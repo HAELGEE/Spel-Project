@@ -29,7 +29,7 @@ namespace Kod_till_Spel
                     orc01.speed += 0.1;
                 }
             }
-
+            int randomXp = random.Next(1, 6);
             while (hero.hp > 0 && orc01.hp > 0)
             {
                 if (hero.speed > orc01.speed)
@@ -39,12 +39,15 @@ namespace Kod_till_Spel
                     orc01.hp -= damage;
                     Thread.Sleep(500);
 
+                    
+
                     if (orc01.hp <= 0)
                     {
                         Console.WriteLine(orc01.name + " är besegrad!");
                         Thread.Sleep(400);
-                        Console.WriteLine($"Du fick 3xp\n");
-                        hero.AddExperience(3);
+                        
+                        Console.WriteLine($"Du fick {randomXp}xp\n");
+                        hero.AddExperience(randomXp);
                         Thread.Sleep(400);
                         Console.WriteLine($"Din hjälte är på level: {hero.level}");
                         Thread.Sleep(400);
@@ -88,8 +91,8 @@ namespace Kod_till_Spel
                     {
                         Console.WriteLine(orc01.name + " är besegrad!");
                         Thread.Sleep(400);
-                        Console.WriteLine($"Du fick 3xp\n");
-                        hero.AddExperience(3);
+                        Console.WriteLine($"Du fick {randomXp}xp\n");
+                        hero.AddExperience(randomXp);
                         Thread.Sleep(400);
                         Console.WriteLine($"{hero.name} är på level: {hero.level}");
                         Thread.Sleep(400);
