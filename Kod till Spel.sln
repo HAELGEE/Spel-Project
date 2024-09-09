@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35222.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kod till Spel", "Kod till Spel\Kod till Spel.csproj", "{BD2E4C36-FF20-4CF0-A525-88657C16B359}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BD2E4C36-FF20-4CF0-A525-88657C16B359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2E4C36-FF20-4CF0-A525-88657C16B359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2E4C36-FF20-4CF0-A525-88657C16B359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2E4C36-FF20-4CF0-A525-88657C16B359}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FB009D0-A4C6-4C86-83D8-9F475BB9BEB7}
+	EndGlobalSection
+EndGlobal
