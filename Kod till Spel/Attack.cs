@@ -13,11 +13,23 @@ namespace Kod_till_Spel
         public void _Attack(Hero hero)
         {
             Orc orc01 = new Orc(); // Skapar en ny orc varje gång jag går in i Attack
+            Random random = new Random();
+            double randomSpeedHero = hero.speed;
+            double randomSpeedOrc = orc01.speed;
 
             Console.WriteLine($"\n{orc01.name} dyker upp!\n");
             
             while (hero.hp > 0 && orc01.hp > 0)
             {
+                if (random.Next(0, 2) == 0)
+                {
+                    hero.speed += 0.1;
+                }
+                else
+                {
+                    orc01.speed += 0.1;
+                }
+
                 if (hero.speed > orc01.speed)
                 {
                     // Hero attackerar först
@@ -79,6 +91,10 @@ namespace Kod_till_Spel
                     }
                 }
             }
+
+            hero.speed = randomSpeedHero;
+            orc01.speed = randomSpeedOrc;
+
             Thread.Sleep(500);
             Console.Write($"{hero.name} HP: ");
             if (hero.hp <= 0)

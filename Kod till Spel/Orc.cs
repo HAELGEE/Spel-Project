@@ -35,7 +35,7 @@ public class Orc
     public void Stats()
     {
         dmg = (dmg + (styrka * 1.1)) - armor;
-        speed = agility * 1.05;
+        speed = speed + (agility * 1.05);
         armor = armor + (agility / 2) * 1.01;
     }
 

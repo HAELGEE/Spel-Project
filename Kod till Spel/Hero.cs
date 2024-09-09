@@ -23,7 +23,7 @@ public class Hero
     public int intelligence { get; set; } = 0;
     public int mana { get; set; } = 0;
     public double dmg { get; set; } = 2;                //SKADA
-    public double speed { get; set; } = 2;              //SPEED
+    public double speed { get; set; } = 1;              //SPEED
     public double armor { get; set; } = 1;              //ARMOR
     public int xp { get; set; } = 0;
     public int maxXp { get; set; } = 200;
