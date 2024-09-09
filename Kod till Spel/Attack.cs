@@ -55,8 +55,10 @@ namespace Kod_till_Spel
                     hero.hp -= damage;
                     Thread.Sleep(500);
 
+                    
                     if (hero.hp <= 0)
                     {
+                        hero.hp *= 0;
                         Console.WriteLine(hero.name + " är besegrad!");
                         Thread.Sleep(400);
                         break;
@@ -69,8 +71,10 @@ namespace Kod_till_Spel
                     hero.hp -= damage;
                     Thread.Sleep(500);
 
+                    
                     if (hero.hp <= 0)
                     {
+                        hero.hp *= 0;
                         Console.WriteLine(hero.name + " är besegrad!");
                         Thread.Sleep(300);
                         break;
