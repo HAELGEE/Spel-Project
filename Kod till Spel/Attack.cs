@@ -12,6 +12,7 @@ namespace Kod_till_Spel
     {
         public void _Attack(Hero hero)
         {
+            Healing healing = new Healing();
             Orc orc01 = new Orc(); // Skapar en ny orc varje gång jag går in i Attack
             Random random = new Random();
             double randomSpeedHero = hero.speed;
@@ -39,8 +40,6 @@ namespace Kod_till_Spel
                     orc01.hp -= damage;
                     Thread.Sleep(500);
 
-                    
-
                     if (orc01.hp <= 0)
                     {
                         Console.WriteLine(orc01.name + " är besegrad!");
@@ -57,13 +56,13 @@ namespace Kod_till_Spel
                     damage = orc01.Attack();
                     hero.hp -= damage;
                     Thread.Sleep(500);
-
                     
                     if (hero.hp <= 0)
                     {
                         hero.hp *= 0;
                         Console.WriteLine(hero.name + " är besegrad!");
                         Thread.Sleep(400);
+                        healing._Healing(hero);
                         break;
                     }
                 }
@@ -79,7 +78,8 @@ namespace Kod_till_Spel
                     {
                         hero.hp *= 0;
                         Console.WriteLine(hero.name + " är besegrad!");
-                        Thread.Sleep(300);
+                        Thread.Sleep(400);
+                        healing._Healing(hero);
                         break;
                     }
 

@@ -15,6 +15,7 @@ namespace SPEL
             Console.Write("Ange ett namn till din Hjälte: ");
             hero01.name = Console.ReadLine();
             Attack attack = new Attack();
+            Healing healing = new Healing();
            
             bool spel = true;
             while (spel)
@@ -70,27 +71,8 @@ namespace SPEL
                         attack._Attack(hero01);
                         break;
 
-
-
-
                     case "h":
-                        
-                        if (hero01.hp == hero01.maxHp)
-                        {
-                            Console.WriteLine("Din hjälte har redan fullt HP");                            
-                        }else
-                        {
-                            Console.WriteLine("Din hjälte börjar Meditera för att återställa HP");
-                            while (hero01.hp < hero01.maxHp)
-                            {
-                                hero01.hp += 1;
-                                Console.WriteLine($"Nuvarande hp: {hero01.hp}");
-                                Thread.Sleep(1000);
-                            }
-                        
-                        
-                            Console.WriteLine($"Din hjälte har {hero01.hp}hp av {hero01.hp}hp");
-                        }
+                        healing._Healing(hero01);
                         break;
 
                     case "v":
