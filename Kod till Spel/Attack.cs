@@ -68,6 +68,7 @@ namespace Kod_till_Spel
                         break;
                     }
                 }
+
                 else
                 {
                     // Orc attackerar först

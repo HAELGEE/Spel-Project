@@ -45,7 +45,7 @@ public class Hero
     public double speed { get; set; } = 1;              //SPEED
     public double armor { get; set; } = 1;              //ARMOR
     public int xp { get; set; } = 0;
-    public int maxXp { get; set; } = 200;
+    public int maxXp { get; set; } = 50;
 
     private Random random = new Random();
 
