@@ -8,22 +8,21 @@ using Kod_till_Spel;
 
 namespace Kod_till_Spel;
 public class Hero
-{
-    
+{    
     public string name { get; set; }
     public int level { get; set; } = 1;
     public int experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
-    public int styrka { get; set; } = 10;
-    public int agility { get; set; } = 1;
+    public int styrka { get; set; } = 1;               //ÖKAR SKADA
+    public int agility { get; set; } = 1;              //ÖKAR SPEED
     public int stamina { get; set; } = 1;
     public int charm { get; set; } = 0;
     public int intelligence { get; set; } = 0;
     public int mana { get; set; } = 0;
-    public double dmg { get; set; } = 2;
-    public double speed { get; set; } = 2;
-    public double armor { get; set; } = 1;
+    public double dmg { get; set; } = 2;                //SKADA
+    public double speed { get; set; } = 2;              //SPEED
+    public double armor { get; set; } = 1;              //ARMOR
     public int xp { get; set; } = 0;
     public int maxXp { get; set; } = 200;
 
@@ -40,16 +39,17 @@ public class Hero
         experience += amount;
         while (experience >= maxXp)
         { 
-        LevelUp();
+            experience -= maxXp;
+            LevelUp();
         }
     }
 
     public void LevelUp()
-    {
+    {        
         level++;
-        maxXp *= 2;
-        experience -= maxXp;
-        
+        maxXp *= 2;        
+        hp = hp + 5;
+        maxHp = maxHp + 5;        
 
         Console.WriteLine("Du gick precis upp i level, välj en stat att öka:");
         Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
@@ -90,13 +90,10 @@ public class Hero
             {
                 Console.WriteLine("Ogiltigt val, försök igen!");
                 str = Console.ReadLine();
-            }
-            
+            }            
         }
-
-
-
-    }  
+    } 
+    
     public void Stats()
     {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
