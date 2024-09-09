@@ -113,10 +113,12 @@ namespace Kod_till_Spel
             if (hero.hp <= 0)           //lägger till Färg
             {   
                 Red(hero.hp);           //Röd om hero = död
+                Console.Write("\n");
             }
             else
             {
                 Green(hero.hp);         //Grön om hero har över 0hp
+                Console.Write("\n");
             }                              
             Thread.Sleep(700);
         }

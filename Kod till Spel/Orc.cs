@@ -11,6 +11,24 @@ using System.Text.Json;
 namespace Kod_till_Spel;
 public class Orc
 {
+    static void Green(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Red(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Cyan(int value)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.Write(value);
+        Console.ResetColor();
+    }
     public string name { get; set; }
     public int level { get; set; } = 1;
     public double experience { get; set; } = 0;
@@ -56,23 +74,5 @@ public class Orc
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.WriteLine(" skada.");
         return value;
-    }
-    static void Green(string value)
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(value);
-        Console.ResetColor();
-    }
-    static void Red(string value)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(value);
-        Console.ResetColor();
-    }
-    static void Cyan(int value)
-    {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(value);
-        Console.ResetColor();
     }
 }

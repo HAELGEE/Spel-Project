@@ -10,7 +10,26 @@ using System.Text.Json;
 
 namespace Kod_till_Spel;
 public class Hero
-{    
+{
+    static void Green(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;       //Färg metod för GRÖN med variabel String
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Cyan(int value)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;        //Färg metod för CYAN med variabel int
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Red(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;         //Färg metod för RÖD med variabel String
+        Console.Write(value);
+        Console.ResetColor();
+    }
+
     public string name { get; set; }
     public int level { get; set; } = 1;
     public int experience { get; set; } = 0;
@@ -117,23 +136,4 @@ public class Hero
         Console.WriteLine(" skada.");
         return value;
     }
-    static void Green(string value)
-    {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(value);
-        Console.ResetColor();
-    }
-    static void Cyan(int value)
-    {
-        Console.ForegroundColor = ConsoleColor.Cyan;
-        Console.Write(value);
-        Console.ResetColor();
-    }
-    static void Red(string value)
-    {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(value);
-        Console.ResetColor();        
-    }
-
 }
