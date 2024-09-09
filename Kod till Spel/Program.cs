@@ -27,7 +27,7 @@ namespace SPEL
                 Console.WriteLine("[H]eal");
                 Console.WriteLine("Sa[V]e");
                 Console.WriteLine("[Load]");
-                Console.WriteLine("[Q]uit");
+                Console.WriteLine("[Quit]");
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
                 Console.Clear();
@@ -89,7 +89,7 @@ namespace SPEL
                         Console.ReadKey();
                         break;
 
-                    case "q":
+                    case "quit":
                         Console.WriteLine("Tack för att du använder detta programmet, nu avslutas programmet");
                         spel = false;
                         break;
