@@ -26,7 +26,7 @@ namespace SPEL
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
                 Console.WriteLine("Sa[V]e");
-                Console.WriteLine("[L]oad");
+                Console.WriteLine("[Load]");
                 Console.WriteLine("[Q]uit");
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
@@ -80,7 +80,7 @@ namespace SPEL
                         Console.ReadKey();
                         break;
 
-                    case "l":
+                    case "load":
                         Hero loadedHero = LoadHero("hero_save.json");
                         if (loadedHero != null)
                         {
