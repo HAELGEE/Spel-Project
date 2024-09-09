@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Kod_till_Spel;
+using System.IO;
+using System.Text.Json;
 
 
 namespace SPEL
@@ -22,6 +24,8 @@ namespace SPEL
                 Console.WriteLine("[S]tatus");
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
+                Console.WriteLine("Sa[V]e");
+                Console.WriteLine("[L]oad");
                 Console.WriteLine("[Q]uit");
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
@@ -89,6 +93,20 @@ namespace SPEL
                         }
                         break;
 
+                    case "v":
+                        SaveHero(hero01, "hero_save.json");
+                        Console.ReadKey();
+                        break;
+
+                    case "l":
+                        Hero loadedHero = LoadHero("hero_save.json");
+                        if (loadedHero != null)
+                        {
+                            hero01 = loadedHero;
+                        }
+                        Console.ReadKey();
+                        break;
+
                     case "q":
                         Console.WriteLine("Tack för att du använder detta programmet, nu avslutas programmet");
                         spel = false;
@@ -110,6 +128,27 @@ namespace SPEL
         static void Red(int value)
         {
             Console.ForegroundColor= ConsoleColor.Red;
+        }
+        public static void SaveHero(Hero hero, string filename)
+        {
+            string json = JsonSerializer.Serialize(hero);
+            File.WriteAllText(filename, json);
+            Console.WriteLine("Hjälten är nu sparad.");
+        }
+        public static Hero LoadHero(string filename)
+        {
+            if (File.Exists(filename))
+            {
+                string json = File.ReadAllText(filename);
+                Hero hero = JsonSerializer.Deserialize<Hero>(json);
+                Console.WriteLine("Hjälten är nu laddad.");
+                return hero;
+            }
+            else
+            {
+                Console.WriteLine("Ingen sparfil hittades.");
+                return null;
+            }
         }
 
     }
