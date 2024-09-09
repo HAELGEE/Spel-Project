@@ -111,7 +111,29 @@ public class Hero
         minDamage += (int)dmg;
         maxDamage += (int)dmg;
         int value = random.Next(minDamage, maxDamage);
-        Console.WriteLine(name + " gjorde " + value + " skada.");
+        Green(name);                //Lägger till Färgen GRÖN på Hero
+        Console.Write(" gjorde ");
+        Cyan(value);                //Lägger till färgen CYAN på DMG
+        Console.WriteLine(" skada.");
         return value;
     }
+    static void Green(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Cyan(int value)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.Write(value);
+        Console.ResetColor();
+    }
+    static void Red(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write(value);
+        Console.ResetColor();        
+    }
+
 }
