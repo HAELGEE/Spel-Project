@@ -18,8 +18,7 @@ namespace Kod_till_Spel
             double randomSpeedOrc = orc01.speed;
 
             Console.WriteLine($"\n{orc01.name} dyker upp!\n");
-            
-            while (hero.hp > 0 && orc01.hp > 0)
+            if (hero.speed == orc01.speed)
             {
                 if (random.Next(0, 2) == 0)
                 {
@@ -29,7 +28,10 @@ namespace Kod_till_Spel
                 {
                     orc01.speed += 0.1;
                 }
+            }
 
+            while (hero.hp > 0 && orc01.hp > 0)
+            {
                 if (hero.speed > orc01.speed)
                 {
                     // Hero attackerar först
