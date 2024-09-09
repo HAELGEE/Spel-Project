@@ -18,7 +18,7 @@ namespace SPEL
             while (spel)
             {
 
-                Console.WriteLine("\n=== TEXT SPEL ===");
+                Console.WriteLine("\n=== TEXT SPEL ===          A game created by #Christofer Hägg");
                 Console.WriteLine("[S]tatus");
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
