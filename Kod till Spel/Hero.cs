@@ -12,10 +12,10 @@ public class Hero
     
     public string name { get; set; }
     public int level { get; set; } = 1;
-    public double experience { get; set; } = 0;
+    public int experience { get; set; } = 0;
     public int hp { get; set; } = 10;
-    public int Maxhp { get; set; } = 10;
-    public int styrka { get; set; } = 1;
+    public int maxHp { get; set; } = 10;
+    public int styrka { get; set; } = 10;
     public int agility { get; set; } = 1;
     public int stamina { get; set; } = 1;
     public int charm { get; set; } = 0;
@@ -25,7 +25,7 @@ public class Hero
     public double speed { get; set; } = 2;
     public double armor { get; set; } = 1;
     public int xp { get; set; } = 0;
-    public int Maxxp { get; set; } = 200;
+    public int maxXp { get; set; } = 200;
 
     private Random random = new Random();
 
@@ -33,41 +33,76 @@ public class Hero
     public Hero()
     {
         Stats();
-        Level();
-        Name();
+        AddExperience(this.experience);
+    }
+    public void AddExperience(int amount)
+    {
+        experience += amount;
+        while (experience >= maxXp)
+        { 
+        LevelUp();
+        }
     }
 
-    public void Name()
+    public void LevelUp()
     {
-        this.name = "HAELGE";       //DENNA MÅSTE FIXAS PÅ NÅGOT SÄTT. NU HAR JAG SATT PERMANENT NAMN PÅ HJÄLTEN!!!!!!
-    }
-
-
-    public void Level()
-    {
-        /*Måste göra något för att få in Hur mycket XP det ska vara mellan varje level.       
-         * Sen ska jag få statsen till att öka för varje level, där Du som karaktär får välja vad du vill levla upp för stats.
-         */
-
-      
-            if (experience >= Maxxp)
-            {
-                level++;
-                experience = 0;
-                Maxxp = Maxxp * 2;
-            }
-           
+        level++;
+        maxXp *= 2;
+        experience -= maxXp;
         
-        xp = Maxxp - xp;
-    }
+
+        Console.WriteLine("Du gick precis upp i level, välj en stat att öka:");
+        Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
+        string str = Console.ReadLine();
+        while (true)
+        {
+            if (str == "1")
+            {
+                int statIncrease = Convert.ToInt32(str);
+                this.styrka++;
+                break;
+            }
+            else if (str == "2")
+            {
+                int statIncrease = Convert.ToInt32(str);
+                this.agility++;
+                break;
+            }
+            else if (str == "3")
+            {
+                int statIncrease = Convert.ToInt32(str);
+                this.stamina++;
+                break;
+            }
+            else if (str == "4")
+            {
+                int statIncrease = Convert.ToInt32(str);
+                this.charm++;
+                break;
+            }
+            else if (str == "5")
+            {
+                int statIncrease = Convert.ToInt32(str);
+                this.intelligence++;
+                break;
+            }
+            else
+            {
+                Console.WriteLine("Ogiltigt val, försök igen!");
+                str = Console.ReadLine();
+            }
+            
+        }
 
 
+
+    }  
     public void Stats()
     {
-        Maxhp = hp; //Denna raden är bara till för att veta vad MAX HP till Hero är!
-        dmg = dmg + (styrka * 1.5);
-        speed = speed + (agility * 1.2);
-        armor = armor + (agility * 1.1);
+        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
+        dmg = (dmg + (styrka * 1.1)) - armor;
+        speed = speed + (agility * 1.05);    //För att se vem som skall starta attackera vem.
+        armor = armor + (agility / 2) * 1.01;    //För att göra "avdrag" av dmg
     }
 
     public int Attack()

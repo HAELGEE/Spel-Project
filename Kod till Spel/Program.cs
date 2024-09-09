@@ -34,8 +34,22 @@ namespace SPEL
                         Console.WriteLine($"Ditt namn på din Hero: {hero01.name}\n");
                         Console.WriteLine("Din hjälte är på Level: " + hero01.level);
                         Console.WriteLine($"Din hjälte har: {hero01.experience}xp");
-                        Console.WriteLine($"Din hjälte har: {hero01.xp}xp kvar till nästa level\n");
-                        Console.WriteLine("HP: " + hero01.hp);
+                        Console.WriteLine($"Din hjälte har: {hero01.maxXp - hero01.experience}xp kvar till nästa level\n");
+                        Console.Write($"HP: ");
+                        if (hero01.hp < hero01.maxHp)
+                        {
+                            Red(hero01.hp);
+                        }
+                        else
+                        {
+                            Green(hero01.hp);
+                        }
+                        Console.Write(hero01.hp);
+                        Console.ResetColor();
+                        Console.Write(" av ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(hero01.maxHp);
+                        Console.ResetColor();
                         Console.WriteLine("Styrka: " + hero01.styrka);
                         Console.WriteLine("Agility: " + hero01.agility);
                         Console.WriteLine("Stamina: " + hero01.stamina);
@@ -49,7 +63,7 @@ namespace SPEL
                         break;
 
                     case "a":
-                        attack._Attack();
+                        attack._Attack(hero01);
                         break;
 
 
@@ -57,13 +71,13 @@ namespace SPEL
 
                     case "h":
                         
-                        if (hero01.hp == hero01.Maxhp)
+                        if (hero01.hp == hero01.maxHp)
                         {
                             Console.WriteLine("Din hjälte har redan fullt HP");                            
                         }else
                         {
                             Console.WriteLine("Din hjälte börjar Meditera för att återställa HP");
-                            while (hero01.hp < hero01.Maxhp)
+                            while (hero01.hp < hero01.maxHp)
                             {
                                 hero01.hp += 1;
                                 Console.WriteLine($"Nuvarande hp: {hero01.hp}");
@@ -88,5 +102,15 @@ namespace SPEL
                 }
             }
         }
+
+        static void Green(int value)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+        }
+        static void Red(int value)
+        {
+            Console.ForegroundColor= ConsoleColor.Red;
+        }
+
     }
 }
