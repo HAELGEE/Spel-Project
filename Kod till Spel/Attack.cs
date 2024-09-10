@@ -39,6 +39,7 @@ namespace Kod_till_Spel
             Healing healing = new Healing();
             Orc orc01 = new Orc(); // Skapar en ny orc varje gång jag går in i Attack
             Random random = new Random();
+
             double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = orc01.speed;
 
@@ -54,7 +55,12 @@ namespace Kod_till_Spel
                     orc01.speed += 0.1;      //HÄR FUCKAS SPEEDEN UPP. MÅSTE FIXA JAG "RESETAR" DEN HELA TIDEN
                 }
             }
-            
+
+            Console.Write($"Hero HP: ");
+            Green(hero.hp);
+            Console.Write(", Orc HP: ");
+            Red(orc01.hp);
+            Console.WriteLine("");
 
             int randomXp = random.Next(1, 6);
 
