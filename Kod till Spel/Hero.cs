@@ -34,10 +34,10 @@ public class Hero
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
     public int level { get; set; } = 1;
-    public int experience { get; set; } = 24;
+    public int experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
-    public int styrka { get; set; } = 2;               //ÖKAR SKADA
+    public int styrka { get; set; } = 1;               //ÖKAR SKADA
     public int agility { get; set; } = 1;              //ÖKAR SPEED
     public int stamina { get; set; } = 1;
     public int charm { get; set; } = 0;
@@ -50,6 +50,7 @@ public class Hero
     public int maxXp { get; set; } = 50;
 
     private Random random = new Random();
+    
 
 
     public Hero()
@@ -114,7 +115,6 @@ public class Hero
         }
         Stats();
     }
-
    
     public void Stats()
     {
@@ -123,12 +123,12 @@ public class Hero
         armor = baseArmor + ((agility / 2) * 1.01);    //För att göra "avdrag" av dmg    
     }
 
-    public int Attack()
+    public int Attack(Orc orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
     {
         int minDamage = 1;
         int maxDamage = 4;
-        minDamage += (int)dmg;
-        maxDamage += (int)dmg;
+        minDamage += (int)dmg - (int)orc.armor;
+        maxDamage += (int)dmg - (int)orc.armor;
         int value = random.Next(minDamage, maxDamage);
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");

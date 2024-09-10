@@ -63,7 +63,7 @@ namespace Kod_till_Spel
                 if (hero.speed > orc01.speed)       //Hero speed över orc speed
                 {                   
                     // Hero attackerar först
-                    int damage = hero.Attack();     //Hero attackerar
+                    int damage = hero.Attack(orc01);     //Hero attackerar
                     orc01.hp -= damage;
                     Thread.Sleep(500);
 
@@ -72,7 +72,7 @@ namespace Kod_till_Spel
                         
                         Red(orc01.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;
+                        orc01.speed = randomSpeedOrc;           //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
                         Console.WriteLine($"Du fick {randomXp}xp\n");
@@ -83,7 +83,7 @@ namespace Kod_till_Spel
                         break;
                     }
 
-                    damage = orc01.Attack();        //orc attackerar
+                    damage = orc01.Attack(hero);        //orc attackerar
                     hero.hp -= damage;
                     Thread.Sleep(500);
                     
@@ -92,7 +92,7 @@ namespace Kod_till_Spel
                         hero.hp *= 0;
                         Green(hero.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;
+                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);                        
                         healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
@@ -105,7 +105,7 @@ namespace Kod_till_Spel
                 {
                     
                     // Orc attackerar först
-                    int damage = orc01.Attack();    //Orc speed över hero speed
+                    int damage = orc01.Attack(hero);    //Orc speed över hero speed
                     hero.hp -= damage;              //Orc attackerar
                     Thread.Sleep(500);
 
@@ -115,14 +115,14 @@ namespace Kod_till_Spel
                         hero.hp *= 0;
                         Green(hero.name);
                         Console.Write(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;
+                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);                        
                         healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
 
-                    damage = hero.Attack();         //Hero attackerar
+                    damage = hero.Attack(orc01);         //Hero attackerar
                     orc01.hp -= damage;
                     Thread.Sleep(500);
 
@@ -130,7 +130,7 @@ namespace Kod_till_Spel
                     {                        
                         Red(orc01.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;
+                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
                         Console.WriteLine($"Du fick {randomXp}xp\n");
