@@ -62,6 +62,7 @@ namespace SPEL
                         Console.WriteLine("Charm: " + hero01.charm);
                         Console.WriteLine("Speed: " + hero01.speed);
                         Console.WriteLine("DMG: " + hero01.dmg);
+                        Console.WriteLine("ARMOR: " + hero01.armor);
                         Console.WriteLine("===================================");
                         Console.ReadKey();
                         Console.Clear();
@@ -77,6 +78,7 @@ namespace SPEL
 
                     case "v":
                         SaveHero(hero01, "hero_save.json");
+                        hero01.Stats();
                         Console.ReadKey();
                         break;
 
@@ -84,7 +86,7 @@ namespace SPEL
                         Hero loadedHero = LoadHero("hero_save.json");
                         if (loadedHero != null)
                         {
-                            hero01 = loadedHero;
+                            hero01 = loadedHero;                            
                         }
                         Console.ReadKey();
                         break;

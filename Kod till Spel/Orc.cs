@@ -29,6 +29,7 @@ public class Orc
         Console.Write(value);
         Console.ResetColor();
     }
+    private double baseSpeed { get; set; } = 1;
     public string name { get; set; }
     public int level { get; set; } = 1;
     public double experience { get; set; } = 0;
@@ -52,8 +53,8 @@ public class Orc
     }
     public void Stats()
     {
-        dmg = (dmg + (styrka * 1.1)) - armor;
-        speed = speed + (agility * 1.05);
+        dmg = (dmg + (styrka * 1.1));
+        speed = baseSpeed + (agility * 1.05);
         armor = armor + (agility / 2) * 1.01;
     }
 

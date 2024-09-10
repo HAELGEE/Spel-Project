@@ -29,13 +29,15 @@ public class Hero
         Console.Write(value);
         Console.ResetColor();
     }
-
+    public double baseDmg { get; set; } = 2;
+    public double baseArmor { get; set; } = 1;
+    public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
     public int level { get; set; } = 1;
-    public int experience { get; set; } = 0;
+    public int experience { get; set; } = 24;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
-    public int styrka { get; set; } = 1;               //ÖKAR SKADA
+    public int styrka { get; set; } = 2;               //ÖKAR SKADA
     public int agility { get; set; } = 1;              //ÖKAR SPEED
     public int stamina { get; set; } = 1;
     public int charm { get; set; } = 0;
@@ -52,6 +54,7 @@ public class Hero
 
     public Hero()
     {
+        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
         Stats();
         AddExperience(this.experience);
     }
@@ -61,16 +64,16 @@ public class Hero
         while (experience >= maxXp)
         { 
             experience -= maxXp;
-            LevelUp();
+            LevelUp();            
         }
     }
 
     public void LevelUp()
     {        
         level++;
-        maxXp *= 2;        
-        hp = hp + 5;
-        maxHp = maxHp + 5;        
+        maxXp *= 2;
+        maxHp = maxHp + 5;
+        hp = maxHp;       
 
         Console.WriteLine("Du gick precis upp i level, välj en stat att öka:");
         Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
@@ -79,48 +82,45 @@ public class Hero
         {
             if (str == "1")
             {
-                int statIncrease = Convert.ToInt32(str);
-                this.styrka++;
+                styrka++;
                 break;
             }
             else if (str == "2")
             {
-                int statIncrease = Convert.ToInt32(str);
-                this.agility++;
+                agility++;
                 break;
             }
             else if (str == "3")
             {
-                int statIncrease = Convert.ToInt32(str);
-                this.stamina++;
+                stamina++;
                 break;
             }
             else if (str == "4")
             {
-                int statIncrease = Convert.ToInt32(str);
-                this.charm++;
+                charm++;
                 break;
             }
             else if (str == "5")
             {
-                int statIncrease = Convert.ToInt32(str);
-                this.intelligence++;
+                intelligence++;
                 break;
             }
             else
             {
                 Console.WriteLine("Ogiltigt val, försök igen!");
                 str = Console.ReadLine();
-            }            
+            }
+            
         }
-    } 
-    
+        Stats();
+    }
+
+   
     public void Stats()
     {
-        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
-        dmg = (dmg + (styrka * 1.1)) - armor;
-        speed = speed + (agility * 1.05);    //För att se vem som skall starta attackera vem.
-        armor = armor + (agility / 2) * 1.01;    //För att göra "avdrag" av dmg
+        dmg = baseDmg + (styrka * 1.1);   //Avgör dmg (drar av skada beroende på armor)
+        speed = baseSpeed + (agility * 1.05);    //För att se vem som skall starta attackera vem.
+        armor = baseArmor + ((agility / 2) * 1.01);    //För att göra "avdrag" av dmg    
     }
 
     public int Attack()
