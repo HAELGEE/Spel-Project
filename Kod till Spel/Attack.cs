@@ -43,7 +43,8 @@ namespace Kod_till_Spel
             double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = orc01.speed;
 
-            Console.WriteLine($"\n{orc01.name} dyker upp!\n");
+            Console.WriteLine($"\nLevel:{orc01.level} {orc01.name} dyker upp!\n");
+
             if (hero.speed == orc01.speed)
             {
                 if (random.Next(0, 2) == 0)     //Här börjar "lottningen"
@@ -52,7 +53,7 @@ namespace Kod_till_Spel
                 }
                 else
                 {
-                    orc01.speed += 0.1;      //HÄR FUCKAS SPEEDEN UPP. MÅSTE FIXA JAG "RESETAR" DEN HELA TIDEN
+                    orc01.speed += 0.1;      
                 }
             }
 
@@ -61,8 +62,20 @@ namespace Kod_till_Spel
             Console.Write(", Orc HP: ");
             Red(orc01.hp);
             Console.WriteLine("");
+            int randomXp = 0;
 
-            int randomXp = random.Next(1, 6);
+            if (hero.level > orc01.level)
+            {
+                randomXp = random.Next(1, 3);
+            }
+            else if (hero.level < orc01.level)
+            {
+                randomXp = random.Next(5, 8);
+            }
+            else
+            {
+                randomXp = random.Next(3, 5);
+            }
 
             while (hero.hp > 0 && orc01.hp > 0)
             {

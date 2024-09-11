@@ -50,7 +50,7 @@ public class Hero
     public int maxXp { get; set; } = 50;
 
     private Random random = new Random();
-    
+
 
 
     public Hero()
@@ -63,59 +63,62 @@ public class Hero
     {
         experience += amount;
         while (experience >= maxXp)
-        { 
+        {
             experience -= maxXp;
-            LevelUp();            
+            LevelUp();
         }
     }
 
     public void LevelUp()
-    {        
+    {
         level++;
         maxXp *= 2;
         maxHp = maxHp + 5;
-        hp = maxHp;       
+        hp = maxHp;
+        int statIncrease = 2;
 
-        Console.WriteLine("Du gick precis upp i level, välj en stat att öka:");
-        Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
-        string str = Console.ReadLine();
-        while (true)
+        Console.Write($"Du gick precis upp i level!");
+        while (statIncrease != 0)
         {
+            Console.WriteLine($" Du har {statIncrease} kvar att välj en stat att öka:");
+            Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
+            string str = Console.ReadLine();
+
             if (str == "1")
             {
                 styrka++;
-                break;
+                statIncrease--;
             }
             else if (str == "2")
             {
                 agility++;
-                break;
+                statIncrease--;
             }
             else if (str == "3")
             {
                 stamina++;
-                break;
+                statIncrease--;
             }
             else if (str == "4")
             {
                 charm++;
-                break;
+                statIncrease--;
             }
             else if (str == "5")
             {
                 intelligence++;
-                break;
+                statIncrease--;
             }
             else
             {
                 Console.WriteLine("Ogiltigt val, försök igen!");
                 str = Console.ReadLine();
             }
-            
+
         }
         Stats();
     }
-   
+
     public void Stats()
     {
         dmg = baseDmg + (styrka * 1.1);   //Avgör dmg (drar av skada beroende på armor)

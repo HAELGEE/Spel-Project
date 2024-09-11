@@ -32,7 +32,7 @@ public class Orc
     public double orcBaseDmg { get; set; } = 2;
     public double orcBaseArmor { get; set; } = 1;
     public double orcBaseSpeed { get; set; } = 1;
-    
+
     public string name { get; set; }
     public int level { get; set; } = 1;
     public double experience { get; set; } = 0;
@@ -48,13 +48,34 @@ public class Orc
     public double armor { get; set; } = 1;              //ARMOR
 
     private Random random = new Random();
-    
+
 
     public Orc()
     {
+        Hero hero = new Hero();
         Namn(); //Ger orcen ett random namn
+        LevelCheck(hero);
         Stats();
     }
+
+    private void LevelCheck(Hero hero)
+    {
+        int levelOver = 0;
+        int levelUnder = 0;
+
+        if (hero.level >= this.level)
+        {
+            levelOver += hero.level + 2;
+
+            if (hero.level > 2)
+            {
+                levelUnder = hero.level - 2;
+            }
+
+            this.level = random.Next(levelUnder, levelOver);
+        }
+    }
+
     public void Stats()
     {
         dmg = orcBaseDmg + (styrka * 1.1);
@@ -75,7 +96,7 @@ public class Orc
         maxDamage += (int)dmg - (int)hero.armor;
         int value = random.Next(minDamage, maxDamage);
         Red(name);                  //lägger in färgen RÖD på orc
-        Console.Write(" gjorde ");  
+        Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.WriteLine(" skada.");
         return value;
