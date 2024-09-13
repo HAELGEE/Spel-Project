@@ -14,7 +14,6 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
-    
     public void LevelCheck(Hero hero)
     {
         Random random = new Random();
@@ -127,11 +126,11 @@ public class OrcBase
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.WriteLine(" skada.");
         return value;
-    }
-
+    }    
+    
     public virtual void GenerateName()
     {
-        this.name = "Orc-" + random.Next(1, 3340);
+        this.name = "Orc-" + random.Next(1, 3340);        
     }
 }
 
@@ -142,14 +141,19 @@ public class Orc : OrcBase
         this.damage = 2;
         this.speed = 1;
         this.armor = 1;
+        this.hp = this.hp - 2;
+
         GenerateName();
         Hero hero = new Hero();
         LevelCheck(hero);
+
+        this.damage = this.damage + (styrka * 1.1);
+        this.speed = this.speed + (agility * 1.05);
+        this.armor = this.armor + (agility / 2) * 1.01;
     }
 
     public virtual int Attack(Hero hero)
     {
-
         return base.Attack(hero);      // Specifik attack för Orc        
     }
 }
@@ -160,9 +164,14 @@ public class Shaman : OrcBase
         this.damage = 3;
         this.speed = 0.9;
         this.armor = 1;
+
         this.name = "Shaman-" + random.Next(1, 3340);
         Hero hero = new Hero();
         LevelCheck(hero);
+
+        this.damage = this.damage + (styrka * 1.1);
+        this.speed = this.speed + (agility * 1.05);
+        this.armor = this.armor + (agility / 2) * 1.01;
     }
 
     public virtual int Attack(Hero hero)
@@ -179,9 +188,15 @@ public class Grunt : OrcBase
         this.damage = 1;
         this.speed = 0.5;
         this.armor = 3;
+        this.hp += 5;
+
         this.name = "Grunt-" + random.Next(1, 3340);
         Hero hero = new Hero();
         LevelCheck(hero);
+
+        this.damage = this.damage + (styrka * 1.1);
+        this.speed = this.speed + (agility * 1.05);
+        this.armor = this.armor + (agility / 2) * 1.01;
     }
 
     public virtual int Attack(Hero hero)
