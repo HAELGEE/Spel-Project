@@ -32,10 +32,10 @@ public class Orc
     public double orcBaseDmg { get; set; } = 2;
     public double orcBaseArmor { get; set; } = 1;
     public double orcBaseSpeed { get; set; } = 1;
-    public int baseLevel { get; set; } = 1;
+
 
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 7;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int styrka { get; set; } = 1;                //Ökar skada
@@ -67,7 +67,7 @@ public class Orc
         //this.baseLevel = this.level;
 
         if (hero.level >= this.level)
-        {   
+        {
             levelOver += hero.level + 3;
 
             if (hero.level > 3)
@@ -76,13 +76,49 @@ public class Orc
             }
 
             this.level = random.Next(levelUnder, levelOver);
-        }else
+        }
+        else
         {
-            levelOver += hero.level + 3;            
+            levelOver += hero.level + 3;
 
             this.level = random.Next(levelUnder, levelOver);
         }
 
+        if (this.level > 1)
+        {
+            int levelLeft = this.level - 1;
+            int j = 4;
+            
+            for (int i = 0; i < levelLeft; i++)
+            {
+                j = j - i;
+
+                int statIncrease = random.Next(j);
+                switch (statIncrease)
+                {
+                    case 0:
+                        {
+                            this.styrka++;
+                            break;
+                        }
+                    case 1:
+                        {
+                            this.agility++;
+                            break;
+                        }
+                    case 2:
+                        {
+                            this.stamina++;
+                            break;
+                        }
+                    case 3:
+                        {
+                            this.intelligence++;
+                            break;
+                        }
+                }
+            }
+        }
     }
 
     public void Stats()
