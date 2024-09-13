@@ -126,7 +126,7 @@ public class Hero
         armor = baseArmor + ((agility / 2) * 1.01);    //För att göra "avdrag" av dmg    
     }
 
-    public int Attack(Orc orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
+    public int Attack(OrcBase orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
     {
         int minDamage = 1;
         int maxDamage = 4;

@@ -34,20 +34,36 @@ namespace Kod_till_Spel
             Console.Write(value);
             Console.ResetColor();       //Reset av färg till standard
         }
-       
+        Healing healing = new Healing();
 
         public void _Attack(Hero hero)
         {
-            Healing healing = new Healing();
-            Orc orc01 = new Orc(); // Skapar en ny orc varje gång jag går in i Attack
+            OrcBase orc;
             Random random = new Random();
+            int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt
+
+            switch (randomName)
+            {
+                case 0:
+                    orc = new Orc();
+                    break;
+                case 1:
+                    orc = new Shaman();
+                    break;
+                case 2:
+                    orc = new Grunt();
+                    break;
+                default:
+                    orc = new Orc(); 
+                    break;
+            }
 
             double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
-            double randomSpeedOrc = orc01.speed;
+            double randomSpeedOrc = orc.speed;
 
-            Console.WriteLine($"\nLevel:{orc01.level} {orc01.name} dyker upp!\n");
+            Console.WriteLine($"\nLevel: {orc.level} {orc.name} dyker upp!\n");
 
-            if (hero.speed == orc01.speed)
+            if (hero.speed == orc.speed)
             {
                 if (random.Next(0, 2) == 0)     //Här börjar "lottningen"
                 {
@@ -55,22 +71,22 @@ namespace Kod_till_Spel
                 }
                 else
                 {
-                    orc01.speed += 0.1;      
+                    orc.speed += 0.1;                    
                 }
             }
 
             Console.Write($"Hero HP: ");
             Green(hero.hp);
             Console.Write(", Orc HP: ");
-            Red(orc01.hp);
+            Red(orc.hp);
             Console.WriteLine("");
             int randomXp = 0;
 
-            if (hero.level > orc01.level)
+            if (hero.level > orc.level)
             {
                 randomXp = random.Next(1, 3);
             }
-            else if (hero.level < orc01.level)
+            else if (hero.level < orc.level)
             {
                 randomXp = random.Next(5, 8);
             }
@@ -79,21 +95,21 @@ namespace Kod_till_Spel
                 randomXp = random.Next(3, 5);
             }
 
-            while (hero.hp > 0 && orc01.hp > 0)
+            while (hero.hp > 0 && orc.hp > 0)
             {
-                if (hero.speed > orc01.speed)       //Hero speed över orc speed
-                {                   
+                if (hero.speed > orc.speed)       //Hero speed över orc speed
+                {
                     // Hero attackerar först
-                    int damage = hero.Attack(orc01);     //Hero attackerar
-                    orc01.hp -= damage;
+                    int damage = hero.Attack(orc);     //Hero attackerar
+                    orc.hp -= damage;
                     Thread.Sleep(500);
 
-                    if (orc01.hp <= 0)
+                    if (orc.hp <= 0)
                     {
-                        
-                        Red(orc01.name);
+
+                        Red(orc.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;           //Stänger av tillfälliga speed ökningen
+                        orc.speed = randomSpeedOrc;           //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
                         Console.WriteLine($"Du fick {randomXp}xp\n");
@@ -104,18 +120,18 @@ namespace Kod_till_Spel
                         break;
                     }
 
-                    damage = orc01.Attack(hero);        //orc attackerar
+                    damage = orc.Attack(hero);        //orc attackerar
                     hero.hp -= damage;
                     Thread.Sleep(500);
-                    
+
                     if (hero.hp <= 0)
                     {
                         hero.hp *= 0;
                         Green(hero.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
+                        orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
-                        Thread.Sleep(400);                        
+                        Thread.Sleep(400);
                         healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
@@ -124,34 +140,34 @@ namespace Kod_till_Spel
 
                 else
                 {
-                    
+
                     // Orc attackerar först
-                    int damage = orc01.Attack(hero);    //Orc speed över hero speed
-                    hero.hp -= damage;              //Orc attackerar
+                    int damage = orc.Attack(hero);    //Orc speed över hero speed
+                    hero.hp -= damage;                  //Orc attackerar
                     Thread.Sleep(500);
 
-                    
+
                     if (hero.hp <= 0)
-                    {                        
+                    {
                         hero.hp *= 0;
                         Green(hero.name);
                         Console.Write(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
+                        orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
-                        Thread.Sleep(400);                        
+                        Thread.Sleep(400);
                         healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
 
-                    damage = hero.Attack(orc01);         //Hero attackerar
-                    orc01.hp -= damage;
+                    damage = hero.Attack(orc);         //Hero attackerar
+                    orc.hp -= damage;
                     Thread.Sleep(500);
 
-                    if (orc01.hp <= 0)
-                    {                        
-                        Red(orc01.name);
+                    if (orc.hp <= 0)
+                    {
+                        Red(orc.name);
                         Console.WriteLine(" är besegrad!\n");
-                        orc01.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
+                        orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
                         Console.WriteLine($"Du fick {randomXp}xp\n");
@@ -163,12 +179,12 @@ namespace Kod_till_Spel
                     }
                 }
             }
-            
+
 
             Thread.Sleep(500);
             Console.Write($"{hero.name} HP: ");
             if (hero.hp <= 0)           //lägger till Färg
-            {   
+            {
                 Red(hero.hp);           //Röd om hero = död
                 Console.Write("\n");
             }
@@ -176,10 +192,10 @@ namespace Kod_till_Spel
             {
                 Green(hero.hp);         //Grön om hero har över 0hp
                 Console.Write("\n");
-            }                              
+            }
             Thread.Sleep(700);
         }
-        
-        
+
+
     }
 }
