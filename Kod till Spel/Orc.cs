@@ -161,7 +161,7 @@ public class Shaman : OrcBase
 {
     public Shaman()
     {
-        this.damage = 3;
+        this.damage = 2;
         this.speed = 0.9;
         this.armor = 1;
 
