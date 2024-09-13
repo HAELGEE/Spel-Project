@@ -51,6 +51,7 @@ public class OrcBase
             for (int i = 0; i < levelLeft; i++)
             {
                 j = j - i;
+                this.hp++;
 
                 int statIncrease = random.Next(j);
                 switch (statIncrease)
@@ -105,7 +106,7 @@ public class OrcBase
     public int styrka { get; set; } = 1;
     public int agility { get; set; } = 1;
     public int stamina { get; set; } = 1;
-    public int intelligence { get; set; } = 0;
+    public int intelligence { get; set; } = 1;
     public int mana { get; set; } = 0;
     public int charm { get; set; } = 0;
     public double damage { get; set; }
@@ -138,7 +139,7 @@ public class Orc : OrcBase
 {
     public Orc()
     {
-        this.damage = 2;
+        this.damage = 3;
         this.speed = 1;
         this.armor = 1;
         this.hp = this.hp - 2;
@@ -169,7 +170,7 @@ public class Shaman : OrcBase
         Hero hero = new Hero();
         LevelCheck(hero);
 
-        this.damage = this.damage + (styrka * 1.1);
+        this.damage = this.damage + (intelligence * 1.1);
         this.speed = this.speed + (agility * 1.05);
         this.armor = this.armor + (agility / 2) * 1.01;
     }
@@ -189,6 +190,7 @@ public class Grunt : OrcBase
         this.speed = 0.5;
         this.armor = 3;
         this.hp += 5;
+        
 
         this.name = "Grunt-" + random.Next(1, 3340);
         Hero hero = new Hero();
