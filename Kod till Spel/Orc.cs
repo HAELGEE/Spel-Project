@@ -55,16 +55,14 @@ public class Orc
     {
         Hero hero = new Hero();
         Namn(); //Ger orcen ett random namn
-        LevelCheck(hero);
-        Stats();
+        LevelCheck(hero);   //Kollar level emot Hero för att avgöra vilken level orc skall bli
+        Stats();            
     }
 
     private void LevelCheck(Hero hero)
     {
         int levelOver = 0;
         int levelUnder = 1;
-
-        //this.baseLevel = this.level;
 
         if (hero.level >= this.level)
         {
