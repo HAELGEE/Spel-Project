@@ -127,8 +127,21 @@ public class OrcBase
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.WriteLine(" skada.");
         return value;
-    }    
-    
+    }
+    public int AttackSpellCasters(Hero hero)
+    {
+        int minDamage = 1;
+        int maxDamage = 4;
+        minDamage += (int)damage - (int)hero.armor;
+        maxDamage += (int)damage - (int)hero.armor;
+        int value = random.Next(minDamage, maxDamage);
+        Red(name);                  //lägger in färgen RÖD på orc
+        Console.Write(" gjorde ");
+        Cyan(value);                //Lägger till färgen CYAN på DMG
+        Console.WriteLine(" skada.");
+        return value;
+    }
+
     public virtual void GenerateName()
     {
         this.name = "Orc-" + random.Next(1, 3340);        
@@ -178,7 +191,7 @@ public class Shaman : OrcBase
     public virtual int Attack(Hero hero)
     {
 
-        return base.Attack(hero);   // Specifik attack för Shaman        
+        return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
     }
 }
 
@@ -189,7 +202,7 @@ public class Grunt : OrcBase
         this.damage = 1;
         this.speed = 0.5;
         this.armor = 3;
-        this.hp += 5;
+        this.hp += 3;
         
 
         this.name = "Grunt-" + random.Next(1, 3340);
