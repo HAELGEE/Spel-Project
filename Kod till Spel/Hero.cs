@@ -136,7 +136,7 @@ public class Hero
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.WriteLine(" skada.");
+        Console.WriteLine(" slash dmg.");
         return value;
     }
 }

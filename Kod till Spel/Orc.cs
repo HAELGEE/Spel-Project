@@ -20,60 +20,63 @@ public class OrcBase
 
         int levelOver = 0;
         int levelUnder = 1;
-        if (levelUnder < 1)
+        if (levelUnder < 1)     //Kollar om levelUnder ligger under 1 isf sätter den upp den till 1
         {
             levelUnder = 1;
         }
 
-        if (hero.level >= this.level)
+        if (hero.level >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
-            levelOver += hero.level + 3;
+            levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            if (hero.level > 3)
+            if (hero.level > 3)             //Kollar om Hero level är över 3
             {
-                levelUnder = hero.level - 2;
+                levelUnder = hero.level - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
             }
 
-            this.level = random.Next(levelUnder, levelOver);
+            this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
         else
         {
-            levelOver += hero.level + 3;
+            levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            this.level = random.Next(levelUnder, levelOver);
+            this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
 
-        if (this.level > 1)
+        if (this.level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
         {
             int levelLeft = this.level - 1;
             int j = 4;
 
             for (int i = 0; i < levelLeft; i++)
             {
-                j = j - i;
-                this.hp++;
+                
+                this.hp++;              //lägger till 1 i hp
+                this.maxHp++;           //lägger till 1 i maxHp
+                this.minHealing++;      //lägger till 1 i minimum Healing
+                this.maxHealing++;      //Lägger till 1 i maximum Healing
 
                 int statIncrease = random.Next(j);
                 switch (statIncrease)
                 {
                     case 0:
                         {
-                            this.styrka++;
+                            this.styrka++;      //Om lottningen stannade här +1 i styrka
                             break;
                         }
                     case 1:
                         {
-                            this.agility++;
+                            this.agility++;     //Om lottningen stannade här +1 i agility
                             break;
                         }
                     case 2:
                         {
-                            this.stamina++;
+                            this.stamina++;     //Om lottningen stannade här +1 i stamina
                             break;
                         }
                     case 3:
                         {
-                            this.intelligence++;
+                            this.intelligence++;    //Om lottningen stannade här +1 i intelligence
                             break;
                         }
                 }
@@ -103,6 +106,7 @@ public class OrcBase
     public int level { get; set; } = 1;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
+    public int maxHp { get; set; } = 10;
     public int styrka { get; set; } = 1;
     public int agility { get; set; } = 1;
     public int stamina { get; set; } = 1;
@@ -112,6 +116,9 @@ public class OrcBase
     public double damage { get; set; }
     public double speed { get; set; }
     public double armor { get; set; }
+    public double healing { get; set; } = 0;
+    public int minHealing { get; set; } = 1;
+    public int maxHealing { get; set; } = 3;
 
     public Random random = new Random();
 
@@ -125,10 +132,10 @@ public class OrcBase
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.WriteLine(" skada.");
+        Console.WriteLine(" slash dmg.");
         return value;
     }
-    public int AttackSpellCasters(Hero hero)
+    public int AttackSpellCasters(Hero hero)        //Här skall det modifieras så shaman gör Heal efter varje attack och skadan som görs är Fireball attack
     {
         int minDamage = 1;
         int maxDamage = 4;
@@ -138,7 +145,19 @@ public class OrcBase
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.WriteLine(" skada.");
+        Console.Write(" fire dmg.");
+
+        if (this.hp < this.maxHp)
+        {
+            int randomHealing = random.Next(this.minHealing, this.maxHealing);
+            this.hp += Convert.ToInt32(this.healing);
+            Console.Write($" Och healar sig själv med ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write(this.healing);
+            Console.ResetColor();
+            Console.WriteLine(": HP");
+        }
+
         return value;
     }
 
@@ -154,7 +173,7 @@ public class Orc : OrcBase
     {
         this.damage = 3;
         this.speed = 1;
-        this.armor = 1;
+        this.armor = 0.65;
         this.hp = this.hp - 2;
 
         GenerateName();
@@ -175,7 +194,7 @@ public class Shaman : OrcBase
 {
     public Shaman()
     {
-        this.damage = 2;
+        this.damage = 1;
         this.speed = 0.9;
         this.armor = 1;
 
@@ -183,7 +202,8 @@ public class Shaman : OrcBase
         Hero hero = new Hero();
         LevelCheck(hero);
 
-        this.damage = this.damage + (intelligence * 1.1);
+        this.damage = this.damage + (intelligence * 0.8);
+        this.healing = this.healing + (intelligence * 1);
         this.speed = this.speed + (agility * 1.05);
         this.armor = this.armor + (agility / 2) * 1.01;
     }
@@ -193,6 +213,7 @@ public class Shaman : OrcBase
 
         return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
     }
+    
 }
 
 public class Grunt : OrcBase
@@ -201,16 +222,16 @@ public class Grunt : OrcBase
     {
         this.damage = 1;
         this.speed = 0.5;
-        this.armor = 3;
-        this.hp += 3;
+        this.armor = 2;
+        this.hp += 2;
         
 
         this.name = "Grunt-" + random.Next(1, 3340);
         Hero hero = new Hero();
         LevelCheck(hero);
 
-        this.damage = this.damage + (styrka * 1.1);
-        this.speed = this.speed + (agility * 1.05);
+        this.damage = this.damage + (styrka * 0.9);
+        this.speed = this.speed + (agility * 1.00);
         this.armor = this.armor + (agility / 2) * 1.01;
     }
 

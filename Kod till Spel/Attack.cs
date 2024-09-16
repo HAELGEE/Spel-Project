@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Kod_till_Spel
 {
@@ -54,7 +55,7 @@ namespace Kod_till_Spel
                     orc = new Grunt();
                     break;
                 default:
-                    orc = new Orc(); 
+                    orc = new Orc();
                     break;
             }
 
@@ -71,7 +72,7 @@ namespace Kod_till_Spel
                 }
                 else
                 {
-                    orc.speed += 0.1;                    
+                    orc.speed += 0.1;
                 }
             }
 
@@ -97,10 +98,12 @@ namespace Kod_till_Spel
 
             while (hero.hp > 0 && orc.hp > 0)
             {
-                if (hero.speed > orc.speed)       //Hero speed över orc speed
+                if (hero.speed > orc.speed)     //Hero speed över orc speed
                 {
                     // Hero attackerar först
-                    int damage = hero.Attack(orc);     //Hero attackerar
+
+                    int damage = hero.Attack(orc);  //Hero attackerar
+
                     orc.hp -= damage;
                     Thread.Sleep(500);
 
@@ -119,8 +122,14 @@ namespace Kod_till_Spel
                         Thread.Sleep(400);
                         break;
                     }
-
-                    damage = orc.Attack(hero);        //orc attackerar
+                    if (orc.name.Contains("Shaman"))
+                    {
+                        damage = orc.AttackSpellCasters(hero);  //orc attackerar
+                    }
+                    else
+                    {
+                        damage = orc.Attack(hero);
+                    }
                     hero.hp -= damage;
                     Thread.Sleep(500);
 
@@ -140,9 +149,17 @@ namespace Kod_till_Spel
 
                 else
                 {
-
+                    int damage;
                     // Orc attackerar först
-                    int damage = orc.Attack(hero);    //Orc speed över hero speed
+                    if (orc.name.Contains("Shaman"))
+                    {
+                        damage = orc.AttackSpellCasters(hero);  //orc attackerar
+                    }
+                    else
+                    {
+                        damage = orc.Attack(hero);
+                    }
+                        //int damage = orc.Attack(hero);    //Orc speed över hero speed
                     hero.hp -= damage;                  //Orc attackerar
                     Thread.Sleep(500);
 
