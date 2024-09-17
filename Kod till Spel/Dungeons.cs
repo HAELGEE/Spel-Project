@@ -13,6 +13,8 @@ internal class Dungeons
     *   Där varje dungeon har en chans till dropp av items. Som tex en E dungeon enbart kan droppa common och som högst uncommon fast med låg chans?
     *   Typ common = 20% och uncommon 2% ? och Fortsätta så genom alla dungeons där S dungeons är den som har högst chans till att droppa mythic items (men också
     *   svårast att gå igenom)
+    *   
+    *   Lägga till guld för varje besegrad motståndare eller klarad dungeon?
     */
 
 }

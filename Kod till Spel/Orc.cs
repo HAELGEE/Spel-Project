@@ -14,6 +14,7 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
+    public Hero hero = new Hero();
     public void LevelCheck(Hero hero)
     {
         Random random = new Random();
@@ -46,7 +47,7 @@ public class OrcBase
         if (this.level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
         {
             int levelLeft = this.level - 1;
-            int j = 4;
+            
 
             for (int i = 0; i < levelLeft; i++)
             {
@@ -56,7 +57,7 @@ public class OrcBase
                 this.minHealing++;      //lägger till 1 i minimum Healing
                 this.maxHealing++;      //Lägger till 1 i maximum Healing
 
-                int statIncrease = random.Next(j);
+                int statIncrease = random.Next(0, 4);
                 switch (statIncrease)
                 {
                     case 0:
@@ -132,9 +133,14 @@ public class OrcBase
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.WriteLine(" slash dmg.");
+        Console.Write(" slash dmg.");
         return value;
     }
+    /// <summary>
+    /// Attack för shaman (Klasser som använder spelldmg)   //Denna rad definierar Metoden så att man vet vad den gör med text
+    /// </summary>
+    /// <param name="hero"></param>                 
+    /// <returns></returns>
     public int AttackSpellCasters(Hero hero)        //Här skall det modifieras så shaman gör Heal efter varje attack och skadan som görs är Fireball attack
     {
         int minDamage = 1;
@@ -155,7 +161,7 @@ public class OrcBase
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(this.healing);
             Console.ResetColor();
-            Console.WriteLine(": HP");
+            Console.Write("hp");
         }
 
         return value;
@@ -176,9 +182,8 @@ public class Orc : OrcBase
         this.armor = 0.65;
         this.hp = this.hp - 2;
 
-        GenerateName();
-        Hero hero = new Hero();
-        LevelCheck(hero);
+        GenerateName();        
+        LevelCheck(hero);   //Kollar vilken Level Hero är på
 
         this.damage = this.damage + (styrka * 1.1);
         this.speed = this.speed + (agility * 1.05);
@@ -199,8 +204,7 @@ public class Shaman : OrcBase
         this.armor = 1;
 
         this.name = "Shaman-" + random.Next(1, 3340);
-        Hero hero = new Hero();
-        LevelCheck(hero);
+        LevelCheck(hero);   //Kollar vilken Level Hero är på
 
         this.damage = this.damage + (intelligence * 0.8);
         this.healing = this.healing + (intelligence * 1);
@@ -210,7 +214,6 @@ public class Shaman : OrcBase
 
     public virtual int Attack(Hero hero)
     {
-
         return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
     }
     
@@ -227,8 +230,7 @@ public class Grunt : OrcBase
         
 
         this.name = "Grunt-" + random.Next(1, 3340);
-        Hero hero = new Hero();
-        LevelCheck(hero);
+        LevelCheck(hero);   //Kollar vilken Level Hero är på
 
         this.damage = this.damage + (styrka * 0.9);
         this.speed = this.speed + (agility * 1.00);

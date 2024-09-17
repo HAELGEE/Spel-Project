@@ -136,6 +136,7 @@ namespace Kod_till_Spel
                     if (hero.hp <= 0)
                     {
                         hero.hp *= 0;
+                        Console.Write("\n");
                         Green(hero.name);
                         Console.WriteLine(" är besegrad!\n");
                         orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
@@ -167,6 +168,7 @@ namespace Kod_till_Spel
                     if (hero.hp <= 0)
                     {
                         hero.hp *= 0;
+                        Console.Write("\n");
                         Green(hero.name);
                         Console.Write(" är besegrad!\n");
                         orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen

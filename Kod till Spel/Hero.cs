@@ -33,7 +33,7 @@ public class Hero
     public double baseArmor { get; set; } = 1;
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 4;
     public int experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -82,7 +82,7 @@ public class Hero
         {
             Console.WriteLine($" Du har {statIncrease} kvar att välj en stat att öka:");
             Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
-            string str = Console.ReadLine();
+            string str = Console.ReadLine()!;
 
             if (str == "1")
             {
@@ -112,7 +112,7 @@ public class Hero
             else
             {
                 Console.WriteLine("Ogiltigt val, försök igen!");
-                str = Console.ReadLine();
+                str = Console.ReadLine()!;
             }
 
         }
@@ -133,6 +133,7 @@ public class Hero
         minDamage += (int)dmg - (int)orc.armor;
         maxDamage += (int)dmg - (int)orc.armor;
         int value = random.Next(minDamage, maxDamage);
+        Console.Write("\n");
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
