@@ -33,7 +33,7 @@ public class Hero
     public double baseArmor { get; set; } = 1;
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
-    public int level { get; set; } = 4;
+    public int level { get; set; } = 1;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -48,6 +48,7 @@ public class Hero
     public double armor { get; set; } = 1;              //ARMOR
     public int xp { get; set; } = 0;
     public int maxXp { get; set; } = 50;
+    public int lifeSteal { get; set; } = 0;
 
     private Random random = new Random();
 
@@ -66,6 +67,35 @@ public class Hero
         {
             experience -= maxXp;
             LevelUp();
+        }
+    }
+
+    public void LifeStealing()
+    {
+        if (lifeSteal > 0)
+        {
+            if (hp < maxHp)
+            {
+                hp = hp + lifeSteal;
+                if (hp > maxHp)
+                {
+                    hp = maxHp;
+                }
+
+                Console.Write($" och du lifestealade ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.Write(lifeSteal);
+                Console.ResetColor();
+                Console.WriteLine("hp");
+            }
+            else
+            {
+                Console.WriteLine("");
+            }
+        }
+        else
+        {
+            Console.WriteLine("");
         }
     }
 
@@ -141,7 +171,8 @@ public class Hero
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.WriteLine(" slash dmg.");
+        Console.Write(" slash dmg.");
+        LifeStealing();
         return value;
     }
 }
