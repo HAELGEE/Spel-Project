@@ -130,6 +130,10 @@ public class OrcBase
         minDamage += (int)damage - (int)hero.armor;
         maxDamage += (int)damage - (int)hero.armor;
         int value = random.Next(minDamage, maxDamage);
+        if (value < 0)
+        {
+            value = 0;
+        }
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
@@ -148,6 +152,10 @@ public class OrcBase
         minDamage += (int)damage - (int)hero.armor;
         maxDamage += (int)damage - (int)hero.armor;
         int value = random.Next(minDamage, maxDamage);
+        if (value < 0)
+        {
+            value = 0;
+        }
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG

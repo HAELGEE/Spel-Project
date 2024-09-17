@@ -81,19 +81,23 @@ namespace Kod_till_Spel
             Console.Write(", Orc HP: ");
             Red(orc.hp);
             Console.WriteLine("");
-            int randomXp = 0;
+            double randomXp = 0;
 
             if (hero.level > orc.level)
             {
-                randomXp = random.Next(1, 3);
+                randomXp = random.Next(1, 4);
+                randomXp = Math.Round(randomXp + (hero.level * 1.3));
             }
             else if (hero.level < orc.level)
             {
                 randomXp = random.Next(5, 8);
+                randomXp = Math.Round(randomXp + (hero.level * 1.3));
             }
             else
             {
-                randomXp = random.Next(3, 5);
+                randomXp = random.Next(3, 6);
+                randomXp = Math.Round(randomXp + (hero.level * 1.3));
+                
             }
 
             while (hero.hp > 0 && orc.hp > 0)

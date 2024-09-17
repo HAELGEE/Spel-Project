@@ -34,7 +34,7 @@ public class Hero
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
     public int level { get; set; } = 4;
-    public int experience { get; set; } = 0;
+    public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
     public int styrka { get; set; } = 1;               //ÖKAR SKADA
@@ -59,7 +59,7 @@ public class Hero
         Stats();
         AddExperience(this.experience);
     }
-    public void AddExperience(int amount)
+    public void AddExperience(double amount)
     {
         experience += amount;
         while (experience >= maxXp)
@@ -133,6 +133,10 @@ public class Hero
         minDamage += (int)dmg - (int)orc.armor;
         maxDamage += (int)dmg - (int)orc.armor;
         int value = random.Next(minDamage, maxDamage);
+        if (value < 0)
+        {
+            value = 0;
+        }
         Console.Write("\n");
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");
