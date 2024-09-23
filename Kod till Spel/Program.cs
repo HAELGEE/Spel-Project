@@ -13,21 +13,25 @@ namespace SPEL
         {
             Hero hero01 = new Hero();
             Console.Write("Ange ett namn till din Hjälte: ");
-            hero01.name = Console.ReadLine();
+            hero01.name = Console.ReadLine();            
             Attack attack = new Attack();
             Healing healing = new Healing();
-           
+            List<Weapon> weapons = Weapon.GetAllWeapons();
+            
+
             bool spel = true;
             while (spel)
             {
-
                 Console.WriteLine("\n=== TEXT SPEL ===          A game created by #Christofer Hägg");
                 Console.WriteLine("[S]tatus");
+                Console.WriteLine("[I]tems");
+                Console.WriteLine("[Equip]");
+                Console.WriteLine("[Shop]");
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
                 Console.WriteLine("Sa[V]e");
                 Console.WriteLine("[Load]");
-                Console.WriteLine("[Quit]");
+                Console.WriteLine("[Quit]");                
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
                 Console.Clear();
@@ -63,9 +67,36 @@ namespace SPEL
                         Console.WriteLine("Speed: " + hero01.speed);
                         Console.WriteLine("DMG: " + hero01.dmg);
                         Console.WriteLine("ARMOR: " + hero01.armor);
+                        Console.WriteLine($"LifeSteal: {hero01.lifeSteal}");
                         Console.WriteLine("===================================");
                         Console.ReadKey();
                         Console.Clear();
+                        break;
+
+                    case "i":
+                        //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
+                        hero01.ShowItems();
+                        break;
+
+                    case "equip":
+                        Console.WriteLine("Välj föremål att utrusta:");
+                        for (int i = 0; i < weapons.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {weapons[i].ItemName} - {weapons[i].ItemDescription}");
+                        }
+                        int weaponChoice = int.Parse(Console.ReadLine()) - 1;
+                        if (weaponChoice >= 0 && weaponChoice < weapons.Count)
+                        {
+                            hero01.EquipItem(weapons[weaponChoice]);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt val.");
+                        }
+                        break;
+
+                    case "shop":
+                        Console.WriteLine("Det finns inget här för tillfället. Mer kommer inom kort!");
                         break;
 
                     case "a":
@@ -86,7 +117,7 @@ namespace SPEL
                         Hero loadedHero = LoadHero("hero_save.json");
                         if (loadedHero != null)
                         {
-                            hero01 = loadedHero;                            
+                            hero01 = loadedHero;
                         }
                         Console.ReadKey();
                         break;
@@ -105,13 +136,14 @@ namespace SPEL
             }
         }
 
+
         static void Green(int value)
         {
             Console.ForegroundColor = ConsoleColor.Green;
         }
         static void Red(int value)
         {
-            Console.ForegroundColor= ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;
         }
         public static void SaveHero(Hero hero, string filename)
         {
@@ -134,6 +166,5 @@ namespace SPEL
                 return null;
             }
         }
-
     }
 }

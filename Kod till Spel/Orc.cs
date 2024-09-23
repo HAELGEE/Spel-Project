@@ -117,6 +117,7 @@ public class OrcBase
     public double damage { get; set; }
     public double speed { get; set; }
     public double armor { get; set; }
+    public double resistance { get; set; } = 0;
     public double healing { get; set; } = 0;
     public int minHealing { get; set; } = 1;
     public int maxHealing { get; set; } = 3;
@@ -149,8 +150,8 @@ public class OrcBase
     {
         int minDamage = 1;
         int maxDamage = 4;
-        minDamage += (int)damage - (int)hero.armor;
-        maxDamage += (int)damage - (int)hero.armor;
+        minDamage += (int)damage - (int)hero.resistance;
+        maxDamage += (int)damage - (int)hero.resistance;
         int value = random.Next(minDamage, maxDamage);
         if (value < 0)
         {
@@ -195,7 +196,8 @@ public class Orc : OrcBase
 
         this.damage = this.damage + (styrka * 1.1);
         this.speed = this.speed + (agility * 1.05);
-        this.armor = this.armor + (agility / 2) * 1.01;
+        this.armor = this.armor + (agility * 0.16);
+        this.resistance = this.resistance + (intelligence * 0.1);
     }
 
     public virtual int Attack(Hero hero)
@@ -217,7 +219,8 @@ public class Shaman : OrcBase
         this.damage = this.damage + (intelligence * 0.8);
         this.healing = this.healing + (intelligence * 1);
         this.speed = this.speed + (agility * 1.05);
-        this.armor = this.armor + (agility / 2) * 1.01;
+        this.armor = this.armor + (agility * 0.16);
+        this.resistance = this.resistance + (intelligence * 0.1);
     }
 
     public virtual int Attack(Hero hero)
@@ -242,7 +245,8 @@ public class Grunt : OrcBase
 
         this.damage = this.damage + (styrka * 0.9);
         this.speed = this.speed + (agility * 1.00);
-        this.armor = this.armor + (agility / 2) * 1.01;
+        this.armor = this.armor + +(agility * 0.16);
+
     }
 
     public virtual int Attack(Hero hero)
