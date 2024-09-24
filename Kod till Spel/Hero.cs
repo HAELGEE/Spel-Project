@@ -40,13 +40,13 @@ public class Hero
     public int styrka { get; set; } = 1;               //ÖKAR SKADA
     public int agility { get; set; } = 1;              //ÖKAR SPEED
     public int stamina { get; set; } = 1;
-    public int charm { get; set; } = 0;
-    public int intelligence { get; set; } = 0;
-    public int mana { get; set; } = 0;
+    public int charm { get; set; } = 1;
+    public int intelligence { get; set; } = 1;
+    public int mana { get; set; } = 10;
     public double dmg { get; set; } = 2;                //SKADA
     public double speed { get; set; } = 1;              //SPEED
     public double armor { get; set; } = 1;              //ARMOR
-    public double resistance { get; set; } = 0;         //Armor emot magisk dmg
+    public double resistance { get; set; } = 1;         //Armor emot magisk dmg
     public int xp { get; set; } = 0;
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;

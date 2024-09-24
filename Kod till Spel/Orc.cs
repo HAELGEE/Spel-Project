@@ -112,13 +112,13 @@ public class OrcBase
     public int agility { get; set; } = 1;
     public int stamina { get; set; } = 1;
     public int intelligence { get; set; } = 1;
-    public int mana { get; set; } = 0;
-    public int charm { get; set; } = 0;
+    public int mana { get; set; } = 10;
+    public int charm { get; set; } = 1;
     public double damage { get; set; }
     public double speed { get; set; }
     public double armor { get; set; }
-    public double resistance { get; set; } = 0;
-    public double healing { get; set; } = 0;
+    public double resistance { get; set; } = 1;
+    public double healing { get; set; } = 1;
     public int minHealing { get; set; } = 1;
     public int maxHealing { get; set; } = 3;
 
@@ -216,8 +216,8 @@ public class Shaman : OrcBase
         this.name = "Shaman-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.damage + (intelligence * 0.8);
-        this.healing = this.healing + (intelligence * 1);
+        this.damage = this.damage + (intelligence * 0.9);
+        this.healing = this.healing + (Math.Round(intelligence * 0.8));
         this.speed = this.speed + (agility * 1.05);
         this.armor = this.armor + (agility * 0.16);
         this.resistance = this.resistance + (intelligence * 0.1);
