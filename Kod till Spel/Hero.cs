@@ -52,6 +52,7 @@ public class Hero
     public int xp { get; set; } = 0;
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
+    public int Guld { get; set; } = 0;
     public Weapon EquippedWeapon { get; set; }  // Lägger till för att hantera nuvarande utrustat vapen
 
     private Random random = new Random();
@@ -132,17 +133,10 @@ public class Hero
         }
     }
 
-    void HeroLevels(int input)
-    {
-        savedLevel = level;
-        input = level;
-        return;
-    }
-
     public Hero()
     {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
-        HeroLevels(savedLevel);
+        //HeroLevels(savedLevel);
         Stats();
         AddExperience(this.experience);
     }

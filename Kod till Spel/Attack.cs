@@ -40,13 +40,11 @@ namespace Kod_till_Spel
         public void _Attack(Hero hero)
         {
             OrcBase orc = new OrcBase(hero);
-            //orc.SetHero(hero);             // Sätter hjälten
-            
 
             Random random = new Random();
             int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt
 
-            switch (0)
+            switch (randomName)
             {
                 case 0:
                     orc = new Orc(hero);
@@ -65,9 +63,7 @@ namespace Kod_till_Spel
             double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = orc.speed;
 
-            
-            
-            Console.WriteLine($"\nLevel: {orc.level} {orc.name} dyker upp!\n");            
+            Console.WriteLine($"\nLevel: {orc.level} {orc.name} dyker upp!\n");
 
             if (hero.speed == orc.speed)
             {
@@ -102,7 +98,7 @@ namespace Kod_till_Spel
             {
                 randomXp = random.Next(3, 6);
                 randomXp = Math.Round(randomXp + (hero.level * 1.3));
-                
+
             }
 
             while (hero.hp > 0 && orc.hp > 0)
@@ -110,7 +106,6 @@ namespace Kod_till_Spel
                 if (hero.speed > orc.speed)     //Hero speed över orc speed
                 {
                     // Hero attackerar först
-
                     int damage = hero.Attack(orc);  //Hero attackerar
 
                     orc.hp -= damage;
@@ -154,7 +149,6 @@ namespace Kod_till_Spel
                         healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
-
                 }
 
                 else
@@ -208,7 +202,6 @@ namespace Kod_till_Spel
                 }
             }
 
-
             Thread.Sleep(500);
             Console.Write($"{hero.name} HP: ");
             if (hero.hp <= 0)           //lägger till Färg
@@ -223,7 +216,11 @@ namespace Kod_till_Spel
             }
             Thread.Sleep(700);
         }
-
-
+        public void DungeonAttack(Hero hero)
+        {
+            //Här skall det läggas in attacker för en dungeon.
+            //Hur många mobs? Ska det randomatiseras?
+            //Möta en boss? Kanske en mellan boss och en sista boss?
+        }
     }
 }

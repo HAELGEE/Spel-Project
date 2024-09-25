@@ -17,7 +17,7 @@ public class OrcBase
     public Hero hero {  get; set; }
     public string name { get; set; }
     public int level { get; set; } = 1;
-    public static int heroLevel { get; set; } = Hero.savedLevel;
+    //public static int heroLevel { get; set; } = Hero.savedLevel;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -38,7 +38,6 @@ public class OrcBase
     public OrcBase(Hero hero)
     {
         this.hero = hero;
-        //LevelCheck(hero);
     }
     
     

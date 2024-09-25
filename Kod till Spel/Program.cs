@@ -41,6 +41,7 @@ namespace SPEL
             Attack attack = new Attack();
             Healing healing = new Healing();
             List<Weapon> weapons = Weapon.GetAllWeapons();
+            Dungeons dungeon = new Dungeons(hero);
 
 
             bool spel = true;
@@ -55,7 +56,7 @@ namespace SPEL
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
                 Console.WriteLine("Sa[V]e");
-                //Console.WriteLine("[Load]");
+                Console.WriteLine("[D]ungeon");
                 Console.WriteLine("[Quit]");
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
@@ -69,6 +70,7 @@ namespace SPEL
                         Console.WriteLine("Din hjälte är på Level: " + hero.level);
                         Console.WriteLine($"Din hjälte har: {hero.experience}xp");
                         Console.WriteLine($"Din hjälte har: {hero.maxXp - hero.experience}xp kvar till nästa level\n");
+                        Console.WriteLine($"Du har för närvarande {hero.Guld} guld\n");
                         Console.Write($"HP: ");
                         if (hero.hp < hero.maxHp)
                         {
@@ -122,6 +124,7 @@ namespace SPEL
 
                     case "shop":
                         Console.WriteLine("Det finns inget här för tillfället. Mer kommer inom kort!");
+                        Console.ReadKey();
                         break;
 
                     case "a":
@@ -139,14 +142,9 @@ namespace SPEL
                         Console.ReadKey();
                         break;
 
-                    //case "load":
-                    //    Hero loadedHero = LoadHero("hero_save.json");
-                    //    if (loadedHero != null)
-                    //    {
-                    //        hero01 = loadedHero;
-                    //    }
-                    //    Console.ReadKey();
-                    //    break;
+                    case "d":
+                        dungeon.Edungeon();
+                        break;
 
                     case "quit":
                         Console.WriteLine("Tack för att du använder detta programmet, nu avslutas programmet");
