@@ -14,8 +14,10 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
+    public Hero hero = new Hero();
     public string name { get; set; }
     public int level { get; set; } = 1;
+    //public static int heroLevel { get; set; } = Hero.savedLevel;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -33,15 +35,17 @@ public class OrcBase
     public int minHealing { get; set; } = 1;
     public int maxHealing { get; set; } = 3;
 
-     public Hero hero = new Hero();
 
     
     
     public void LevelCheck(Hero hero)
     {
-        Random random = new Random();        
-
+        Random random = new Random();
+        int heroLevel = 0;
+        hero.HeroLevels(heroLevel);
         
+
+
         int levelOver = 0;
         int levelUnder = 1;
         if (levelUnder < 1)     //Kollar om levelUnder ligger under 1 isf sätter den upp den till 1
@@ -49,13 +53,13 @@ public class OrcBase
             levelUnder = 1;
         }
         
-        if (Hero.savedLevel >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
+        if (heroLevel >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
             levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            if (Hero.savedLevel > 3)             //Kollar om Hero level är över 3
+            if (heroLevel > 3)             //Kollar om Hero level är över 3
             {
-                levelUnder = Hero.savedLevel - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
+                levelUnder = heroLevel - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
             }
 
             this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli

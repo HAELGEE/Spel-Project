@@ -7,6 +7,7 @@ using SPEL;
 using Kod_till_Spel;
 using System.IO;
 using System.Text.Json;
+using System.Security.Cryptography;
 
 namespace Kod_till_Spel;
 public class Hero
@@ -33,9 +34,9 @@ public class Hero
     public double baseArmor { get; set; } = 1;
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 16;
     public static int savedLevel { get; set; } = 1;
-    public double experience { get; set; } = 24;
+    public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
     public int styrka { get; set; } = 1;               //ÖKAR SKADA
@@ -131,11 +132,16 @@ public class Hero
         }
     }
 
+    public void HeroLevels(int input)
+    {
+        savedLevel = level;
+        input = level;
+        return;
+    }
 
     public Hero()
     {
-        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!        
-        savedLevel = level;
+        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!             
         Stats();
         AddExperience(this.experience);
     }
@@ -254,4 +260,5 @@ public class Hero
         LifeStealing();
         return value;
     }
+    
 }
