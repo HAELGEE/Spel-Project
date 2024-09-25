@@ -14,10 +14,10 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
-    public Hero hero = new Hero();
+    public Hero hero {  get; set; }
     public string name { get; set; }
     public int level { get; set; } = 1;
-    //public static int heroLevel { get; set; } = Hero.savedLevel;
+    public static int heroLevel { get; set; } = Hero.savedLevel;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -35,17 +35,17 @@ public class OrcBase
     public int minHealing { get; set; } = 1;
     public int maxHealing { get; set; } = 3;
 
-
+    public OrcBase(Hero hero)
+    {
+        this.hero = hero;
+        //LevelCheck(hero);
+    }
     
     
     public void LevelCheck(Hero hero)
     {
         Random random = new Random();
-        int heroLevel = 0;
-        hero.HeroLevels(heroLevel);
         
-
-
         int levelOver = 0;
         int levelUnder = 1;
         if (levelUnder < 1)     //Kollar om levelUnder ligger under 1 isf sätter den upp den till 1
@@ -53,13 +53,13 @@ public class OrcBase
             levelUnder = 1;
         }
         
-        if (heroLevel >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
+        if (hero.level >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
             levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            if (heroLevel > 3)             //Kollar om Hero level är över 3
+            if (hero.level > 3)             //Kollar om Hero level är över 3
             {
-                levelUnder = heroLevel - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
+                levelUnder = hero.level - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
             }
 
             this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
@@ -133,7 +133,7 @@ public class OrcBase
 
     public Random random = new Random();
 
-    public int Attack(Hero hero)
+    public virtual int Attack(Hero hero)
     {
         int minDamage = 1;
         int maxDamage = 4;
@@ -155,7 +155,7 @@ public class OrcBase
     /// </summary>
     /// <param name="hero"></param>                 
     /// <returns></returns>
-    public int AttackSpellCasters(Hero hero)        //Här skall det modifieras så shaman gör Heal efter varje attack och skadan som görs är Fireball attack
+    public virtual int AttackSpellCasters(Hero hero)        //Här skall det modifieras så shaman gör Heal efter varje attack och skadan som görs är Fireball attack
     {
         int minDamage = 1;
         int maxDamage = 4;
@@ -193,7 +193,7 @@ public class OrcBase
 
 public class Orc : OrcBase
 {
-    public Orc()
+    public Orc(Hero hero) : base(hero)
     {
         this.damage = 3;
         this.speed = 1;
@@ -210,14 +210,14 @@ public class Orc : OrcBase
         this.resistance = this.resistance + (intelligence * 0.1);
     }
 
-    public virtual int Attack(Hero hero)
+    public override int Attack(Hero hero)
     {
         return base.Attack(hero);      // Specifik attack för Orc        
     }
 }
 public class Shaman : OrcBase
 {
-    public Shaman()
+    public Shaman(Hero hero) : base(hero)
     {
         this.damage = 1;
         this.speed = 0.9;
@@ -233,7 +233,7 @@ public class Shaman : OrcBase
         this.resistance = this.resistance + (intelligence * 0.1);
     }
 
-    public virtual int Attack(Hero hero)
+    public override int Attack(Hero hero)
     {
         return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
     }
@@ -242,7 +242,7 @@ public class Shaman : OrcBase
 
 public class Grunt : OrcBase
 {
-    public Grunt()
+    public Grunt(Hero hero) : base(hero)
     {
         this.damage = 1;
         this.speed = 0.5;
@@ -260,7 +260,7 @@ public class Grunt : OrcBase
 
     }
 
-    public virtual int Attack(Hero hero)
+    public override int Attack(Hero hero)
     {
 
         return base.Attack(hero);      // Specifik attack för Grunt        

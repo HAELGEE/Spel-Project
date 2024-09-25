@@ -34,7 +34,7 @@ public class Hero
     public double baseArmor { get; set; } = 1;
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
-    public int level { get; set; } = 16;
+    public int level { get; set; } = 1;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
@@ -61,8 +61,8 @@ public class Hero
         if (item is Weapon)
         {
             EquippedWeapon = (Weapon)item;
-            EquippedWeapon.ApplyStats(this);            
-        }   
+            EquippedWeapon.ApplyStats(this);
+        }
     }
     public void ShowItems()
     {
@@ -120,11 +120,11 @@ public class Hero
             }
 
 
-                //Visar upp vilka stats som ökar och hur mycket.
-                Console.WriteLine($": {EquippedWeapon.ItemName} - Damage: {EquippedWeapon.WeaponDamage}\nStyrka: {EquippedWeapon.styrka}\n" +
-                    $"Agility: {EquippedWeapon.agility}\nStamina: {EquippedWeapon.stamina}\n" +
-                    $"Intelligence: {EquippedWeapon.intelligence}\nCharm: {EquippedWeapon.charm}\nLifesteal: {EquippedWeapon.lifeSteal}");
-            
+            //Visar upp vilka stats som ökar och hur mycket.
+            Console.WriteLine($": {EquippedWeapon.ItemName} - Damage: {EquippedWeapon.WeaponDamage}\nStyrka: {EquippedWeapon.styrka}\n" +
+                $"Agility: {EquippedWeapon.agility}\nStamina: {EquippedWeapon.stamina}\n" +
+                $"Intelligence: {EquippedWeapon.intelligence}\nCharm: {EquippedWeapon.charm}\nLifesteal: {EquippedWeapon.lifeSteal}");
+
         }
         else
         {
@@ -132,7 +132,7 @@ public class Hero
         }
     }
 
-    public void HeroLevels(int input)
+    void HeroLevels(int input)
     {
         savedLevel = level;
         input = level;
@@ -141,7 +141,8 @@ public class Hero
 
     public Hero()
     {
-        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!             
+        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
+        HeroLevels(savedLevel);
         Stats();
         AddExperience(this.experience);
     }
@@ -260,5 +261,5 @@ public class Hero
         LifeStealing();
         return value;
     }
-    
+
 }

@@ -39,7 +39,7 @@ namespace Kod_till_Spel
 
         public void _Attack(Hero hero)
         {
-            OrcBase orc = new OrcBase();
+            OrcBase orc = new OrcBase(hero);
             //orc.SetHero(hero);             // Sätter hjälten
             
 
@@ -49,16 +49,16 @@ namespace Kod_till_Spel
             switch (0)
             {
                 case 0:
-                    orc = new Orc();
+                    orc = new Orc(hero);
                     break;
                 case 1:
-                    orc = new Shaman();
+                    orc = new Shaman(hero);
                     break;
                 case 2:
-                    orc = new Grunt();
+                    orc = new Grunt(hero);
                     break;
                 default:
-                    orc = new Orc();
+                    orc = new Orc(hero);
                     break;
             }
 
@@ -169,7 +169,7 @@ namespace Kod_till_Spel
                     {
                         damage = orc.Attack(hero);
                     }
-                        //int damage = orc.Attack(hero);    //Orc speed över hero speed
+                    //int damage = orc.Attack(hero);    //Orc speed över hero speed
                     hero.hp -= damage;                  //Orc attackerar
                     Thread.Sleep(500);
 

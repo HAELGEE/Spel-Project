@@ -11,7 +11,7 @@ namespace SPEL
     {
         static void Main(string[] args)
         {
-            Hero hero01 = new Hero();
+            Hero hero = new Hero();
             bool load = true;
             while (load)
             {
@@ -22,7 +22,7 @@ namespace SPEL
                     Hero loadedHero = LoadHero("hero_save.json");
                     if (loadedHero != null)
                     {
-                        hero01 = loadedHero;
+                        hero = loadedHero;
                     }
                     Console.ReadKey();
                     break;
@@ -30,7 +30,7 @@ namespace SPEL
                 else if (choice.ToUpper() == "N")
                 {
                     Console.Write("Ange ett namn till din Hjälte: ");
-                    hero01.name = Console.ReadLine();
+                    hero.name = Console.ReadLine();
                     break;
                 }
                 else
@@ -65,34 +65,34 @@ namespace SPEL
                 {
                     case "s":
                         Console.WriteLine("===================================");
-                        Console.WriteLine($"Ditt namn på din Hero: {hero01.name}\n");
-                        Console.WriteLine("Din hjälte är på Level: " + hero01.level);
-                        Console.WriteLine($"Din hjälte har: {hero01.experience}xp");
-                        Console.WriteLine($"Din hjälte har: {hero01.maxXp - hero01.experience}xp kvar till nästa level\n");
+                        Console.WriteLine($"Ditt namn på din Hero: {hero.name}\n");
+                        Console.WriteLine("Din hjälte är på Level: " + hero.level);
+                        Console.WriteLine($"Din hjälte har: {hero.experience}xp");
+                        Console.WriteLine($"Din hjälte har: {hero.maxXp - hero.experience}xp kvar till nästa level\n");
                         Console.Write($"HP: ");
-                        if (hero01.hp < hero01.maxHp)
+                        if (hero.hp < hero.maxHp)
                         {
-                            Red(hero01.hp);
+                            Red(hero.hp);
                         }
                         else
                         {
-                            Green(hero01.hp);
+                            Green(hero.hp);
                         }
-                        Console.Write(hero01.hp);
+                        Console.Write(hero.hp);
                         Console.ResetColor();
                         Console.Write(" av ");
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(hero01.maxHp);
+                        Console.WriteLine(hero.maxHp);
                         Console.ResetColor();
-                        Console.WriteLine("Styrka: " + hero01.styrka);
-                        Console.WriteLine("Agility: " + hero01.agility);
-                        Console.WriteLine("Stamina: " + hero01.stamina);
-                        Console.WriteLine("Intelligence: " + hero01.intelligence);
-                        Console.WriteLine("Charm: " + hero01.charm);
-                        Console.WriteLine("Speed: " + hero01.speed);
-                        Console.WriteLine("DMG: " + hero01.dmg);
-                        Console.WriteLine("ARMOR: " + hero01.armor);
-                        Console.WriteLine($"LifeSteal: {hero01.lifeSteal}");
+                        Console.WriteLine("Styrka: " + hero.styrka);
+                        Console.WriteLine("Agility: " + hero.agility);
+                        Console.WriteLine("Stamina: " + hero.stamina);
+                        Console.WriteLine("Intelligence: " + hero.intelligence);
+                        Console.WriteLine("Charm: " + hero.charm);
+                        Console.WriteLine("Speed: " + hero.speed);
+                        Console.WriteLine("DMG: " + hero.dmg);
+                        Console.WriteLine("ARMOR: " + hero.armor);
+                        Console.WriteLine($"LifeSteal: {hero.lifeSteal}");
                         Console.WriteLine("===================================");
                         Console.ReadKey();
                         Console.Clear();
@@ -100,7 +100,7 @@ namespace SPEL
 
                     case "i":
                         //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
-                        hero01.ShowItems();
+                        hero.ShowItems();
                         break;
 
                     case "equip":
@@ -112,7 +112,7 @@ namespace SPEL
                         int weaponChoice = int.Parse(Console.ReadLine()) - 1;
                         if (weaponChoice >= 0 && weaponChoice < weapons.Count)
                         {
-                            hero01.EquipItem(weapons[weaponChoice]);
+                            hero.EquipItem(weapons[weaponChoice]);
                         }
                         else
                         {
@@ -125,17 +125,17 @@ namespace SPEL
                         break;
 
                     case "a":
-                        attack._Attack(hero01);
+                        attack._Attack(hero);
                         break;
 
                     case "h":
-                        healing._Healing(hero01);
+                        healing._Healing(hero);
                         break;
 
                     case "v":
 
-                        SaveHero(hero01, "hero_save.json");
-                        hero01.Stats();
+                        SaveHero(hero, "hero_save.json");
+                        hero.Stats();
                         Console.ReadKey();
                         break;
 
