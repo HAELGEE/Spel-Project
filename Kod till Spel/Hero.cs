@@ -34,7 +34,8 @@ public class Hero
     public double baseSpeed { get; set; } = 1;
     public string name { get; set; }
     public int level { get; set; } = 1;
-    public double experience { get; set; } = 0;
+    public static int savedLevel { get; set; } = 1;
+    public double experience { get; set; } = 24;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
     public int styrka { get; set; } = 1;               //ÖKAR SKADA
@@ -133,7 +134,8 @@ public class Hero
 
     public Hero()
     {
-        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
+        maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!        
+        savedLevel = level;
         Stats();
         AddExperience(this.experience);
     }
@@ -158,7 +160,6 @@ public class Hero
                 {
                     hp = maxHp;
                 }
-
                 Console.Write($" och du lifestealade ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write(lifeSteal);
@@ -231,7 +232,7 @@ public class Hero
         dmg = baseDmg + (styrka * 1.1);   //Avgör dmg (drar av skada beroende på armor)
         speed = baseSpeed + (agility * 1.05);    //För att se vem som skall starta attackera vem.
         armor = baseArmor + (agility * 0.16);    //För att göra "avdrag" av dmg    
-        resistance = resistance + (intelligence * 0.1);
+        resistance = resistance + (intelligence * 0.1); //Resistance "avdrag" utav spell dmg 
     }
 
     public int Attack(OrcBase orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor

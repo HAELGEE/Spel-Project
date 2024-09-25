@@ -14,34 +14,57 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
-    public Hero hero = new Hero();
+    public string name { get; set; }
+    public int level { get; set; } = 1;
+    public double experience { get; set; } = 0;
+    public int hp { get; set; } = 10;
+    public int maxHp { get; set; } = 10;
+    public int styrka { get; set; } = 1;
+    public int agility { get; set; } = 1;
+    public int stamina { get; set; } = 1;
+    public int intelligence { get; set; } = 1;
+    public int mana { get; set; } = 10;
+    public int charm { get; set; } = 1;
+    public double damage { get; set; }
+    public double speed { get; set; }
+    public double armor { get; set; }
+    public double resistance { get; set; } = 1;
+    public double healing { get; set; } = 1;
+    public int minHealing { get; set; } = 1;
+    public int maxHealing { get; set; } = 3;
+
+     public Hero hero = new Hero();
+
+    
+    
     public void LevelCheck(Hero hero)
     {
-        Random random = new Random();
+        Random random = new Random();        
 
+        
         int levelOver = 0;
         int levelUnder = 1;
         if (levelUnder < 1)     //Kollar om levelUnder ligger under 1 isf sätter den upp den till 1
         {
             levelUnder = 1;
         }
-
-        if (hero.level >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
+        
+        if (Hero.savedLevel >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
             levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            if (hero.level > 3)             //Kollar om Hero level är över 3
+            if (Hero.savedLevel > 3)             //Kollar om Hero level är över 3
             {
-                levelUnder = hero.level - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
+                levelUnder = Hero.savedLevel - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
             }
 
             this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
         else
         {
-            levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
+            levelOver = Hero.savedLevel + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
-            this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
+            level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
 
         if (this.level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
@@ -103,24 +126,6 @@ public class OrcBase
         Console.ResetColor();
     }
 
-    public string name { get; set; }
-    public int level { get; set; } = 1;
-    public double experience { get; set; } = 0;
-    public int hp { get; set; } = 10;
-    public int maxHp { get; set; } = 10;
-    public int styrka { get; set; } = 1;
-    public int agility { get; set; } = 1;
-    public int stamina { get; set; } = 1;
-    public int intelligence { get; set; } = 1;
-    public int mana { get; set; } = 10;
-    public int charm { get; set; } = 1;
-    public double damage { get; set; }
-    public double speed { get; set; }
-    public double armor { get; set; }
-    public double resistance { get; set; } = 1;
-    public double healing { get; set; } = 1;
-    public int minHealing { get; set; } = 1;
-    public int maxHealing { get; set; } = 3;
 
     public Random random = new Random();
 
@@ -178,7 +183,7 @@ public class OrcBase
 
     public virtual void GenerateName()
     {
-        this.name = "Orc-" + random.Next(1, 3340);        
+        this.name = "Orc-" + random.Next(1, 3340);
     }
 }
 
@@ -191,7 +196,8 @@ public class Orc : OrcBase
         this.armor = 0.65;
         this.hp = this.hp - 2;
 
-        GenerateName();        
+        GenerateName();     
+        //Här får jag inte rätt level av hero in efter att jag loadat min save
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
         this.damage = this.damage + (styrka * 1.1);
@@ -236,7 +242,7 @@ public class Grunt : OrcBase
     {
         this.damage = 1;
         this.speed = 0.5;
-        this.armor = 2;
+        this.armor = 2.5;
         this.hp += 2;
         
 
@@ -245,7 +251,8 @@ public class Grunt : OrcBase
 
         this.damage = this.damage + (styrka * 0.9);
         this.speed = this.speed + (agility * 1.00);
-        this.armor = this.armor + +(agility * 0.16);
+        this.armor = this.armor + +(agility * 0.21);
+        this.resistance = this.resistance + (intelligence * 0.1);
 
     }
 

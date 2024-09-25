@@ -12,9 +12,7 @@ public class Items
     public double baseDmg { get; set; } = 2;
     public double baseArmor { get; set; } = 1;
     public double baseSpeed { get; set; } = 1;
-    public string name { get; set; }
-    public int level { get; set; } = 4;
-    public double experience { get; set; } = 0;
+    public string name { get; set; }   
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
     public int styrka { get; set; } = 1;               //ÖKAR SKADA
@@ -26,8 +24,7 @@ public class Items
     public double dmg { get; set; } = 2;                //SKADA
     public double speed { get; set; } = 1;              //SPEED
     public double armor { get; set; } = 1;              //ARMOR
-    public int xp { get; set; } = 0;
-    public int maxXp { get; set; } = 50;
+        public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
 
     public string ItemName { get; set; }

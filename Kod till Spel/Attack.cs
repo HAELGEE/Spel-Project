@@ -39,11 +39,14 @@ namespace Kod_till_Spel
 
         public void _Attack(Hero hero)
         {
-            OrcBase orc;
+            OrcBase orc = new OrcBase();
+            //orc.SetHero(hero);             // Sätter hjälten
+            
+
             Random random = new Random();
             int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt
 
-            switch (randomName)
+            switch (0)
             {
                 case 0:
                     orc = new Orc();
@@ -62,7 +65,9 @@ namespace Kod_till_Spel
             double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = orc.speed;
 
-            Console.WriteLine($"\nLevel: {orc.level} {orc.name} dyker upp!\n");
+            
+            
+            Console.WriteLine($"\nLevel: {orc.level} {orc.name} dyker upp!\n");            
 
             if (hero.speed == orc.speed)
             {

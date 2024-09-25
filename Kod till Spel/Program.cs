@@ -12,16 +12,41 @@ namespace SPEL
         static void Main(string[] args)
         {
             Hero hero01 = new Hero();
-            Console.Write("Ange ett namn till din Hjälte: ");
-            hero01.name = Console.ReadLine();            
+            bool load = true;
+            while (load)
+            {
+                Console.WriteLine("Vill du ladda en hjälte? J/N");
+                string choice = Console.ReadLine();
+                if (choice.ToUpper() == "J")
+                {
+                    Hero loadedHero = LoadHero("hero_save.json");
+                    if (loadedHero != null)
+                    {
+                        hero01 = loadedHero;
+                    }
+                    Console.ReadKey();
+                    break;
+                }
+                else if (choice.ToUpper() == "N")
+                {
+                    Console.Write("Ange ett namn till din Hjälte: ");
+                    hero01.name = Console.ReadLine();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input");
+                }
+            }
             Attack attack = new Attack();
             Healing healing = new Healing();
             List<Weapon> weapons = Weapon.GetAllWeapons();
-            
+
 
             bool spel = true;
             while (spel)
             {
+                Console.Clear();
                 Console.WriteLine("\n=== TEXT SPEL ===          A game created by #Christofer Hägg");
                 Console.WriteLine("[S]tatus");
                 Console.WriteLine("[I]tems");
@@ -30,8 +55,8 @@ namespace SPEL
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
                 Console.WriteLine("Sa[V]e");
-                Console.WriteLine("[Load]");
-                Console.WriteLine("[Quit]");                
+                //Console.WriteLine("[Load]");
+                Console.WriteLine("[Quit]");
                 Console.Write("Val: ");
                 string val = Console.ReadLine().ToLower();
                 Console.Clear();
@@ -108,19 +133,20 @@ namespace SPEL
                         break;
 
                     case "v":
+
                         SaveHero(hero01, "hero_save.json");
                         hero01.Stats();
                         Console.ReadKey();
                         break;
 
-                    case "load":
-                        Hero loadedHero = LoadHero("hero_save.json");
-                        if (loadedHero != null)
-                        {
-                            hero01 = loadedHero;
-                        }
-                        Console.ReadKey();
-                        break;
+                    //case "load":
+                    //    Hero loadedHero = LoadHero("hero_save.json");
+                    //    if (loadedHero != null)
+                    //    {
+                    //        hero01 = loadedHero;
+                    //    }
+                    //    Console.ReadKey();
+                    //    break;
 
                     case "quit":
                         Console.WriteLine("Tack för att du använder detta programmet, nu avslutas programmet");
