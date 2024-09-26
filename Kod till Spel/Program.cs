@@ -143,7 +143,7 @@ namespace SPEL
                         break;
 
                     case "d":
-                        dungeon.Edungeon();
+                        dungeon.EnterDungeon();
                         break;
 
                     case "quit":

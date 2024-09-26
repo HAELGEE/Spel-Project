@@ -14,7 +14,7 @@ namespace Kod_till_Spel;
 
 public class OrcBase
 {
-    public Hero hero {  get; set; }
+    public Hero hero { get; set; }
     public string name { get; set; }
     public int level { get; set; } = 1;
     //public static int heroLevel { get; set; } = Hero.savedLevel;
@@ -39,19 +39,19 @@ public class OrcBase
     {
         this.hero = hero;
     }
-    
-    
+
+
     public void LevelCheck(Hero hero)
     {
         Random random = new Random();
-        
+
         int levelOver = 0;
         int levelUnder = 1;
         if (levelUnder < 1)     //Kollar om levelUnder ligger under 1 isf sätter den upp den till 1
         {
             levelUnder = 1;
         }
-        
+
         if (hero.level >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
             levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
@@ -73,11 +73,11 @@ public class OrcBase
         if (this.level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
         {
             int levelLeft = this.level - 1;
-            
+
 
             for (int i = 0; i < levelLeft; i++)
             {
-                
+
                 this.hp++;              //lägger till 1 i hp
                 this.maxHp++;           //lägger till 1 i maxHp
                 this.minHealing++;      //lägger till 1 i minimum Healing
@@ -134,11 +134,24 @@ public class OrcBase
 
     public virtual int Attack(Hero hero)
     {
-        int minDamage = 1;
-        int maxDamage = 4;
-        minDamage += (int)damage - (int)hero.armor;
-        maxDamage += (int)damage - (int)hero.armor;
-        int value = random.Next(minDamage, maxDamage);
+        int value = 0;
+        if (name.Contains("Dungeon"))       //Ökar skada för Dungeon klass mobs
+        {
+            int minDamage = 3;
+            int maxDamage = 7;
+            minDamage += (int)damage - (int)hero.resistance;
+            maxDamage += (int)damage - (int)hero.resistance;
+            value = random.Next(minDamage, maxDamage);
+        }
+        else
+        {
+            int minDamage = 1;
+            int maxDamage = 4;
+            minDamage += (int)damage - (int)hero.resistance;
+            maxDamage += (int)damage - (int)hero.resistance;
+            value = random.Next(minDamage, maxDamage);
+        }
+        
         if (value < 0)
         {
             value = 0;
@@ -156,11 +169,24 @@ public class OrcBase
     /// <returns></returns>
     public virtual int AttackSpellCasters(Hero hero)        //Här skall det modifieras så shaman gör Heal efter varje attack och skadan som görs är Fireball attack
     {
-        int minDamage = 1;
-        int maxDamage = 4;
-        minDamage += (int)damage - (int)hero.resistance;
-        maxDamage += (int)damage - (int)hero.resistance;
-        int value = random.Next(minDamage, maxDamage);
+        int value = 0;
+        if (name.Contains("Dungeon"))       //Ökar skada för Dungeon klass mobs
+        {
+            int minDamage = 3;
+            int maxDamage = 7;
+            minDamage += (int)damage - (int)hero.resistance;
+            maxDamage += (int)damage - (int)hero.resistance;
+            value = random.Next(minDamage, maxDamage);
+        }
+        else
+        {
+            int minDamage = 1;
+            int maxDamage = 4;
+            minDamage += (int)damage - (int)hero.resistance;
+            maxDamage += (int)damage - (int)hero.resistance;
+            value = random.Next(minDamage, maxDamage);
+        }
+        
         if (value < 0)
         {
             value = 0;
@@ -183,6 +209,23 @@ public class OrcBase
 
         return value;
     }
+    public virtual int BossAttack(Hero hero)
+    {
+        int minDamage = 2;
+        int maxDamage = 5;
+        minDamage += (int)damage - (int)hero.armor;
+        maxDamage += (int)damage - (int)hero.armor;
+        int value = random.Next(minDamage, maxDamage);
+        if (value < 0)
+        {
+            value = 0;
+        }
+        Red(name);                  //lägger in färgen RÖD på orc
+        Console.Write(" gjorde ");
+        Cyan(value);                //Lägger till färgen CYAN på DMG
+        Console.Write(" slash dmg.");
+        return value;
+    }
 
     public virtual void GenerateName()
     {
@@ -199,7 +242,7 @@ public class Orc : OrcBase
         this.armor = 0.65;
         this.hp = this.hp - 2;
 
-        GenerateName();     
+        GenerateName();
         //Här får jag inte rätt level av hero in efter att jag loadat min save
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
@@ -236,7 +279,7 @@ public class Shaman : OrcBase
     {
         return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
     }
-    
+
 }
 
 public class Grunt : OrcBase
@@ -247,7 +290,7 @@ public class Grunt : OrcBase
         this.speed = 0.5;
         this.armor = 2.5;
         this.hp += 2;
-        
+
 
         this.name = "Grunt-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
@@ -256,6 +299,99 @@ public class Grunt : OrcBase
         this.speed = this.speed + (agility * 1.00);
         this.armor = this.armor + +(agility * 0.21);
         this.resistance = this.resistance + (intelligence * 0.1);
+
+    }
+
+    public override int Attack(Hero hero)
+    {
+
+        return base.Attack(hero);      // Specifik attack för Grunt        
+    }
+}
+public class Boss : OrcBase
+{
+    public Boss(Hero hero) : base(hero)
+    {
+        this.hp = 25; // Bossar har mer hälsa
+        this.damage = 2;
+        this.speed = 1;
+        this.armor = 3;
+        //this.hp += 2;
+
+        this.name = "DungeonBoss-" + random.Next(1, 6666);
+
+        this.damage = this.damage + (styrka * 1.05);
+        this.speed = this.speed + (agility * 1.10);
+        this.armor = this.armor + +(agility * 0.35);
+        this.resistance = this.resistance + (intelligence * 0.2);
+    }
+    public override int Attack(Hero hero)
+    {
+        return base.BossAttack(hero);      // Specifik attack för Boss       
+    }
+}
+public class DungeonOrc : OrcBase
+{
+    public DungeonOrc(Hero hero) : base(hero)
+    {
+        this.damage = 3.5;
+        this.speed = 2;
+        this.armor = 0.9;
+        this.hp = this.hp - 1;
+
+        this.name = "DungeonOrc-" + random.Next(1, 3340);
+
+        this.damage = this.damage + (styrka * 1.3);
+        this.speed = this.speed + (agility * 1.13);
+        this.armor = this.armor + (agility * 0.22);
+        this.resistance = this.resistance + (intelligence * 0.2);
+    }
+
+    public override int Attack(Hero hero)
+    {
+        return base.Attack(hero);      // Specifik attack för Orc        
+    }
+}
+public class DungeonShaman : OrcBase
+{
+    public DungeonShaman(Hero hero) : base(hero)
+    {
+        this.damage = 1.8;
+        this.speed = 1.1;
+        this.armor = 1.7;
+
+        this.name = "DungeonShaman-" + random.Next(1, 3340);
+
+        this.damage = this.damage + (intelligence * 1);
+        this.healing = this.healing + (Math.Round(intelligence * 0.95));
+        this.speed = this.speed + (agility * 1.15);
+        this.armor = this.armor + (agility * 0.26);
+        this.resistance = this.resistance + (intelligence * 0.2);
+    }
+
+    public override int Attack(Hero hero)
+    {
+        return base.AttackSpellCasters(hero);   // Specifik attack för Shaman        
+    }
+
+}
+
+public class DungeonGrunt : OrcBase
+{
+    public DungeonGrunt(Hero hero) : base(hero)
+    {
+        this.damage = 1.3;
+        this.speed = 0.7;
+        this.armor = 2.8;
+        this.hp += 3;
+
+        this.name = "DungeonGrunt-" + random.Next(1, 3340);
+
+
+        this.damage = this.damage + (styrka * 1);
+        this.speed = this.speed + (agility * 1.10);
+        this.armor = this.armor + +(agility * 0.28);
+        this.resistance = this.resistance + (intelligence * 0.25);
 
     }
 
