@@ -16,8 +16,7 @@ public class OrcBase
 {
     public Hero hero { get; set; }
     public string name { get; set; }
-    public int level { get; set; } = 1;
-    //public static int heroLevel { get; set; } = Hero.savedLevel;
+    public int level { get; set; } = 1;    
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -78,8 +77,8 @@ public class OrcBase
             for (int i = 0; i < levelLeft; i++)
             {
 
-                this.hp++;              //lägger till 1 i hp
-                this.maxHp++;           //lägger till 1 i maxHp
+                this.hp += 3;              //lägger till 3 i hp
+                this.maxHp += 3;           //lägger till 3 i maxHp
                 this.minHealing++;      //lägger till 1 i minimum Healing
                 this.maxHealing++;      //Lägger till 1 i maximum Healing
 
@@ -246,10 +245,10 @@ public class Orc : OrcBase
         //Här får jag inte rätt level av hero in efter att jag loadat min save
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.damage + (styrka * 1.1);
-        this.speed = this.speed + (agility * 1.05);
-        this.armor = this.armor + (agility * 0.16);
-        this.resistance = this.resistance + (intelligence * 0.1);
+        this.damage = this.damage + (styrka * 1.2);
+        this.speed = this.speed + (agility * 1.15);
+        this.armor = this.armor + (agility * 0.26);
+        this.resistance = this.resistance + (intelligence * 0.2);
     }
 
     public override int Attack(Hero hero)
@@ -268,11 +267,11 @@ public class Shaman : OrcBase
         this.name = "Shaman-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.damage + (intelligence * 0.9);
-        this.healing = this.healing + (Math.Round(intelligence * 0.8));
-        this.speed = this.speed + (agility * 1.05);
-        this.armor = this.armor + (agility * 0.16);
-        this.resistance = this.resistance + (intelligence * 0.1);
+        this.damage = this.damage + (intelligence * 1);
+        this.healing = this.healing + (Math.Round(intelligence * 0.9));
+        this.speed = this.speed + (agility * 1.15);
+        this.armor = this.armor + (agility * 0.26);
+        this.resistance = this.resistance + (intelligence * 0.2);
     }
 
     public override int Attack(Hero hero)
@@ -295,10 +294,10 @@ public class Grunt : OrcBase
         this.name = "Grunt-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.damage + (styrka * 0.9);
-        this.speed = this.speed + (agility * 1.00);
-        this.armor = this.armor + +(agility * 0.21);
-        this.resistance = this.resistance + (intelligence * 0.1);
+        this.damage = this.damage + (styrka * 1);
+        this.speed = this.speed + (agility * 1.10);
+        this.armor = this.armor + (agility * 0.31);
+        this.resistance = this.resistance + (intelligence * 0.2);
 
     }
 
@@ -312,7 +311,7 @@ public class Boss : OrcBase
 {
     public Boss(Hero hero) : base(hero)
     {
-        this.hp = 25; // Bossar har mer hälsa
+        this.hp = 50; // Bossar har mer hälsa
         this.damage = 2;
         this.speed = 1;
         this.armor = 3;
@@ -322,7 +321,7 @@ public class Boss : OrcBase
 
         this.damage = this.damage + (styrka * 1.05);
         this.speed = this.speed + (agility * 1.10);
-        this.armor = this.armor + +(agility * 0.35);
+        this.armor = this.armor + (agility * 0.35);
         this.resistance = this.resistance + (intelligence * 0.2);
     }
     public override int Attack(Hero hero)
@@ -334,6 +333,7 @@ public class DungeonOrc : OrcBase
 {
     public DungeonOrc(Hero hero) : base(hero)
     {
+        this.hp = 25;
         this.damage = 3.5;
         this.speed = 2;
         this.armor = 0.9;
@@ -356,6 +356,7 @@ public class DungeonShaman : OrcBase
 {
     public DungeonShaman(Hero hero) : base(hero)
     {
+        this.hp = 30;
         this.damage = 1.8;
         this.speed = 1.1;
         this.armor = 1.7;
@@ -380,6 +381,7 @@ public class DungeonGrunt : OrcBase
 {
     public DungeonGrunt(Hero hero) : base(hero)
     {
+        this.hp = 40;
         this.damage = 1.3;
         this.speed = 0.7;
         this.armor = 2.8;
@@ -390,7 +392,7 @@ public class DungeonGrunt : OrcBase
 
         this.damage = this.damage + (styrka * 1);
         this.speed = this.speed + (agility * 1.10);
-        this.armor = this.armor + +(agility * 0.28);
+        this.armor = this.armor + (agility * 0.28);
         this.resistance = this.resistance + (intelligence * 0.25);
 
     }
