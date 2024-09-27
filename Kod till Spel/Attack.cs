@@ -256,8 +256,8 @@ namespace Kod_till_Spel
                     for (int i = 0; i < levelLeft; i++)
                     {
 
-                        orc.hp++;              //lägger till 1 i hp
-                        orc.maxHp++;           //lägger till 1 i maxHp
+                        orc.hp += 3;              //lägger till 3 i hp
+                        orc.maxHp += 3;           //lägger till 3 i maxHp
                         orc.minHealing++;      //lägger till 1 i minimum Healing
                         orc.maxHealing++;      //Lägger till 1 i maximum Healing
 
@@ -300,12 +300,12 @@ namespace Kod_till_Spel
                     for (int i = 0; i < levelLeft; i++)
                     {
 
-                        orc.hp++;              //lägger till 1 i hp
-                        orc.maxHp++;           //lägger till 1 i maxHp
+                        orc.hp += 3;              //lägger till 3 i hp
+                        orc.maxHp += 3;           //lägger till 3 i maxHp
                         orc.minHealing++;      //lägger till 1 i minimum Healing
                         orc.maxHealing++;      //Lägger till 1 i maximum Healing
 
-                        int statIncrease = random.Next(0, 4);
+                        int statIncrease = random.Next(0, 3);
                         switch (statIncrease)
                         {
                             case 0:
@@ -320,12 +320,12 @@ namespace Kod_till_Spel
                                 }
                             case 2:
                                 {
-                                    orc.stamina++;     //Om lottningen stannade här +1 i stamina
+                                    orc.intelligence++;   //Om lottningen stannade här +1 i intelligence
                                     break;
                                 }
                             case 3:
                                 {
-                                    orc.intelligence++;    //Om lottningen stannade här +1 i intelligence
+                                    orc.stamina++;   // Om lottningen stannade här + 1 i stamina
                                     break;
                                 }
                         }

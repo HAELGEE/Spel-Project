@@ -30,21 +30,21 @@ public class Hero
         Console.Write(value);
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 2;
-    public double baseArmor { get; set; } = 1;
-    public double baseSpeed { get; set; } = 1;
+    public double baseDmg { get; set; } = 3;
+    public double baseArmor { get; set; } = 1.5;
+    public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
     public int level { get; set; } = 1;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
-    public int hp { get; set; } = 10;
-    public int maxHp { get; set; } = 10;
-    public int styrka { get; set; } = 1;               //ÖKAR SKADA
-    public int agility { get; set; } = 1;              //ÖKAR SPEED
-    public int stamina { get; set; } = 1;
+    public int hp { get; set; } = 15;
+    public int maxHp { get; set; } = 15;
+    public int styrka { get; set; } = 2;               //ÖKAR SKADA
+    public int agility { get; set; } = 2;              //ÖKAR SPEED
+    public int stamina { get; set; } = 2;
     public int charm { get; set; } = 1;
     public int intelligence { get; set; } = 1;
-    public int mana { get; set; } = 10;
+    public int mana { get; set; } = 15;
     public double dmg { get; set; } = 2;                //SKADA
     public double speed { get; set; } = 1;              //SPEED
     public double armor { get; set; } = 1;              //ARMOR
@@ -53,92 +53,86 @@ public class Hero
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
     public int Guld { get; set; } = 0;
+    
     public Weapon EquippedWeapon { get; set; }  // Lägger till för att hantera nuvarande utrustat vapen
 
     private Random random = new Random();
 
-    public void EquipItem(Items item)
-    {
-        if (item is Weapon)
-        {
-            EquippedWeapon = (Weapon)item;
-            EquippedWeapon.ApplyStats(this);
-        }
-    }
-    public void ShowItems()
-    {
-        Console.WriteLine("Utrustade föremål:");
-        if (EquippedWeapon != null)
-        {
-            if (EquippedWeapon.ItemClass.Contains("Common"))
-            {
-                Console.ForegroundColor = ConsoleColor.Gray;
-                //Sätter färgen Gray på texten "Vapen" när det innehåller Common
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else if (EquippedWeapon.ItemClass.Contains("UnCommon"))
-            {
-                Console.ForegroundColor = ConsoleColor.Green;
-                //Sätter färgen Green på texten "Vapen" när det innehåller UnCommon
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else if (EquippedWeapon.ItemClass.Contains("Rare"))
-            {
-                Console.ForegroundColor = ConsoleColor.Blue;
-                //Sätter färgen Blue på texten "Vapen" när det innehåller Rare
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else if (EquippedWeapon.ItemClass.Contains("VeryRare"))
-            {
-                Console.ForegroundColor = ConsoleColor.DarkBlue;
-                //Sätter färgen DarkBlue på texten "Vapen" när det innehåller VeryRare
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else if (EquippedWeapon.ItemClass.Contains("Epic"))
-            {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                //Sätter färgen Magenta på texten "Vapen" när det innehåller Epic
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else if (EquippedWeapon.ItemClass.Contains("Legendary"))
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                //Sätter färgen Yellow på texten "Vapen" när det innehåller Legendary
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                //Sätter färgen DarkRed på texten "Vapen" när det innehåller Mythic
-                Console.Write("Vapen");
-                Console.ResetColor();
-            }
+    
+    //public void ShowItems()
+    //{
+    //    Console.WriteLine("Utrustade föremål:");
+    //    if (EquippedWeapon != null)
+    //    {
+    //        if (EquippedWeapon.ItemClass.Contains("Common"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.Gray;
+    //            //Sätter färgen Gray på texten "Vapen" när det innehåller Common
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else if (EquippedWeapon.ItemClass.Contains("UnCommon"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.Green;
+    //            //Sätter färgen Green på texten "Vapen" när det innehåller UnCommon
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else if (EquippedWeapon.ItemClass.Contains("Rare"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.Blue;
+    //            //Sätter färgen Blue på texten "Vapen" när det innehåller Rare
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else if (EquippedWeapon.ItemClass.Contains("VeryRare"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.DarkBlue;
+    //            //Sätter färgen DarkBlue på texten "Vapen" när det innehåller VeryRare
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else if (EquippedWeapon.ItemClass.Contains("Epic"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.Magenta;
+    //            //Sätter färgen Magenta på texten "Vapen" när det innehåller Epic
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else if (EquippedWeapon.ItemClass.Contains("Legendary"))
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.Yellow;
+    //            //Sätter färgen Yellow på texten "Vapen" när det innehåller Legendary
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
+    //        else
+    //        {
+    //            Console.ForegroundColor = ConsoleColor.DarkRed;
+    //            //Sätter färgen DarkRed på texten "Vapen" när det innehåller Mythic
+    //            Console.Write("Vapen");
+    //            Console.ResetColor();
+    //        }
 
 
-            //Visar upp vilka stats som ökar och hur mycket.
-            Console.WriteLine($": {EquippedWeapon.ItemName} - Damage: {EquippedWeapon.WeaponDamage}\nStyrka: {EquippedWeapon.styrka}\n" +
-                $"Agility: {EquippedWeapon.agility}\nStamina: {EquippedWeapon.stamina}\n" +
-                $"Intelligence: {EquippedWeapon.intelligence}\nCharm: {EquippedWeapon.charm}\nLifesteal: {EquippedWeapon.lifeSteal}");
+    //        //Visar upp vilka stats som ökar och hur mycket.
+    //        Console.WriteLine($": {EquippedWeapon.ItemName} - Damage: {EquippedWeapon.WeaponDamage}\nStyrka: {EquippedWeapon.styrka}\n" +
+    //            $"Agility: {EquippedWeapon.agility}\nStamina: {EquippedWeapon.stamina}\n" +
+    //            $"Intelligence: {EquippedWeapon.intelligence}\nCharm: {EquippedWeapon.charm}\nLifesteal: {EquippedWeapon.lifeSteal}");
 
-        }
-        else
-        {
-            Console.WriteLine("Inget vapen utrustat."); //Om inget vapen är utrustat
-        }
-    }
+    //    }
+    //    else
+    //    {
+    //        Console.WriteLine("Inget vapen utrustat."); //Om inget vapen är utrustat
+    //    }
+    //}
 
     public Hero()
     {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
         //HeroLevels(savedLevel);
         Stats();
-        AddExperience(this.experience);
+        AddExperience(this.experience);        
     }
     public void AddExperience(double amount)
     {
@@ -230,10 +224,10 @@ public class Hero
 
     public void Stats()
     {
-        dmg = baseDmg + (styrka * 1.1);   //Avgör dmg (drar av skada beroende på armor)
-        speed = baseSpeed + (agility * 1.05);    //För att se vem som skall starta attackera vem.
-        armor = baseArmor + (agility * 0.16);    //För att göra "avdrag" av dmg    
-        resistance = resistance + (intelligence * 0.1); //Resistance "avdrag" utav spell dmg 
+        dmg = baseDmg + (styrka * 1.2);   //Avgör dmg (drar av skada beroende på armor)
+        speed = baseSpeed + (agility * 1.15);    //För att se vem som skall starta attackera vem.
+        armor = baseArmor + (agility * 0.26);    //För att göra "avdrag" av dmg    
+        resistance = resistance + (intelligence * 0.2); //Resistance "avdrag" utav spell dmg 
     }
 
     public int Attack(OrcBase orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor

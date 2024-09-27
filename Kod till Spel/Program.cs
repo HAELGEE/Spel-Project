@@ -40,7 +40,7 @@ namespace SPEL
             }
             Attack attack = new Attack();
             Healing healing = new Healing();
-            List<Weapon> weapons = Weapon.GetAllWeapons();
+            
             Dungeons dungeon = new Dungeons(hero);
 
 
@@ -101,25 +101,15 @@ namespace SPEL
                         break;
 
                     case "i":
-                        //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
-                        hero.ShowItems();
+                        Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
+                        //hero.ShowItems();
+                        Console.ReadKey();
                         break;
 
                     case "equip":
-                        Console.WriteLine("Välj föremål att utrusta:");
-                        for (int i = 0; i < weapons.Count; i++)
-                        {
-                            Console.WriteLine($"{i + 1}. {weapons[i].ItemName} - {weapons[i].ItemDescription}");
-                        }
-                        int weaponChoice = int.Parse(Console.ReadLine()) - 1;
-                        if (weaponChoice >= 0 && weaponChoice < weapons.Count)
-                        {
-                            hero.EquipItem(weapons[weaponChoice]);
-                        }
-                        else
-                        {
-                            Console.WriteLine("Ogiltigt val.");
-                        }
+                        
+                        Console.WriteLine("Mer kommer inom kort");
+                        Console.ReadKey();
                         break;
 
                     case "shop":
