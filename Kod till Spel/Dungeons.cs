@@ -5,6 +5,8 @@ using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using static Kod_till_Spel.Armor;
+using static Kod_till_Spel.EquipAbleItem;
 
 namespace Kod_till_Spel;
 public class Dungeons
@@ -30,12 +32,27 @@ public class Dungeons
     {
         this.hero = hero;
         orc = new OrcBase(hero);
+        
+    }
+    public enum DungeonRank
+    {
+        E,
+        D,
+        C,
+        B,
+        A,
+        S
+    }
+    public DungeonRank Rank { get; set; }
+    public Dungeons(DungeonRank rank)
+    {
+        Rank = rank;        
     }
 
     public bool dungeonLoop = true;
     public string keepGoing;
     public static int roomNumber = 0;
-    public static char rank;
+    
     public int rng = 0;
 
 
@@ -91,6 +108,9 @@ public class Dungeons
             {
                 hero.Guld += 4;
                 Console.WriteLine(". Och du får 4 extra guld för att klara Bossen");
+                EquipableItem loot = currentDungeon.DropLoot();
+                Console.WriteLine($"You received: {loot.Name} of rarity {loot.ItemRarity}");
+                Console.ReadKey();
             }
             Console.ReadLine();
         }
@@ -114,28 +134,28 @@ public class Dungeons
             switch (val)
             {
                 case "1":
-                    ResetDungeon();
-                    Edungeon('E');
+                    currentDungeon = new Dungeons(DungeonRank.E);
+                    Edungeon(DungeonRank.E);
                     break;
                 case "2":
-                    ResetDungeon();
-                    Edungeon('D');
+                    currentDungeon = new Dungeons(DungeonRank.D);
+                    Edungeon(DungeonRank.D);
                     break;
                 case "3":
-                    ResetDungeon();
-                    Edungeon('C');
+                    currentDungeon = new Dungeons(DungeonRank.C);
+                    Edungeon(DungeonRank.C);
                     break;
                 case "4":
-                    ResetDungeon();
-                    Edungeon('B');
+                    currentDungeon = new Dungeons(DungeonRank.B);
+                    Edungeon(DungeonRank.B);
                     break;
                 case "5":
-                    ResetDungeon();
-                    Edungeon('A');
+                    currentDungeon = new Dungeons(DungeonRank.A);
+                    Edungeon(DungeonRank.A);
                     break;
                 case "6":
-                    ResetDungeon();
-                    Edungeon('S');
+                    currentDungeon = new Dungeons(DungeonRank.S);
+                    Edungeon(DungeonRank.S);
                     break;
 
                 case "7":
@@ -146,10 +166,14 @@ public class Dungeons
             }
         }
     }
-    public void Edungeon(char rank)
+    private Dungeons currentDungeon;
+    public void Edungeon(DungeonRank rank)
     {
+        roomNumber = 0;
+        currentDungeon = new Dungeons(rank);
         if (hero.level > 5 && hero.hp > 0)
         {
+            currentDungeon = new Dungeons(rank); // Sätt aktuell dungeon här
             while (dungeonLoop)
             {
                 Console.Clear();
@@ -199,91 +223,76 @@ public class Dungeons
         dungeonLoop = true;  // Gör det möjligt att starta om dungeonen
     }
 
-    //public string Rank { get; set; }
-    //public List<Room> Rooms { get; set; }
+    public EquipableItem DropLoot()
+    {
+        Random random = new Random();
+        int dropChance = random.Next(1, 10001); // Slumpa 1-100
 
-    //public Dungeons(string rank)
-    //{
-    //    Rank = rank;
-    //    Rooms = GenerateRoomsForRank(rank);
-    //}
+        Rarity? rarity = DetermineRarity(dropChance);
 
-    //private List<Room> GenerateRoomsForRank(string rank)
-    //{
-    //    // Skapa en lista med rum och sätt deras innehåll baserat på rank
-    //    List<Room> rooms = new List<Room>();
-    //    rooms.Add(new Room("Room 1 - Mobs", GenerateEnemy(rank), null));
-    //    rooms.Add(new Room("Room 2 - Mid Boss", GenerateBoss(rank), null));
-    //    rooms.Add(new Room("Room 3 - Mobs", GenerateEnemy(rank), null));
-    //    rooms.Add(new Room("Room 4 - Final Boss", GenerateBoss(rank), GenerateLoot(rank)));
+        // Om rarity är null, returnerar vi ingen loot.
+        if (rarity == null)
+        {
+            Console.WriteLine("Tyvärr, ingen loot denna gången");
+            return null;
+        }
 
-    //    return rooms;
-    //}
+        // Annars generera ett föremål.
+        bool isWeapon = random.Next(0, 2) == 0;
+        if (isWeapon)
+        {
+            return new Weapon("Dungeon Weapon", rarity.Value);
+        }
+        else
+        {
+            ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot
+            return new Armor("Dungeon Armor", rarity.Value, slot);
+        }
+    }
 
-    //private Enemy GenerateEnemy(string rank)
-    //{
-    //    // Logik för att skapa fiender baserat på dungeon-rank
-    //    return new Enemy("Standard Mob", CalculateEnemyStats(rank));
-    //}
-
-    //private Enemy GenerateBoss(string rank)
-    //{
-    //    // Logik för att skapa bossar baserat på rank
-    //    return new Enemy("Dungeon Boss", CalculateBossStats(rank));
-    //}
-
-    //private Item GenerateLoot(string rank)
-    //{
-    //    Random rand = new Random();
-    //    int roll = rand.Next(1, 101);  // Slumpar från 1 till 100
-
-    //    switch (rank)
-    //    {
-    //        case "E":
-    //            if (roll <= 20) return new Item("Common Item");
-    //            else if (roll <= 22) return new Item("Uncommon Item");
-    //            break;
-    //        case "D":
-    //            if (roll <= 30) return new Item("Common Item");
-    //            else if (roll <= 35) return new Item("Uncommon Item");
-    //            break;
-    //        // Lägg till logik för andra ranker...
-    //        case "S":
-    //            if (roll <= 50) return new Item("Rare Item");
-    //            else if (roll <= 55) return new Item("Mythic Item");
-    //            break;
-    //    }
-    //    return new Item("Nothing");
-    //}
-
-
-
-    //public void CompleteDungeon(Dungeons dungeon)
-    //{
-    //    foreach (Room room in dungeon.Rooms)
-    //    {
-    //        Console.WriteLine(room.Description);
-
-    //        if (room.Enemy != null)
-    //        {
-    //            Console.WriteLine($"You encountered {room.Enemy.Name}");
-    //            attack.DungeonAttack(hero, room.Enemy);
-
-    //            // Belöning för besegrad fiende
-    //            int goldReward = room.Enemy.GoldDrop;
-    //            hero.Guld += goldReward;
-    //            Console.WriteLine($"You earned {goldReward} gold.");
-    //        }
-
-    //        if (room.Loot != null)
-    //        {
-    //            Console.WriteLine($"You found a {room.Loot.Name}!");
-    //            hero.Inventory.Add(room.Loot);
-    //        }
-    //    }
-
-    //    // Extra belöning för att klara hela dungeonen
-    //    hero.Guld += dungeon.CompletionReward;
-    //    Console.WriteLine($"Dungeon completed! You earned an additional {dungeon.CompletionReward} gold.");
-    //}
+    private Rarity? DetermineRarity(int dropChance)
+    {
+        switch (Rank)
+        {
+            case DungeonRank.E:
+                if (dropChance <= 2000) return Rarity.Common;           // 20%
+                else if (dropChance <= 3000) return Rarity.Uncommon;    // 10% (Över 20%)
+                else if (dropChance <= 3100) return Rarity.Rare;        // 1%
+                else return null;
+            // VeryRare och uppåt är ej tillgängliga i rank E.
+            case DungeonRank.D:
+                if (dropChance <= 60) return Rarity.Common;
+                else if (dropChance <= 85) return Rarity.Uncommon;
+                else if (dropChance <= 95) return Rarity.Rare;
+                else return Rarity.VeryRare;
+            case DungeonRank.C:
+                if (dropChance <= 50) return Rarity.Common;
+                else if (dropChance <= 80) return Rarity.Uncommon;
+                else if (dropChance <= 90) return Rarity.Rare;
+                else if (dropChance <= 98) return Rarity.VeryRare;
+                else return Rarity.Epic;
+            case DungeonRank.B:
+                if (dropChance <= 40) return Rarity.Common;
+                else if (dropChance <= 70) return Rarity.Uncommon;
+                else if (dropChance <= 85) return Rarity.Rare;
+                else if (dropChance <= 95) return Rarity.VeryRare;
+                else return Rarity.Epic;
+            case DungeonRank.A:
+                if (dropChance <= 30) return Rarity.Common;
+                else if (dropChance <= 60) return Rarity.Uncommon;
+                else if (dropChance <= 80) return Rarity.Rare;
+                else if (dropChance <= 90) return Rarity.VeryRare;
+                else if (dropChance <= 98) return Rarity.Epic;
+                else return Rarity.Legendary;
+            case DungeonRank.S:
+                if (dropChance <= 20) return Rarity.Common;
+                else if (dropChance <= 50) return Rarity.Uncommon;
+                else if (dropChance <= 70) return Rarity.Rare;
+                else if (dropChance <= 85) return Rarity.VeryRare;
+                else if (dropChance <= 95) return Rarity.Epic;
+                else return Rarity.Mythic;
+            default:
+                return null; // Standard fallback
+        }
+    }    
 }

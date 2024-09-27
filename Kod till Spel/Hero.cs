@@ -8,6 +8,8 @@ using Kod_till_Spel;
 using System.IO;
 using System.Text.Json;
 using System.Security.Cryptography;
+using static Kod_till_Spel.Armor;
+using static Kod_till_Spel.EquipAbleItem;
 
 namespace Kod_till_Spel;
 public class Hero
@@ -58,74 +60,53 @@ public class Hero
 
     private Random random = new Random();
 
-    
-    //public void ShowItems()
-    //{
-    //    Console.WriteLine("Utrustade föremål:");
-    //    if (EquippedWeapon != null)
-    //    {
-    //        if (EquippedWeapon.ItemClass.Contains("Common"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Gray;
-    //            //Sätter färgen Gray på texten "Vapen" när det innehåller Common
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else if (EquippedWeapon.ItemClass.Contains("UnCommon"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Green;
-    //            //Sätter färgen Green på texten "Vapen" när det innehåller UnCommon
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else if (EquippedWeapon.ItemClass.Contains("Rare"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Blue;
-    //            //Sätter färgen Blue på texten "Vapen" när det innehåller Rare
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else if (EquippedWeapon.ItemClass.Contains("VeryRare"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.DarkBlue;
-    //            //Sätter färgen DarkBlue på texten "Vapen" när det innehåller VeryRare
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else if (EquippedWeapon.ItemClass.Contains("Epic"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Magenta;
-    //            //Sätter färgen Magenta på texten "Vapen" när det innehåller Epic
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else if (EquippedWeapon.ItemClass.Contains("Legendary"))
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.Yellow;
-    //            //Sätter färgen Yellow på texten "Vapen" när det innehåller Legendary
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
-    //        else
-    //        {
-    //            Console.ForegroundColor = ConsoleColor.DarkRed;
-    //            //Sätter färgen DarkRed på texten "Vapen" när det innehåller Mythic
-    //            Console.Write("Vapen");
-    //            Console.ResetColor();
-    //        }
+    public Armor Head { get; set; }
+    public Armor Chest { get; set; }
+    public Armor Hands { get; set; }
+    public Armor Legs { get; set; }
+    public Armor Feet { get; set; }
+    public Weapon Weapon { get; set; }
 
+    public void Equip(EquipableItem item)
+    {
+        if (item is Armor armor)
+        {
+            switch (armor.Slot)
+            {
+                case ArmorSlot.Head:
+                    Head = armor;
+                    break;
+                case ArmorSlot.Chest:
+                    Chest = armor;
+                    break;
+                case ArmorSlot.Hands:
+                    Hands = armor;
+                    break;
+                case ArmorSlot.Legs:
+                    Legs = armor;
+                    break;
+                case ArmorSlot.Feet:
+                    Feet = armor;
+                    break;
+            }
+        }
+        else if (item is Weapon weapon)
+        {
+            Weapon = weapon;
+        }
+    }
 
-    //        //Visar upp vilka stats som ökar och hur mycket.
-    //        Console.WriteLine($": {EquippedWeapon.ItemName} - Damage: {EquippedWeapon.WeaponDamage}\nStyrka: {EquippedWeapon.styrka}\n" +
-    //            $"Agility: {EquippedWeapon.agility}\nStamina: {EquippedWeapon.stamina}\n" +
-    //            $"Intelligence: {EquippedWeapon.intelligence}\nCharm: {EquippedWeapon.charm}\nLifesteal: {EquippedWeapon.lifeSteal}");
+    public void ShowEquippedItems()
+    {
+        Console.WriteLine("Equipped Items:");
+        if (Head != null) Console.WriteLine($"Head: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}");
+        if (Chest != null) Console.WriteLine($"Chest: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}");
+        if (Hands != null) Console.WriteLine($"Hands: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}");
+        if (Legs != null) Console.WriteLine($"Legs: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}");
+        if (Feet != null) Console.WriteLine($"Feet: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}");
+        if (Weapon != null) Console.WriteLine($"Weapon: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}");
+    }
 
-    //    }
-    //    else
-    //    {
-    //        Console.WriteLine("Inget vapen utrustat."); //Om inget vapen är utrustat
-    //    }
-    //}
 
     public Hero()
     {

@@ -6,41 +6,16 @@ using System.Security.Claims;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static Kod_till_Spel.EquipAbleItem;
 
 namespace Kod_till_Spel;
-public class Weapon : Item
+public class Weapon : EquipableItem
 {
-    public int WeaponDamage { get; set; }           //Ökar damage
-    public int styrka {  get; set; }                //Ökar damage
-    public int agility { get; set; }                //ÖKAR SPEED och armor
-    public int stamina { get; set; }
-    public int charm { get; set; }
-    public int intelligence { get; set; }           //Ökar spellDmg
-    public int lifeSteal { get; set; }   
-    //Ökar lifesteal
-    //public Weapon(string name, string description, string itemType, string itemClass, int value, int damage, int styrka, int agility, int stamina, int charm, int intelligence, int lifeSteal)
-    //    : base(name, description, itemType, itemClass, value)
-    //{
-    //    WeaponDamage = damage;
-    //    this.styrka = styrka;
-    //    this.agility = agility;
-    //    this.stamina = stamina;
-    //    this.charm = charm;
-    //    this.intelligence = intelligence;
-    //    this.lifeSteal = lifeSteal;
-    //}
+    public Weapon(string name, Rarity rarity)
+        : base(name, rarity)
+    {
+    }
 
-    //public override void ApplyStats(Hero hero)
-    //{
-    //    hero.dmg += WeaponDamage;
-    //    hero.styrka += this.styrka;
-    //    hero.agility += this.agility;
-    //    hero.charm += this.charm;
-    //    hero.intelligence += this.intelligence;
-    //    hero.stamina += this.stamina;
-    //    hero.lifeSteal += this.lifeSteal;
-
-    //}
 
     //lista med olika vapen, dessa har olika klasser "Common, rare, mythic osv"
     //public static List<Weapon> GetAllWeapons()

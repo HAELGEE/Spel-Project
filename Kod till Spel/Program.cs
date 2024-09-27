@@ -50,7 +50,7 @@ namespace SPEL
                 Console.Clear();
                 Console.WriteLine("\n=== TEXT SPEL ===          A game created by #Christofer Hägg");
                 Console.WriteLine("[S]tatus");
-                Console.WriteLine("[I]tems");
+                Console.WriteLine("[I]tems som är monterade");
                 Console.WriteLine("[Equip]");
                 Console.WriteLine("[Shop]");
                 Console.WriteLine("[A]ttack");
