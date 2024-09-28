@@ -50,8 +50,8 @@ namespace SPEL
                 Console.Clear();
                 Console.WriteLine("\n=== TEXT SPEL ===          A game created by #Christofer Hägg");
                 Console.WriteLine("[S]tatus");
-                Console.WriteLine("[I]tems som är monterade");
-                Console.WriteLine("[Equip]");
+                Console.WriteLine("[U]trustade föremål");
+                Console.WriteLine("[Hittade] föremål");
                 Console.WriteLine("[Shop]");
                 Console.WriteLine("[A]ttack");
                 Console.WriteLine("[H]eal");
@@ -100,16 +100,15 @@ namespace SPEL
                         Console.Clear();
                         break;
 
-                    case "i":
-                        Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
-                        //hero.ShowItems();
+                    case "u":
+                        //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
+                        hero.ShowEquippedItems();
                         Console.ReadKey();
                         break;
 
-                    case "equip":
-                        
-                        Console.WriteLine("Mer kommer inom kort");
-                        Console.ReadKey();
+                    case "hittade":
+
+                        hero.ManageInventory();                        
                         break;
 
                     case "shop":

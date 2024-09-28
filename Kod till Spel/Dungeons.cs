@@ -11,28 +11,16 @@ using static Kod_till_Spel.EquipAbleItem;
 namespace Kod_till_Spel;
 public class Dungeons
 {
-    /*  Skapa olika slags "dungeons" där det klassas från olika levels (Kanske varje "dungeon" skall vara en viss värld?)
-    *   Kanske varje dungeon skall vara rankade från E till S? E, D, C, B, A, S ?
-    *   Där varje dungeon har en chans till dropp av items. Som tex en E dungeon enbart kan droppa common och som högst uncommon fast med låg chans?
-    *   Typ common = 20% och uncommon 2% ? och Fortsätta så genom alla dungeons där S dungeons är den som har högst chans till att droppa mythic items (men också
-    *   svårast att gå igenom)
-    *   
-    *   Varje dungeon skall innehålla 4 rum där första och tredje rummet innehåller fiender/mobs och andra rummet innehåller en mellan Boss och sista innehåller en Slut boss
-    *   Hur får jag bossen till "starkare" ?
-    *   
-    *   Lägga till guld för varje besegrad motståndare eller klarad dungeon? eller både och?
-    */
     Hero hero;
     Attack attack = new Attack();
     OrcBase orc;
     public Random random = new Random();
     Healing healing = new Healing();
 
-    public Dungeons(Hero hero)
+    public Dungeons(Hero Hero)
     {
-        this.hero = hero;
+        this.hero = Hero;
         orc = new OrcBase(hero);
-        
     }
     public enum DungeonRank
     {
@@ -46,13 +34,13 @@ public class Dungeons
     public DungeonRank Rank { get; set; }
     public Dungeons(DungeonRank rank)
     {
-        Rank = rank;        
+        Rank = rank;
     }
 
     public bool dungeonLoop = true;
     public string keepGoing;
     public static int roomNumber = 0;
-    
+
     public int rng = 0;
 
 
@@ -101,18 +89,21 @@ public class Dungeons
             if (roomNumber == 2)
             {
                 hero.Guld += 2;
-                Console.WriteLine(". Och du får 2 extra guld för att klara Bossen");
+                Console.Write(". Och du får 2 extra guld för att klara Bossen");
             }
 
             if (roomNumber == 4)
             {
                 hero.Guld += 4;
-                Console.WriteLine(". Och du får 4 extra guld för att klara Bossen");
+                Console.Write(". Och du får 4 extra guld för att klara Bossen");
                 EquipableItem loot = currentDungeon.DropLoot();
-                Console.WriteLine($"You received: {loot.Name} of rarity {loot.ItemRarity}");
+                if (loot != null)
+                    Console.WriteLine($"Du hittade: {loot.Name} av rank {loot.ItemRarity} ");
+                else Console.WriteLine("\nTyvärr, ingen loot denna gången");
+
                 Console.ReadKey();
             }
-            Console.ReadLine();
+
         }
     }
 
@@ -121,6 +112,7 @@ public class Dungeons
         bool loop = true;
         while (loop)
         {
+            Console.Clear();
             Console.WriteLine("Vilken dungeon vill du gå in i?");
             Console.WriteLine("1. E-Dungeon");
             Console.WriteLine("2. D-Dungeon");
@@ -134,27 +126,33 @@ public class Dungeons
             switch (val)
             {
                 case "1":
-                    currentDungeon = new Dungeons(DungeonRank.E);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.E);
                     break;
                 case "2":
-                    currentDungeon = new Dungeons(DungeonRank.D);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.D);
                     break;
                 case "3":
-                    currentDungeon = new Dungeons(DungeonRank.C);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.C);
                     break;
                 case "4":
-                    currentDungeon = new Dungeons(DungeonRank.B);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.B);
                     break;
                 case "5":
-                    currentDungeon = new Dungeons(DungeonRank.A);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.A);
                     break;
                 case "6":
-                    currentDungeon = new Dungeons(DungeonRank.S);
+                    ResetDungeon();
+                    currentDungeon = new Dungeons(hero);
                     Edungeon(DungeonRank.S);
                     break;
 
@@ -169,44 +167,46 @@ public class Dungeons
     private Dungeons currentDungeon;
     public void Edungeon(DungeonRank rank)
     {
-        roomNumber = 0;
-        currentDungeon = new Dungeons(rank);
+        roomNumber = 3;
+        
         if (hero.level > 5 && hero.hp > 0)
-        {
-            currentDungeon = new Dungeons(rank); // Sätt aktuell dungeon här
+        {            
+            Console.Clear();
+            Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
+            Console.WriteLine("Du har fyra stycken rum att klara!");
             while (dungeonLoop)
             {
-                Console.Clear();
-                Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
-                Console.WriteLine("Du har fyra stycken rum att klara!");
-                Console.WriteLine("1. Fortsätt");
+
+                Console.WriteLine("\n\n1. Fortsätt");
                 Console.WriteLine("2. Avbryt");
                 Console.WriteLine("Vill du fortsätta eller avbryta?");
                 string val = Console.ReadLine();
-
                 switch (val)
                 {
                     case "1":
-                        roomNumber++;
-                        if (roomNumber <= 4)
+                        if (roomNumber < 4)
                         {
+                            roomNumber++;
                             EnterRoom();
                         }
                         else
                         {
-                            Console.WriteLine("Du har redan klarat denna Dungeon");
+                            Console.WriteLine("Du har klarat denna Dungeon redan\n");
                             Console.ReadKey();
+                            roomNumber = 0;
+                            dungeonLoop = false;
                         }
                         break;
 
                     case "2":
-                        Console.WriteLine("Du går nu ut ur denna Dungeon!");
+                        Console.WriteLine("Du går nu ut ur denna Dungeon!\n");
                         Console.ReadKey();
                         dungeonLoop = false;
                         break;
                 }
             }
-        }else if (hero.hp <= 0)
+        }
+        else if (hero.hp <= 0)
         {
             Console.WriteLine($"Din hjälte har {hero.hp}:hp, du kan ej fortsätta utan att meditera");
             Console.ReadKey();
@@ -233,21 +233,27 @@ public class Dungeons
         // Om rarity är null, returnerar vi ingen loot.
         if (rarity == null)
         {
-            Console.WriteLine("Tyvärr, ingen loot denna gången");
             return null;
         }
 
         // Annars generera ett föremål.
         bool isWeapon = random.Next(0, 2) == 0;
+        EquipableItem item;
+        int dungeonWeaponCount = 0;
+        int dungeonArmorCount = 0;
         if (isWeapon)
         {
-            return new Weapon("Dungeon Weapon", rarity.Value);
+            item = new Weapon($"Dungeon Weapon {dungeonWeaponCount++}", rarity.Value);
         }
         else
         {
             ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot
-            return new Armor("Dungeon Armor", rarity.Value, slot);
+            item = new Armor($"Dungeon Armor {dungeonArmorCount++}", rarity.Value, slot);
         }
+
+        hero.AddToInventory(item);
+        return item;
+
     }
 
     private Rarity? DetermineRarity(int dropChance)
@@ -294,5 +300,5 @@ public class Dungeons
             default:
                 return null; // Standard fallback
         }
-    }    
+    }
 }

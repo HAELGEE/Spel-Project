@@ -55,10 +55,12 @@ public class Hero
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
     public int Guld { get; set; } = 0;
-    
+
     public Weapon EquippedWeapon { get; set; }  // Lägger till för att hantera nuvarande utrustat vapen
+    public List<EquipableItem> Inventory { get; set; } = new List<EquipableItem>(); //Skapar en lista för items som är hittade
 
     private Random random = new Random();
+    public Colour colour = new Colour();
 
     public Armor Head { get; set; }
     public Armor Chest { get; set; }
@@ -67,6 +69,14 @@ public class Hero
     public Armor Feet { get; set; }
     public Weapon Weapon { get; set; }
 
+    // Metod för att lägga till ett item i inventariet
+    public void AddToInventory(EquipableItem item)
+    {
+        Inventory.Add(item);
+        Console.WriteLine($"{item.Name} har lagts till i ditt inventarium.");
+    }
+
+    // Metod för att utrusta ett item
     public void Equip(EquipableItem item)
     {
         if (item is Armor armor)
@@ -96,24 +106,104 @@ public class Hero
         }
     }
 
+    // Metod för att ta av ett item
+    public void UnequipItem(EquipableItem item)
+    {
+        // Logik för att ta av item, t.ex. återställa stats
+        Console.WriteLine($"Du har tagit av {item.Name}.");
+    }
+
+    // Metod för att visa inventory
+    public void ShowInventory()
+    {
+        Console.WriteLine("Dina items:");
+        foreach (var item in Inventory)
+        {
+            Console.WriteLine($"Namn: {item.Name}, Rarity: {item.ItemRarity}");
+
+            //// Här lägs färg in för rätt vapen/armor
+            //switch (item.ItemRarity)
+            //{
+            //    case Dungeons.DungeonRank.E:
+            //        colour.Grå(item.ItemRarity.ToString());
+            //        break;
+            //    case Dungeons.DungeonRank.D:
+            //        colour.Green(item.ItemRarity.ToString());
+            //        break;
+            //    case Dungeons.DungeonRank.C:
+            //        colour.Blå(item.ItemRarity.ToString());
+            //        break;
+            //    case Dungeons.DungeonRank.B:
+            //        colour.Magenta(item.ItemRarity.ToString());
+            //        break;
+            //    case Dungeons.DungeonRank.A:
+            //        colour.Gul(item.ItemRarity.ToString());
+            //        break;
+            //    case Dungeons.DungeonRank.S:
+            //        colour.Red(item.ItemRarity.ToString());
+            //        break;
+            //}  
+            
+            //Console.WriteLine();
+        }
+    }
+    public void ManageInventory()
+    {
+        bool loop = true;
+        while (true)
+        {
+            Console.Clear();
+            ShowInventory();
+
+            Console.WriteLine("Vill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:");
+            string choice = Console.ReadLine();
+
+            var itemToEquip = Inventory.FirstOrDefault(i => i.Name.IndexOf(choice, StringComparison.OrdinalIgnoreCase) >= 0);
+
+            if (itemToEquip != null)
+            {
+                Equip(itemToEquip);                
+                Console.ReadKey();
+                loop = false;
+                return;
+            }
+            else if (choice.ToLower() == "back")
+            {
+                loop = false; // Gå tillbaka
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Itemet finns inte i inventariet.");
+            }
+            Console.ReadKey();
+        }
+    }
+
     public void ShowEquippedItems()
     {
         Console.WriteLine("Equipped Items:");
-        if (Head != null) Console.WriteLine($"Head: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}");
-        if (Chest != null) Console.WriteLine($"Chest: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}");
-        if (Hands != null) Console.WriteLine($"Hands: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}");
-        if (Legs != null) Console.WriteLine($"Legs: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}");
-        if (Feet != null) Console.WriteLine($"Feet: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}");
-        if (Weapon != null) Console.WriteLine($"Weapon: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}");
+        if (Head != null) Console.WriteLine($"Huvudet: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}");
+        else Console.WriteLine("Du har inget på Huvudet än");
+        if (Chest != null) Console.WriteLine($"Bröst: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}");
+        else Console.WriteLine("Du har inget på Bröstet än");
+        if (Hands != null) Console.WriteLine($"Händer: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}");
+        else Console.WriteLine("Du har inget på Händerna än");
+        if (Legs != null) Console.WriteLine($"Byxor: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}");
+        else Console.WriteLine("Du har inga Byxor än");
+        if (Feet != null) Console.WriteLine($"Fötter: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}");
+        else Console.WriteLine("Du har inget på Fötterna än");
+        if (Weapon != null) Console.WriteLine($"Vapen: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}");
+        else Console.WriteLine("Du har inget vapen än");
     }
 
 
     public Hero()
     {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
-        //HeroLevels(savedLevel);
+                       //HeroLevels(savedLevel);
         Stats();
-        AddExperience(this.experience);        
+        AddExperience(this.experience);
     }
     public void AddExperience(double amount)
     {

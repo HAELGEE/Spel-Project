@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Kod_till_Spel;
 public class EquipAbleItem
-{
-    public class EquipableItem : Item
+{    
+    public class EquipableItem
     {
         public string Name { get; set; }
         public Rarity ItemRarity { get; set; }
@@ -24,13 +24,25 @@ public class EquipAbleItem
         {
             Random random = new Random();
             string[] possibleAttributes = { "Strength", "Agility", "HPBoost", "Lifesteal", "Intelligence", "Mana" };
-            int numberOfAttributes = random.Next(1, 4); // Exempelvis slumpas 1-3 attributer
+            int numberOfAttributes = 0;
+            if (ItemRarity.ToString() == "E")
+                random.Next(1, 2); // Exempelvis slumpas 1-3 attributer
+            else if (ItemRarity.ToString() == "D")
+                random.Next(1, 3);
+            else if (ItemRarity.ToString() == "C")
+                random.Next(1, 4);
 
             for (int i = 0; i < numberOfAttributes; i++)
             {
+                //Här ska jag fixa så att det ökas med mer attribut vid högre Dungeon
                 string attribute = possibleAttributes[random.Next(0, possibleAttributes.Length)];
-                int value = random.Next(1, 101); // Värdet slumpas, 1-100.
-                Attributes[attribute] = value;
+                int value = 0;
+                if (ItemRarity.ToString() == "E")
+                    value = random.Next(1, 6); // Värdet slumpas, 1-100.
+                else if (ItemRarity.ToString() == "D")
+                    value = random.Next(2, 8);
+                else if (ItemRarity.ToString() == "C")
+                    value = random.Next(4, 10);
             }
         }
     }
