@@ -165,7 +165,7 @@ public class Dungeons
         }
     }
     private Dungeons currentDungeon;
-    public void Edungeon(DungeonRank rank)
+    public void Edungeon(DungeonRank rank)    
     {
         roomNumber = 3;
         
@@ -261,7 +261,7 @@ public class Dungeons
         switch (Rank)
         {
             case DungeonRank.E:
-                if (dropChance <= 2000) return Rarity.Common;           // 20%
+                if (dropChance <= 10000) return Rarity.Common;           // 20%
                 else if (dropChance <= 3000) return Rarity.Uncommon;    // 10% (Över 20%)
                 else if (dropChance <= 3100) return Rarity.Rare;        // 1%
                 else return null;

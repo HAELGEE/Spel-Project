@@ -25,23 +25,23 @@ public class EquipAbleItem
             Random random = new Random();
             string[] possibleAttributes = { "Strength", "Agility", "HPBoost", "Lifesteal", "Intelligence", "Mana" };
             int numberOfAttributes = 0;
-            if (ItemRarity.ToString() == "E")
-                random.Next(1, 2); // Exempelvis slumpas 1-3 attributer
-            else if (ItemRarity.ToString() == "D")
-                random.Next(1, 3);
-            else if (ItemRarity.ToString() == "C")
-                random.Next(1, 4);
+            if (ItemRarity.ToString() == "Common")
+                numberOfAttributes = random.Next(1, 2); // Exempelvis slumpas 1-3 attributer
+            else if (ItemRarity.ToString() == "Uncommon")
+                numberOfAttributes = random.Next(1, 3);
+            else if (ItemRarity.ToString() == "Rare")
+                numberOfAttributes = random.Next(1, 4);
 
             for (int i = 0; i < numberOfAttributes; i++)
             {
                 //Här ska jag fixa så att det ökas med mer attribut vid högre Dungeon
                 string attribute = possibleAttributes[random.Next(0, possibleAttributes.Length)];
                 int value = 0;
-                if (ItemRarity.ToString() == "E")
+                if (ItemRarity.ToString() == "Common")
                     value = random.Next(1, 6); // Värdet slumpas, 1-100.
-                else if (ItemRarity.ToString() == "D")
+                else if (ItemRarity.ToString() == "Uncommon")
                     value = random.Next(2, 8);
-                else if (ItemRarity.ToString() == "C")
+                else if (ItemRarity.ToString() == "Rare")
                     value = random.Next(4, 10);
             }
         }

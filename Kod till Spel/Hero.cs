@@ -32,15 +32,15 @@ public class Hero
         Console.Write(value);
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 3;
+    public double baseDmg { get; set; } = 300;
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 6;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
-    public int hp { get; set; } = 15;
-    public int maxHp { get; set; } = 15;
+    public int hp { get; set; } = 150;
+    public int maxHp { get; set; } = 150;
     public int styrka { get; set; } = 2;               //ÖKAR SKADA
     public int agility { get; set; } = 2;              //ÖKAR SPEED
     public int stamina { get; set; } = 2;
@@ -119,32 +119,32 @@ public class Hero
         Console.WriteLine("Dina items:");
         foreach (var item in Inventory)
         {
-            Console.WriteLine($"Namn: {item.Name}, Rarity: {item.ItemRarity}");
+            Console.Write($"Namn: {item.Name}, Rarity: ");
 
-            //// Här lägs färg in för rätt vapen/armor
-            //switch (item.ItemRarity)
-            //{
-            //    case Dungeons.DungeonRank.E:
-            //        colour.Grå(item.ItemRarity.ToString());
-            //        break;
-            //    case Dungeons.DungeonRank.D:
-            //        colour.Green(item.ItemRarity.ToString());
-            //        break;
-            //    case Dungeons.DungeonRank.C:
-            //        colour.Blå(item.ItemRarity.ToString());
-            //        break;
-            //    case Dungeons.DungeonRank.B:
-            //        colour.Magenta(item.ItemRarity.ToString());
-            //        break;
-            //    case Dungeons.DungeonRank.A:
-            //        colour.Gul(item.ItemRarity.ToString());
-            //        break;
-            //    case Dungeons.DungeonRank.S:
-            //        colour.Red(item.ItemRarity.ToString());
-            //        break;
-            //}  
-            
-            //Console.WriteLine();
+            // Här lägs färg in för rätt vapen/armor
+            switch (item.ItemRarity.ToString())
+            {
+                case "Common":
+                    colour.Green(item.ItemRarity.ToString());
+                    break;
+                case "Uncommon":
+                    colour.Green(item.ItemRarity.ToString());
+                    break;
+                case "Rare":
+                    colour.Blå(item.ItemRarity.ToString());
+                    break;
+                case "Epic":
+                    colour.Magenta(item.ItemRarity.ToString());
+                    break;
+                case "Legendary":
+                    colour.Gul(item.ItemRarity.ToString());
+                    break;
+                case "Mythic":
+                    colour.Red(item.ItemRarity.ToString());
+                    break;
+            }
+
+            Console.WriteLine();
         }
     }
     public void ManageInventory()
