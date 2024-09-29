@@ -11,6 +11,8 @@ namespace SPEL
     {
         static void Main(string[] args)
         {
+            Load load1 = new Load();
+
             Hero hero = new Hero();
             bool load = true;
             while (load)
@@ -19,10 +21,29 @@ namespace SPEL
                 string choice = Console.ReadLine();
                 if (choice.ToUpper() == "J")
                 {
-                    Hero loadedHero = LoadHero("hero_save.json");
-                    if (loadedHero != null)
+                    List<Hero> loadedHeroes = Save.LoadHeroes("Hero_save.json");
+                    if (loadedHeroes != null && loadedHeroes.Count > 0)
                     {
-                        hero = loadedHero;
+                        Console.WriteLine("Välj vilken hjälte du vill ladda:");
+                        for (int i = 0; i < loadedHeroes.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {loadedHeroes[i].name}");
+                        }
+
+                        bool validInput = int.TryParse(Console.ReadLine(), out int selectedHeroIndex);
+                        if (validInput && selectedHeroIndex > 0 && selectedHeroIndex <= loadedHeroes.Count)
+                        {
+                            hero = loadedHeroes[selectedHeroIndex - 1];
+                            Console.WriteLine($"Hjälten {hero.name} har laddats.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltigt val.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inga hjältar att ladda.");
                     }
                     Console.ReadKey();
                     break;
@@ -35,12 +56,12 @@ namespace SPEL
                 }
                 else
                 {
-                    Console.WriteLine("Invalid input");
+                    Console.WriteLine("Ogiltig inmatning, försök igen.");
                 }
             }
             Attack attack = new Attack();
             Healing healing = new Healing();
-            
+            Save save = new Save();
             Dungeons dungeon = new Dungeons(hero);
 
 
@@ -125,9 +146,9 @@ namespace SPEL
                         break;
 
                     case "v":
-
-                        SaveHero(hero, "hero_save.json");
+                        Save.SaveHeroes(hero, "Hero_save.json");
                         hero.Stats();
+                        
                         Console.ReadKey();
                         break;
 
@@ -158,26 +179,7 @@ namespace SPEL
         {
             Console.ForegroundColor = ConsoleColor.Red;
         }
-        public static void SaveHero(Hero hero, string filename)
-        {
-            string json = JsonSerializer.Serialize(hero);
-            File.WriteAllText(filename, json);
-            Console.WriteLine("Hjälten är nu sparad.");
-        }
-        public static Hero LoadHero(string filename)
-        {
-            if (File.Exists(filename))
-            {
-                string json = File.ReadAllText(filename);
-                Hero hero = JsonSerializer.Deserialize<Hero>(json);
-                Console.WriteLine("Hjälten är nu laddad.");
-                return hero;
-            }
-            else
-            {
-                Console.WriteLine("Ingen sparfil hittades.");
-                return null;
-            }
-        }
+        
+        
     }
 }

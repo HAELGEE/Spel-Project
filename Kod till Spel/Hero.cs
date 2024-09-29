@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using static Kod_till_Spel.Armor;
 using static Kod_till_Spel.EquipAbleItem;
+using System.Xml.Linq;
 
 namespace Kod_till_Spel;
 public class Hero
@@ -32,15 +33,15 @@ public class Hero
         Console.Write(value);
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 300;
+    public double baseDmg { get; set; } = 3;
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 6;
+    public int level { get; set; } = 1;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
-    public int hp { get; set; } = 150;
-    public int maxHp { get; set; } = 150;
+    public int hp { get; set; } = 15;
+    public int maxHp { get; set; } = 15;
     public int styrka { get; set; } = 2;               //ÖKAR SKADA
     public int agility { get; set; } = 2;              //ÖKAR SPEED
     public int stamina { get; set; } = 2;
@@ -184,19 +185,64 @@ public class Hero
     {
         Console.WriteLine("Equipped Items:");
         if (Head != null) Console.WriteLine($"Huvudet: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}");
-        else Console.WriteLine("Du har inget på Huvudet än");
+        else Console.WriteLine("Du har inget på Huvudet");
         if (Chest != null) Console.WriteLine($"Bröst: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}");
-        else Console.WriteLine("Du har inget på Bröstet än");
+        else Console.WriteLine("Du har inget på Bröstet");
         if (Hands != null) Console.WriteLine($"Händer: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}");
-        else Console.WriteLine("Du har inget på Händerna än");
+        else Console.WriteLine("Du har inget på Händerna");
         if (Legs != null) Console.WriteLine($"Byxor: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}");
-        else Console.WriteLine("Du har inga Byxor än");
+        else Console.WriteLine("Du har inga Byxor");
         if (Feet != null) Console.WriteLine($"Fötter: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}");
-        else Console.WriteLine("Du har inget på Fötterna än");
+        else Console.WriteLine("Du har inget på Fötterna");
         if (Weapon != null) Console.WriteLine($"Vapen: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}");
-        else Console.WriteLine("Du har inget vapen än");
-    }
+        else Console.WriteLine("Du har inget vapen");
 
+        // Kontrollera attributen och uppdaterar attributen
+        UpdateAttributes(Head);
+        UpdateAttributes(Chest);
+        UpdateAttributes(Hands);
+        UpdateAttributes(Legs);
+        UpdateAttributes(Feet);
+        UpdateAttributes(Weapon);
+    }   
+
+    private void UpdateAttributes(EquipableItem item)
+    {
+        if (item != null && item.Attributes != null)
+        {
+            // Lista över attribut som vi vill kontrollera
+            string[] attributeKeys = { "Strength", "Agility", "HPBoost", "Lifesteal", "Intelligence", "Mana" };
+
+            foreach (var key in attributeKeys)
+            {
+                if (item.Attributes.ContainsKey(key))
+                {
+                    // Beroende på vilket attribut som finns, uppdatera den relevanta egenskapen
+                    switch (key)
+                    {
+                        case "Strength":
+                            this.styrka += item.Attributes[key];
+                            break;
+                        case "Agility":
+                            this.agility += item.Attributes[key];
+                            break;
+                        case "HPBoost":
+                            this.maxHp += item.Attributes[key];
+                            break;
+                        case "Lifesteal":
+                            this.lifeSteal += item.Attributes[key];
+                            break;
+                        case "Intelligence":
+                            this.intelligence += item.Attributes[key];
+                            break;
+                        case "Mana":
+                            this.mana += item.Attributes[key];
+                            break;
+                    }
+                }
+            }
+        }
+    }
 
     public Hero()
     {

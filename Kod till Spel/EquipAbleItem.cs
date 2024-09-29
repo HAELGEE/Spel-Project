@@ -37,12 +37,19 @@ public class EquipAbleItem
                 //Här ska jag fixa så att det ökas med mer attribut vid högre Dungeon
                 string attribute = possibleAttributes[random.Next(0, possibleAttributes.Length)];
                 int value = 0;
+
+                // Värdet slumpas, 1-10.
                 if (ItemRarity.ToString() == "Common")
-                    value = random.Next(1, 6); // Värdet slumpas, 1-100.
+                    value = random.Next(1, 6); 
                 else if (ItemRarity.ToString() == "Uncommon")
                     value = random.Next(2, 8);
                 else if (ItemRarity.ToString() == "Rare")
                     value = random.Next(4, 10);
+
+                if (!Attributes.ContainsKey(attribute))
+                {
+                    Attributes.Add(attribute, value);
+                }
             }
         }
     }

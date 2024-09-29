@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -16,6 +17,13 @@ public class Dungeons
     OrcBase orc;
     public Random random = new Random();
     Healing healing = new Healing();
+
+    public int dungeonWeaponCount = 0;
+    public int dungeonHeadCount = 0;
+    public int dungeonChestCount = 0;
+    public int dungeonHandsCount = 0;
+    public int dungeonLegsCount = 0;
+    public int dungeonFeetCount = 0;
 
     public Dungeons(Hero Hero)
     {
@@ -226,7 +234,7 @@ public class Dungeons
     public EquipableItem DropLoot()
     {
         Random random = new Random();
-        int dropChance = random.Next(1, 10001); // Slumpa 1-100
+        int dropChance = random.Next(1, 10001); // Slumpa 00.01% till 100%
 
         Rarity? rarity = DetermineRarity(dropChance);
 
@@ -239,16 +247,36 @@ public class Dungeons
         // Annars generera ett föremål.
         bool isWeapon = random.Next(0, 2) == 0;
         EquipableItem item;
-        int dungeonWeaponCount = 0;
-        int dungeonArmorCount = 0;
+        
         if (isWeapon)
         {
+            dungeonWeaponCount++;
             item = new Weapon($"Dungeon Weapon {dungeonWeaponCount++}", rarity.Value);
         }
         else
-        {
-            ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot
-            item = new Armor($"Dungeon Armor {dungeonArmorCount++}", rarity.Value, slot);
+        {            
+            ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot 
+            if (slot == ArmorSlot.Head)
+            {
+                dungeonHeadCount++;
+                item = new Armor($"Dungeon {slot} Armor {dungeonHeadCount++}", rarity.Value, slot);
+            }else if (slot == ArmorSlot.Chest)
+            {
+                dungeonChestCount++;
+                item = new Armor($"Dungeon {slot} Armor {dungeonChestCount++}", rarity.Value, slot);
+            }else if (slot == ArmorSlot.Legs)
+            {
+                dungeonLegsCount++;
+                item = new Armor($"Dungeon {slot} Armor {dungeonLegsCount++}", rarity.Value, slot);
+            }else if (slot == ArmorSlot.Feet)
+            {
+                dungeonFeetCount++;
+                item = new Armor($"Dungeon {slot} Armor {dungeonFeetCount++}", rarity.Value, slot);
+            }else 
+            {
+                dungeonHandsCount++;
+                item = new Armor($"Dungeon {slot} Armor {dungeonHandsCount++}", rarity.Value, slot);
+            }
         }
 
         hero.AddToInventory(item);
@@ -261,7 +289,7 @@ public class Dungeons
         switch (Rank)
         {
             case DungeonRank.E:
-                if (dropChance <= 10000) return Rarity.Common;           // 20%
+                if (dropChance <= 2000) return Rarity.Common;           // 20%
                 else if (dropChance <= 3000) return Rarity.Uncommon;    // 10% (Över 20%)
                 else if (dropChance <= 3100) return Rarity.Rare;        // 1%
                 else return null;
