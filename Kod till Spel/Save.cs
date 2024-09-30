@@ -16,7 +16,13 @@ public class Save
         List<Hero> heroes = LoadHeroes(filename);
 
         // Lägg till den nya hjälten till listan
-        heroes.Add(newHero);
+        //foreach (Hero hero in heroes)
+        //{
+        //    if (heroes.Contains(newHero))
+        //        heroes.Add(newHero);
+        //    else
+        //}
+                heroes.Add(newHero);
 
         // Spara hela listan tillbaka till filen
         string json = JsonSerializer.Serialize(heroes, new JsonSerializerOptions { WriteIndented = true });

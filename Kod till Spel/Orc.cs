@@ -141,17 +141,17 @@ public class OrcBase
         if (name.Contains("Dungeon"))       //Ökar skada för Dungeon klass mobs
         {
             int minDamage = 3;
-            int maxDamage = 7;
-            minDamage += (int)damage - (int)hero.resistance;
-            maxDamage += (int)damage - (int)hero.resistance;
+            int maxDamage = 11;
+            minDamage += (int)damage - (int)hero.armor;
+            maxDamage += (int)damage - (int)hero.armor;
             value = random.Next(minDamage, maxDamage);
         }
         else
         {
             int minDamage = 1;
-            int maxDamage = 4;
-            minDamage += (int)damage - (int)hero.resistance;
-            maxDamage += (int)damage - (int)hero.resistance;
+            int maxDamage = 11;
+            minDamage += (int)damage - (int)hero.armor;
+            maxDamage += (int)damage - (int)hero.armor;
             value = random.Next(minDamage, maxDamage);
         }
 
@@ -176,7 +176,7 @@ public class OrcBase
         if (name.Contains("Dungeon"))       //Ökar skada för Dungeon klass mobs
         {
             int minDamage = 3;
-            int maxDamage = 7;
+            int maxDamage = 11;
             minDamage += (int)damage - (int)hero.resistance;
             maxDamage += (int)damage - (int)hero.resistance;
             value = random.Next(minDamage, maxDamage);
@@ -184,7 +184,7 @@ public class OrcBase
         else
         {
             int minDamage = 1;
-            int maxDamage = 4;
+            int maxDamage = 11;
             minDamage += (int)damage - (int)hero.resistance;
             maxDamage += (int)damage - (int)hero.resistance;
             value = random.Next(minDamage, maxDamage);
@@ -215,7 +215,7 @@ public class OrcBase
     public virtual int BossAttack(Hero hero)
     {
         int minDamage = 2;
-        int maxDamage = 5;
+        int maxDamage = 11;
         minDamage += (int)damage - (int)hero.armor;
         maxDamage += (int)damage - (int)hero.armor;
         int value = random.Next(minDamage, maxDamage);

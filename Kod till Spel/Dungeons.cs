@@ -181,7 +181,7 @@ public class Dungeons
         {            
             Console.Clear();
             Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
-            Console.WriteLine("Du har fyra stycken rum att klara!");
+            Console.Write("Du har fyra stycken rum att klara!");
             while (dungeonLoop)
             {
 
