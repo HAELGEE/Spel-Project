@@ -117,68 +117,97 @@ public class Dungeons
 
     public void EnterDungeon()
     {
+
+        string[] dungeonOption = {        
+        "E-Dungeon",
+        "D-Dungeon",
+        "C-Dungeon",
+        "B-Dungeon",
+        "A-Dungeon",
+        "S-Dungeon",
+        "Tillabaka",
+    };
+        int menuPicker = 0;
+
         bool loop = true;
         while (loop)
         {
             Console.Clear();
             Console.WriteLine("Vilken dungeon vill du gå in i?");
-            Console.WriteLine("1. E-Dungeon");
-            Console.WriteLine("2. D-Dungeon");
-            Console.WriteLine("3. C-Dungeon");
-            Console.WriteLine("4. B-Dungeon");
-            Console.WriteLine("5. A-Dungeon");
-            Console.WriteLine("6. S-Dungeon");
-            Console.WriteLine("7. Tillabaka");
-            string val = Console.ReadLine()!.ToUpper();
-
-            switch (val)
+            for (int i = 0; i < dungeonOption.Length; i++)
             {
-                case "1":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.E);
-                    break;
-                case "2":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.D);
-                    break;
-                case "3":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.C);
-                    break;
-                case "4":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.B);
-                    break;
-                case "5":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.A);
-                    break;
-                case "6":
-                    ResetDungeon();
-                    currentDungeon = new Dungeons(hero);
-                    Edungeon(DungeonRank.S);
-                    break;
-
-                case "7":
-                    Console.WriteLine("Du går nu tillbaka");
-                    Console.ReadKey();
-                    loop = false;
-                    break;
+                if (i == menuPicker)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"---> \t {(dungeonOption[i])}");
+                    Console.ResetColor();
+                    Console.CursorVisible = false;
+                }
+                else
+                {
+                    Console.WriteLine(dungeonOption[i]);
+                }
             }
+
+            var key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.DownArrow && menuPicker < dungeonOption.Length - 1)
+                menuPicker++;
+            else if (key == ConsoleKey.UpArrow && menuPicker >= 1)
+                menuPicker--;
+            else if (key == ConsoleKey.Enter)
+            {
+                
+                switch (menuPicker)
+                {
+                    case 0:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.E);
+                        break;
+                    case 1:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.D);
+                        break;
+                    case 2:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.C);
+                        break;
+                    case 3:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.B);
+                        break;
+                    case 4:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.A);
+                        break;
+                    case 5:
+                        ResetDungeon();
+                        currentDungeon = new Dungeons(hero);
+                        Edungeon(DungeonRank.S);
+                        break;
+
+                    case 6:
+                        Console.WriteLine("Du går nu tillbaka");
+                        Console.ReadKey();
+                        loop = false;
+                        break;
+                }
+            }
+
         }
     }
     private Dungeons currentDungeon;
-    public void Edungeon(DungeonRank rank)    
+    public void Edungeon(DungeonRank rank)
     {
         roomNumber = 3;
-        
+
         if (hero.level > 5 && hero.hp > 0)
-        {            
+        {
             Console.Clear();
             Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
             Console.Write("Du har fyra stycken rum att klara!");
@@ -247,32 +276,36 @@ public class Dungeons
         // Annars generera ett föremål.
         bool isWeapon = random.Next(0, 2) == 0;
         EquipableItem item;
-        
+
         if (isWeapon)
         {
             dungeonWeaponCount++;
             item = new Weapon($"Dungeon Weapon {dungeonWeaponCount++}", rarity.Value);
         }
         else
-        {            
+        {
             ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot 
             if (slot == ArmorSlot.Head)
             {
                 dungeonHeadCount++;
                 item = new Armor($"Dungeon {slot} Armor {dungeonHeadCount++}", rarity.Value, slot);
-            }else if (slot == ArmorSlot.Chest)
+            }
+            else if (slot == ArmorSlot.Chest)
             {
                 dungeonChestCount++;
                 item = new Armor($"Dungeon {slot} Armor {dungeonChestCount++}", rarity.Value, slot);
-            }else if (slot == ArmorSlot.Legs)
+            }
+            else if (slot == ArmorSlot.Legs)
             {
                 dungeonLegsCount++;
                 item = new Armor($"Dungeon {slot} Armor {dungeonLegsCount++}", rarity.Value, slot);
-            }else if (slot == ArmorSlot.Feet)
+            }
+            else if (slot == ArmorSlot.Feet)
             {
                 dungeonFeetCount++;
                 item = new Armor($"Dungeon {slot} Armor {dungeonFeetCount++}", rarity.Value, slot);
-            }else 
+            }
+            else
             {
                 dungeonHandsCount++;
                 item = new Armor($"Dungeon {slot} Armor {dungeonHandsCount++}", rarity.Value, slot);
