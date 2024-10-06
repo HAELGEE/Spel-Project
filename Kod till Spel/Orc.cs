@@ -46,7 +46,7 @@ public class OrcBase
 
     public void LevelCheck(Hero hero)
     {
-        Random random = new Random();
+        Random random = new Random();        
 
         int levelOver = 0;
         int levelUnder = 1;
@@ -149,7 +149,7 @@ public class OrcBase
         else
         {
             int minDamage = 1;
-            int maxDamage = 11;
+            int maxDamage = 7;
             minDamage += (int)damage - (int)hero.armor;
             maxDamage += (int)damage - (int)hero.armor;
             value = random.Next(minDamage, maxDamage);
@@ -184,7 +184,7 @@ public class OrcBase
         else
         {
             int minDamage = 1;
-            int maxDamage = 11;
+            int maxDamage = 7;
             minDamage += (int)damage - (int)hero.resistance;
             maxDamage += (int)damage - (int)hero.resistance;
             value = random.Next(minDamage, maxDamage);
@@ -215,7 +215,7 @@ public class OrcBase
     public virtual int BossAttack(Hero hero)
     {
         int minDamage = 2;
-        int maxDamage = 11;
+        int maxDamage = 9;
         minDamage += (int)damage - (int)hero.armor;
         maxDamage += (int)damage - (int)hero.armor;
         int value = random.Next(minDamage, maxDamage);

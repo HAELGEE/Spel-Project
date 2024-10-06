@@ -12,21 +12,32 @@ public class Save
     public static List<Hero> heroes = new List<Hero>();
     public static void SaveHeroes(Hero newHero, string filename)
     {
-        // Ladda befintliga hjältar från filen
+
         List<Hero> heroes = LoadHeroes(filename);
 
-        // Lägg till den nya hjälten till listan
-        //foreach (Hero hero in heroes)
-        //{
-        //    if (heroes.Contains(newHero))
-        //        heroes.Add(newHero);
-        //    else
-        //}
-                heroes.Add(newHero);
+        var existingHero = heroes.FirstOrDefault(h => h.name.Equals(newHero.name, StringComparison.OrdinalIgnoreCase));
+
+        if (existingHero != null)
+        {
+            // Om hjälten finns, uppdatera den
+            int index = heroes.IndexOf(existingHero);
+            heroes[index] = newHero;
+            Console.WriteLine($"Hjälten {newHero.name} uppdaterades.");
+        }
+        else
+        {
+            // Annars, lägg till den nya hjälten
+            heroes.Add(newHero);
+            Console.WriteLine($"En ny hjälte {newHero.name} har sparats.");
+        }
+
 
         // Spara hela listan tillbaka till filen
         string json = JsonSerializer.Serialize(heroes, new JsonSerializerOptions { WriteIndented = true });
+
         File.WriteAllText(filename, json);
+
+
         Console.WriteLine("Hjälten är nu sparad.");
     }
     public static List<Hero> LoadHeroes(string filename)

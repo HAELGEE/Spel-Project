@@ -16,6 +16,7 @@ public class Menu
         Colour colour = new Colour();
         Hero hero = new Hero();
         Status status = new Status();
+
         bool load = true;
         while (load)
         {
@@ -36,7 +37,7 @@ public class Menu
                     bool validInput = int.TryParse(Console.ReadLine(), out int selectedHeroIndex);
                     if (validInput && selectedHeroIndex > 0 && selectedHeroIndex <= loadedHeroes.Count)
                     {
-                        hero = loadedHeroes[selectedHeroIndex - 1];
+                        GameState.CurrentHero = loadedHeroes[selectedHeroIndex - 1];
                         Console.WriteLine($"Hjälten {hero.name} har laddats.");
                     }
                     else
@@ -46,7 +47,12 @@ public class Menu
                 }
                 else
                 {
-                    Console.WriteLine("Inga hjältar att ladda.");
+                        Console.WriteLine("Inga hjältar att ladda.");
+                    do
+                    {
+                        Console.Write("\nAnge ett namn till din Hjälte: ");
+                        GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+                    }while (GameState.CurrentHero.name == null);
                 }
                 Console.ReadKey();
                 break;
@@ -54,7 +60,7 @@ public class Menu
             else if (choice.ToUpper() == "N")
             {
                 Console.Write("Ange ett namn till din Hjälte: ");
-                hero.name = Console.ReadLine();
+                GameState.CurrentHero = new Hero { name = Console.ReadLine() };
                 break;
             }
             else
@@ -120,7 +126,7 @@ public class Menu
 
                     case 1:
                         Console.Clear();
-                        attack._Attack(hero);
+                        attack._Attack();
                         break;
                     case 2:
                         Console.Clear();
@@ -142,7 +148,7 @@ public class Menu
 
                     case 5:
                         Console.Clear();
-                        healing._Healing(hero);
+                        healing._Healing();
                         break;
 
                     case 6:
@@ -152,7 +158,7 @@ public class Menu
 
                     case 7:
                         Console.Clear();
-                        Save.SaveHeroes(hero, "Hero_save.json");
+                        Save.SaveHeroes(GameState.CurrentHero, "Hero_save.json");
                         hero.Stats();
                         Console.ReadKey();
                         break;

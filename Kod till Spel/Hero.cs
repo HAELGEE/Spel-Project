@@ -350,7 +350,7 @@ public class Hero
     public int Attack(OrcBase orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
     {
         int minDamage = 1;
-        int maxDamage = 11;
+        int maxDamage = 7;
         minDamage += (int)dmg - (int)orc.armor;
         maxDamage += (int)dmg - (int)orc.armor;
         int value = random.Next(minDamage, maxDamage);

@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Kod_till_Spel;
 internal class Status
 {
-   public Hero hero = new Hero();
-   public Colour colour = new Colour();
+    public Colour colour = new Colour();
+    //public Hero Hero { get; set; }
+    //public Status(Hero hero)
+    //{
+    //    Hero = hero;
+    //}
+    //public Status()
+    //{
+    //}   
+
     public void StatusMenu()
     {
+        Hero hero = GameState.CurrentHero;
+
         Console.WriteLine("===================================");
         Console.WriteLine($"Ditt namn på din Hero: {hero.name}\n");
         Console.WriteLine("Din hjälte är på Level: " + hero.level);
@@ -25,8 +36,7 @@ internal class Status
         else
         {
             colour.Green(hero.hp);
-        }
-        Console.Write(hero.hp);
+        }        
         Console.ResetColor();
         Console.Write(" av ");
         Console.ForegroundColor = ConsoleColor.Green;

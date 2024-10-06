@@ -37,8 +37,9 @@ namespace Kod_till_Spel
         }
         Healing healing = new Healing();
 
-        public void _Attack(Hero hero)
+        public void _Attack()
         {
+            Hero hero = GameState.CurrentHero;
             OrcBase orc = new OrcBase(hero);
 
             Random random = new Random();
@@ -146,7 +147,7 @@ namespace Kod_till_Spel
                         orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
-                        healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
+                        healing._Healing();     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
                 }
@@ -177,7 +178,7 @@ namespace Kod_till_Spel
                         orc.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
-                        healing._Healing(hero);     //Lagt till HEALING automatiskt om Hero blir besegrad
+                        healing._Healing();     //Lagt till HEALING automatiskt om Hero blir besegrad
                         break;
                     }
 

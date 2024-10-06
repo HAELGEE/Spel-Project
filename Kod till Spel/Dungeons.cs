@@ -75,7 +75,7 @@ public class Dungeons
 
                 if (choice == "J")      //Lägger till ett val för användaren för att se om dom vill försöka på detta rummet igen
                 {
-                    healing._Healing(hero);     //Om ja
+                    healing._Healing();     //Om ja
                     roomNumber--;
                     loop = false;
                     break;
@@ -210,11 +210,11 @@ public class Dungeons
         {
             Console.Clear();
             Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
-            Console.Write("Du har fyra stycken rum att klara!");
+            Console.WriteLine("Du har fyra stycken rum att klara!");
             while (dungeonLoop)
             {
 
-                Console.WriteLine("\n\n1. Fortsätt");
+                Console.WriteLine("\n1. Fortsätt");
                 Console.WriteLine("2. Avbryt");
                 Console.WriteLine("Vill du fortsätta eller avbryta?");
                 string val = Console.ReadLine();
