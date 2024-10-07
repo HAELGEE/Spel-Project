@@ -1,11 +1,10 @@
-﻿using Kod_till_Spel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kod_till_Spel;
+namespace Kod_till_Spel.Menus;
 public class Menu
 {
     // Fixa in så att menyn "tabbar" ut texten och sedan lägger en pil där
@@ -47,12 +46,12 @@ public class Menu
                 }
                 else
                 {
-                        Console.WriteLine("Inga hjältar att ladda.");
+                    Console.WriteLine("Inga hjältar att ladda.");
                     do
                     {
                         Console.Write("\nAnge ett namn till din Hjälte: ");
                         GameState.CurrentHero = new Hero { name = Console.ReadLine() };
-                    }while (GameState.CurrentHero.name == null);
+                    } while (GameState.CurrentHero.name == null);
                 }
                 Console.ReadKey();
                 break;
@@ -73,7 +72,7 @@ public class Menu
         Save save = new Save();
         Dungeons dungeon = new Dungeons(hero);
 
-        string[] menuChoice = {           
+        string[] menuChoice = {
             "Kolla Status på din hjälte",
             "Roama runt och Attackera mobs",
             "Utrustade föremål",
@@ -98,14 +97,14 @@ public class Menu
                 if (i == menuSelecter)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"---> \t {(menuChoice[i])}");
+                    Console.WriteLine($"---> \t {menuChoice[i]}");
                     Console.ResetColor();
                     Console.CursorVisible = false;
                 }
                 else
                     Console.WriteLine(menuChoice[i]);
             }
-            
+
             var key = Console.ReadKey(true).Key;
 
             if (key == ConsoleKey.DownArrow && menuSelecter < menuChoice.Length - 1)
@@ -182,7 +181,7 @@ public class Menu
                 }
             }
         }
-    }    
+    }
 }
 
 

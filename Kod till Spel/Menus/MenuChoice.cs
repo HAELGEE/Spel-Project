@@ -1,11 +1,10 @@
-﻿using Kod_till_Spel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kod_till_Spel;
+namespace Kod_till_Spel.Menus;
 internal class MenuChoice
 {
     //// Skickar in menu options, längden på array av menu options, texten som skall stå INNAN loopen.

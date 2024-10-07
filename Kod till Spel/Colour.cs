@@ -82,8 +82,6 @@ public class Colour
         Console.ResetColor();       //Reset av färg till standard
     }
 
-
-
 }
 
 

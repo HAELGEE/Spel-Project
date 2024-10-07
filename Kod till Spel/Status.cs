@@ -8,15 +8,7 @@ using System.Threading.Tasks;
 namespace Kod_till_Spel;
 internal class Status
 {
-    public Colour colour = new Colour();
-    //public Hero Hero { get; set; }
-    //public Status(Hero hero)
-    //{
-    //    Hero = hero;
-    //}
-    //public Status()
-    //{
-    //}   
+    public Colour colour = new Colour();    
 
     public void StatusMenu()
     {

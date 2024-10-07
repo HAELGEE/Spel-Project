@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
 using static System.Net.Mime.MediaTypeNames;
+using Kod_till_Spel.Enemys;
 
 namespace Kod_till_Spel
 {

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SPEL;
-using Kod_till_Spel;
 using System.IO;
 using System.Text.Json;
 using System.Security.Cryptography;
 using static Kod_till_Spel.Armor;
 using static Kod_till_Spel.EquipAbleItem;
 using System.Xml.Linq;
+using Kod_till_Spel.Enemys;
 
 namespace Kod_till_Spel;
 public class Hero

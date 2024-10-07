@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SPEL;
-using Kod_till_Spel;
 using System.IO;
 using System.Text.Json;
 using System.Runtime.Intrinsics.Arm;
 using System.Xml.Linq;
 
-namespace Kod_till_Spel;
+namespace Kod_till_Spel.Enemys;
 
 public class OrcBase
 {
@@ -46,7 +45,7 @@ public class OrcBase
 
     public void LevelCheck(Hero hero)
     {
-        Random random = new Random();        
+        Random random = new Random();
 
         int levelOver = 0;
         int levelUnder = 1;
@@ -55,7 +54,7 @@ public class OrcBase
             levelUnder = 1;
         }
 
-        if (hero.level >= this.level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
+        if (hero.level >= level)       //Kollar vilken level Hero är på och jämför med orc level (this.level)
         {
             levelOver = hero.level + 3;     //Om hero level är över orc level tar man hero level + 3 för att få "levelOver"
 
@@ -64,7 +63,7 @@ public class OrcBase
                 levelUnder = hero.level - 2;    //Om hero level är över 3 tar man av 2 så får man en motståndare som har max 2 level under och max 2 level över hero
             }
 
-            this.level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
+            level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
         else
         {
@@ -73,40 +72,40 @@ public class OrcBase
             level = random.Next(levelUnder, levelOver);    //Randomiserar vilken level orc skall bli
         }
 
-        if (this.level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
+        if (level > 1)     //Om orc level är över 1 tar man och sparar den i levelLeft -1
         {
-            int levelLeft = this.level - 1;
+            int levelLeft = level - 1;
 
 
             for (int i = 0; i < levelLeft; i++)
             {
 
-                this.hp += 3;              //lägger till 3 i hp
-                this.maxHp += 3;           //lägger till 3 i maxHp
-                this.minHealing++;      //lägger till 1 i minimum Healing
-                this.maxHealing++;      //Lägger till 1 i maximum Healing
+                hp += 3;              //lägger till 3 i hp
+                maxHp += 3;           //lägger till 3 i maxHp
+                minHealing++;      //lägger till 1 i minimum Healing
+                maxHealing++;      //Lägger till 1 i maximum Healing
 
                 int statIncrease = random.Next(0, 3);
                 switch (statIncrease)
                 {
                     case 0:
                         {
-                            this.styrka++;      //Om lottningen stannade här +1 i styrka
+                            styrka++;      //Om lottningen stannade här +1 i styrka
                             break;
                         }
                     case 1:
                         {
-                            this.agility++;     //Om lottningen stannade här +1 i agility
+                            agility++;     //Om lottningen stannade här +1 i agility
                             break;
                         }
                     case 2:
                         {
-                            this.intelligence++;   //Om lottningen stannade här +1 i intelligence
+                            intelligence++;   //Om lottningen stannade här +1 i intelligence
                             break;
                         }
                     case 3:
                         {
-                            this.stamina++;   // Om lottningen stannade här + 1 i stamina
+                            stamina++;   // Om lottningen stannade här + 1 i stamina
                             break;
                         }
                 }
@@ -199,13 +198,13 @@ public class OrcBase
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.Write(" fire dmg.");
 
-        if (this.hp < this.maxHp)
+        if (hp < maxHp)
         {
-            int randomHealing = random.Next(this.minHealing, this.maxHealing);
-            this.hp += Convert.ToInt32(this.healing);
+            int randomHealing = random.Next(minHealing, maxHealing);
+            hp += Convert.ToInt32(healing);
             Console.Write($" Och healar sig själv med ");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write(this.healing);
+            Console.Write(healing);
             Console.ResetColor();
             Console.Write("hp");
         }
@@ -232,7 +231,7 @@ public class OrcBase
 
     public virtual void GenerateName()
     {
-        this.name = "Orc-" + random.Next(1, 3340);
+        name = "Orc-" + random.Next(1, 3340);
     }
 }
 
@@ -240,22 +239,22 @@ public class Orc : OrcBase
 {
     public Orc(Hero hero) : base(hero)
     {
-        this.damage = 4;
-        this.speed = 2;
-        this.armor = 1.5;
-        this.hp = this.hp - 2;
-        this.baseArmor = 1.5;
-        this.baseSpeed = 2;
-        this.baseDamage = 4;
-        this.baseResistance = 1;
+        damage = 4;
+        speed = 2;
+        armor = 1.5;
+        hp = hp - 2;
+        baseArmor = 1.5;
+        baseSpeed = 2;
+        baseDamage = 4;
+        baseResistance = 1;
 
-        GenerateName();        
+        GenerateName();
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.baseDamage + (styrka * 1.3);
-        this.speed = this.baseSpeed + (agility * 1.15);
-        this.armor = this.baseArmor + (agility * 0.26);
-        this.resistance = this.baseResistance + (intelligence * 0.2);
+        damage = baseDamage + styrka * 1.3;
+        speed = baseSpeed + agility * 1.15;
+        armor = baseArmor + agility * 0.26;
+        resistance = baseResistance + intelligence * 0.2;
     }
 
     public override int Attack(Hero hero)
@@ -267,23 +266,23 @@ public class Shaman : OrcBase
 {
     public Shaman(Hero hero) : base(hero)
     {
-        this.damage = 1.5;
-        this.speed = 1.2;
-        this.armor = 2;
-        this.healing = 2;
-        this.baseArmor = 2;
-        this.baseSpeed = 1.2;
-        this.baseDamage = 1.5;
-        this.baseResistance = 2;
+        damage = 1.5;
+        speed = 1.2;
+        armor = 2;
+        healing = 2;
+        baseArmor = 2;
+        baseSpeed = 1.2;
+        baseDamage = 1.5;
+        baseResistance = 2;
 
-        this.name = "Shaman-" + random.Next(1, 3340);
+        name = "Shaman-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.baseDamage + (intelligence * 1);
-        this.healing = this.healing + (Math.Round(intelligence * 0.9));
-        this.speed = this.baseSpeed + (agility * 1.15);
-        this.armor = this.baseArmor + (agility * 0.26);
-        this.resistance = this.baseResistance + (intelligence * 0.95);
+        damage = baseDamage + intelligence * 1;
+        healing = healing + Math.Round(intelligence * 0.9);
+        speed = baseSpeed + agility * 1.15;
+        armor = baseArmor + agility * 0.26;
+        resistance = baseResistance + intelligence * 0.95;
     }
 
     public override int Attack(Hero hero)
@@ -297,22 +296,22 @@ public class Grunt : OrcBase
 {
     public Grunt(Hero hero) : base(hero)
     {
-        this.damage = 1.2;
-        this.speed = 0.7;
-        this.armor = 5.5;
-        this.hp += 10;
-        this.baseArmor = 5.5;
-        this.baseSpeed = 0.7;
-        this.baseDamage = 1.2;
-        this.baseResistance = 2.5;
+        damage = 1.2;
+        speed = 0.7;
+        armor = 5.5;
+        hp += 10;
+        baseArmor = 5.5;
+        baseSpeed = 0.7;
+        baseDamage = 1.2;
+        baseResistance = 2.5;
 
-        this.name = "Grunt-" + random.Next(1, 3340);
+        name = "Grunt-" + random.Next(1, 3340);
         LevelCheck(hero);   //Kollar vilken Level Hero är på
 
-        this.damage = this.baseDamage + (styrka * 1);
-        this.speed = this.baseSpeed + (agility * 1.10);
-        this.armor = this.baseArmor + (agility * 0.31);
-        this.resistance = this.baseResistance + (intelligence * 0.25);
+        damage = baseDamage + styrka * 1;
+        speed = baseSpeed + agility * 1.10;
+        armor = baseArmor + agility * 0.31;
+        resistance = baseResistance + intelligence * 0.25;
 
     }
 
@@ -326,21 +325,21 @@ public class Boss : OrcBase
 {
     public Boss(Hero hero) : base(hero)
     {
-        this.hp = 60; // Bossar har mer hälsa
-        this.damage = 4;
-        this.speed = 1.5;
-        this.armor = 3.5;
-        this.baseArmor = 3.5;
-        this.baseSpeed = 1.5;
-        this.baseDamage = 4;
-        this.baseResistance = 3;
+        hp = 60; // Bossar har mer hälsa
+        damage = 4;
+        speed = 1.5;
+        armor = 3.5;
+        baseArmor = 3.5;
+        baseSpeed = 1.5;
+        baseDamage = 4;
+        baseResistance = 3;
 
-        this.name = "DungeonBoss-" + random.Next(1, 6666);
+        name = "DungeonBoss-" + random.Next(1, 6666);
 
-        this.damage = this.baseDamage + (styrka * 1.05);
-        this.speed = this.baseSpeed + (agility * 1.10);
-        this.armor = this.baseArmor + (agility * 0.35);
-        this.resistance = this.baseResistance + (intelligence * 0.35);
+        damage = baseDamage + styrka * 1.05;
+        speed = baseSpeed + agility * 1.10;
+        armor = baseArmor + agility * 0.35;
+        resistance = baseResistance + intelligence * 0.35;
     }
     public override int Attack(Hero hero)
     {
@@ -351,21 +350,21 @@ public class DungeonOrc : OrcBase
 {
     public DungeonOrc(Hero hero) : base(hero)
     {
-        this.hp = 30;
-        this.damage = 4;
-        this.speed = 2.2;
-        this.armor = 1.2;        
-        this.baseArmor = 1.5;
-        this.baseSpeed = 2;
-        this.baseDamage = 4;
-        this.baseResistance = 1;
+        hp = 30;
+        damage = 4;
+        speed = 2.2;
+        armor = 1.2;
+        baseArmor = 1.5;
+        baseSpeed = 2;
+        baseDamage = 4;
+        baseResistance = 1;
 
-        this.name = "DungeonOrc-" + random.Next(1, 3340);
+        name = "DungeonOrc-" + random.Next(1, 3340);
 
-        this.damage = this.damage + (styrka * 1.3);
-        this.speed = this.speed + (agility * 1.13);
-        this.armor = this.armor + (agility * 0.22);
-        this.resistance = this.resistance + (intelligence * 0.2);
+        damage = damage + styrka * 1.3;
+        speed = speed + agility * 1.13;
+        armor = armor + agility * 0.22;
+        resistance = resistance + intelligence * 0.2;
     }
 
     public override int Attack(Hero hero)
@@ -377,23 +376,23 @@ public class DungeonShaman : OrcBase
 {
     public DungeonShaman(Hero hero) : base(hero)
     {
-        this.hp = 35;
-        this.damage = 2;
-        this.healing = 1.2;
-        this.speed = 1.3;
-        this.armor = 2;
-        this.baseArmor = 1.5;
-        this.baseSpeed = 2;
-        this.baseDamage = 4;
-        this.baseResistance = 1;
+        hp = 35;
+        damage = 2;
+        healing = 1.2;
+        speed = 1.3;
+        armor = 2;
+        baseArmor = 1.5;
+        baseSpeed = 2;
+        baseDamage = 4;
+        baseResistance = 1;
 
-        this.name = "DungeonShaman-" + random.Next(1, 3340);
+        name = "DungeonShaman-" + random.Next(1, 3340);
 
-        this.damage = this.damage + (intelligence * 1);
-        this.healing = this.healing + (Math.Round(intelligence * 0.95));
-        this.speed = this.speed + (agility * 1.15);
-        this.armor = this.armor + (agility * 0.26);
-        this.resistance = this.resistance + (intelligence * 0.2);
+        damage = damage + intelligence * 1;
+        healing = healing + Math.Round(intelligence * 0.95);
+        speed = speed + agility * 1.15;
+        armor = armor + agility * 0.26;
+        resistance = resistance + intelligence * 0.2;
     }
 
     public override int Attack(Hero hero)
@@ -407,22 +406,22 @@ public class DungeonGrunt : OrcBase
 {
     public DungeonGrunt(Hero hero) : base(hero)
     {
-        this.hp = 45;
-        this.damage = 1.5;
-        this.speed = 0.8;
-        this.armor = 3;
-        this.baseArmor = 1.5;
-        this.baseSpeed = 2;
-        this.baseDamage = 4;
-        this.baseResistance = 1;
+        hp = 45;
+        damage = 1.5;
+        speed = 0.8;
+        armor = 3;
+        baseArmor = 1.5;
+        baseSpeed = 2;
+        baseDamage = 4;
+        baseResistance = 1;
 
-        this.name = "DungeonGrunt-" + random.Next(1, 3340);
+        name = "DungeonGrunt-" + random.Next(1, 3340);
 
 
-        this.damage = this.damage + (styrka * 1);
-        this.speed = this.speed + (agility * 1.10);
-        this.armor = this.armor + (agility * 0.28);
-        this.resistance = this.resistance + (intelligence * 0.25);
+        damage = damage + styrka * 1;
+        speed = speed + agility * 1.10;
+        armor = armor + agility * 0.28;
+        resistance = resistance + intelligence * 0.25;
 
     }
 

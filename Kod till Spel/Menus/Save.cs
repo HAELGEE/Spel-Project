@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace Kod_till_Spel;
+namespace Kod_till_Spel.Menus;
 public class Save
 {
     public static List<Hero> heroes = new List<Hero>();

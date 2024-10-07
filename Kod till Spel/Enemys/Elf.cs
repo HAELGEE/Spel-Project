@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kod_till_Spel;
+namespace Kod_till_Spel.Enemys;
 public class Elf
 {
 
