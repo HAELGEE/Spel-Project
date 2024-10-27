@@ -13,6 +13,9 @@ namespace SPEL
         {
             Menu menu = new Menu();
             menu.StartMenu();
+
+            // MÅSTE FIXA SÅ ATT INTE " ORC " GÅR IN I ATTACK OCH SÅNT. HAR LAGT TILL GHOST OCH ELF KLASSEN!
+            // SKAPA EN CLASS FÖR EGEN ATTACK/STATS FÖR MOBS KANSKE?
         }
     }
 }

@@ -14,8 +14,8 @@ namespace Kod_till_Spel;
 public class Dungeons
 {
     Hero hero;
-    Attack attack = new Attack();
-    OrcBase orc;
+    Attack attack = new Attack();    
+    Enemy enemy;
     public Random random = new Random();
     Healing healing = new Healing();
 
@@ -29,7 +29,7 @@ public class Dungeons
     public Dungeons(Hero Hero)
     {
         this.hero = Hero;
-        orc = new OrcBase(hero);
+        enemy = new Enemy(hero);
     }
     public enum DungeonRank
     {

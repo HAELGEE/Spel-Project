@@ -14,6 +14,8 @@ internal class Status
     {
         Hero hero = GameState.CurrentHero;
 
+        Console.Clear();
+
         Console.WriteLine("===================================");
         Console.WriteLine($"Ditt namn på din Hero: {hero.name}\n");
         Console.WriteLine("Din hjälte är på Level: " + hero.level);

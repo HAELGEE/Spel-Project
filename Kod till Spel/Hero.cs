@@ -37,7 +37,7 @@ public class Hero
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 10;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 15;
@@ -163,7 +163,7 @@ public class Hero
 
             if (itemToEquip != null)
             {
-                Equip(itemToEquip);                
+                Equip(itemToEquip);
                 Console.ReadKey();
                 loop = false;
                 return;
@@ -204,7 +204,7 @@ public class Hero
         UpdateAttributes(Legs);
         UpdateAttributes(Feet);
         UpdateAttributes(Weapon);
-    }   
+    }
 
     private void UpdateAttributes(EquipableItem item)
     {
@@ -221,22 +221,22 @@ public class Hero
                     switch (key)
                     {
                         case "Strength":
-                            this.styrka += item.Attributes[key];
+                            styrka += item.Attributes[key];
                             break;
                         case "Agility":
-                            this.agility += item.Attributes[key];
+                            agility += item.Attributes[key];
                             break;
                         case "HPBoost":
-                            this.maxHp += item.Attributes[key];
+                            maxHp += item.Attributes[key];
                             break;
                         case "Lifesteal":
-                            this.lifeSteal += item.Attributes[key];
+                            lifeSteal += item.Attributes[key];
                             break;
                         case "Intelligence":
-                            this.intelligence += item.Attributes[key];
+                            intelligence += item.Attributes[key];
                             break;
                         case "Mana":
-                            this.mana += item.Attributes[key];
+                            mana += item.Attributes[key];
                             break;
                     }
                 }
@@ -249,7 +249,7 @@ public class Hero
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
                        //HeroLevels(savedLevel);
         Stats();
-        AddExperience(this.experience);
+        AddExperience(experience);
     }
     public void AddExperience(double amount)
     {
@@ -341,18 +341,18 @@ public class Hero
 
     public void Stats()
     {
-        dmg = baseDmg + (styrka * 1.2);   //Avgör dmg (drar av skada beroende på armor)
-        speed = baseSpeed + (agility * 1.15);    //För att se vem som skall starta attackera vem.
-        armor = baseArmor + (agility * 0.26);    //För att göra "avdrag" av dmg    
-        resistance = resistance + (intelligence * 0.2); //Resistance "avdrag" utav spell dmg 
+        dmg = baseDmg + styrka * 1.2;   //Avgör dmg (drar av skada beroende på armor)
+        speed = baseSpeed + agility * 1.15;    //För att se vem som skall starta attackera vem.
+        armor = baseArmor + agility * 0.26;    //För att göra "avdrag" av dmg    
+        resistance = resistance + intelligence * 0.2; //Resistance "avdrag" utav spell dmg 
     }
 
-    public int Attack(OrcBase orc)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
+    public int Attack(Enemy enemy)      //Tvungen att lägga in Orc här för att hämta statsen ifrån Orc klassen för att sedan dra Minus på dmg med armor
     {
         int minDamage = 1;
         int maxDamage = 7;
-        minDamage += (int)dmg - (int)orc.armor;
-        maxDamage += (int)dmg - (int)orc.armor;
+        minDamage += (int)dmg - (int)enemy.armor;
+        maxDamage += (int)dmg - (int)enemy.armor;
         int value = random.Next(minDamage, maxDamage);
         if (value < 0)
         {
