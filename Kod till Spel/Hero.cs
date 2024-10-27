@@ -15,6 +15,7 @@ using Kod_till_Spel.Enemys;
 namespace Kod_till_Spel;
 public class Hero
 {
+    
     static void Green(string value)
     {
         Console.ForegroundColor = ConsoleColor.Green;       //Färg metod för GRÖN med variabel String
