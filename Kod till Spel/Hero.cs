@@ -37,7 +37,7 @@ public class Hero
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 10;
+    public int level { get; set; } = 1;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
     public int hp { get; set; } = 15;
