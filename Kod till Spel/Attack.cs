@@ -12,7 +12,7 @@ using System.Security.Cryptography.X509Certificates;
 namespace Kod_till_Spel
 {
     class Attack
-    {        
+    {
         public Hero hero = GameState.CurrentHero;
         //public OrcBase orc = new OrcBase(hero);
         //public Elf elf = new Enemy.Elf();
@@ -49,8 +49,7 @@ namespace Kod_till_Spel
 
             Random random = new Random();
             int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt      
-            //int randomClass = random.Next(0, 3); // Lottning mellan vilken klass som skall mötas
-            int randomClass = 0;
+            int randomClass = random.Next(0, 3); // Lottning mellan vilken klass som skall mötas
 
             if (randomClass == 0)
             {
@@ -107,7 +106,7 @@ namespace Kod_till_Spel
                 }
             }
 
-            double randomSpeedHero = hero.speed;        //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
+            double randomSpeedHero = hero.speed; //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = enemy.speed;
 
             Console.WriteLine($"\nLevel: {enemy.level} {enemy.name} dyker upp!\n");
@@ -115,13 +114,9 @@ namespace Kod_till_Spel
             if (hero.speed == enemy.speed)
             {
                 if (random.Next(0, 2) == 0)     //Här börjar "lottningen"
-                {
                     hero.speed += 0.1;
-                }
                 else
-                {
                     enemy.speed += 0.1;
-                }
             }
 
             Console.Write($"Hero HP: ");
@@ -175,7 +170,7 @@ namespace Kod_till_Spel
                     }
                     if (enemy.name.Contains("Shaman") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Elowen"))
                     {
-                        if (enemy.name.Contains("Shaman"))
+                        //if (enemy.name.Contains("Shaman"))
                             damage = enemy.AttackSpellCasters(hero);  //enemy attackerar
                         //else if (enemy.name.Contains("Hauntress"))
                         //    damage = ghost.AttackSpellCasters(hero);  //orc attackerar
@@ -402,7 +397,7 @@ namespace Kod_till_Spel
 
             Console.Write($"Hero HP: ");
             Green(hero.hp);
-            Console.Write(", Orc HP: ");
+            Console.Write(", Enemy HP: ");
             Red(enemy.hp);
             Console.WriteLine("");
             double randomXp = 0;
@@ -450,13 +445,13 @@ namespace Kod_till_Spel
                         break;
                     }
 
-                    if (enemy.name.Contains("Shaman"))                    
+                    if (enemy.name.Contains("Shaman"))
                         damage = enemy.AttackSpellCasters(hero);  // Fiende attackerar                    
-                    else if (enemy.name.Contains("Boss"))                    
-                        damage = enemy.BossAttack(hero);                    
-                    else                    
+                    else if (enemy.name.Contains("Boss"))
+                        damage = enemy.BossAttack(hero);
+                    else
                         damage = enemy.Attack(hero);
-                    
+
                     hero.hp -= damage;
                     Thread.Sleep(500);
 
