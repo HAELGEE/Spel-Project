@@ -42,6 +42,7 @@ namespace Kod_till_Spel
             Console.Write(value);
             Console.ResetColor();       //Reset av färg till standard
         }
+
         Healing healing = new Healing();
 
         public void _Attack()
