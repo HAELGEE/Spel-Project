@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Kod_till_Spel;
 public class EquipAbleItem
 {
-
     public static int dungeonWeaponCount = 0;
     public static int dungeonHeadCount = 0;
     public static int dungeonChestCount = 0;

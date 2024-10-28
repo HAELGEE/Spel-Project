@@ -21,7 +21,7 @@ public class Save
         {
             // Om hjälten finns, uppdatera den
             int index = heroes.IndexOf(existingHero);
-            heroes[index] = newHero;
+            heroes[index] = newHero;            
             Console.WriteLine($"Hjälten [{newHero.name}] uppdaterades.");
         }
         else
