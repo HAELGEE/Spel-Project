@@ -30,7 +30,7 @@ public class EquipAbleItem
             else if (ItemRarity.ToString() == "Uncommon")
                 numberOfAttributes = random.Next(1, 3);
             else if (ItemRarity.ToString() == "Rare")
-                numberOfAttributes = random.Next(1, 4);
+                numberOfAttributes = random.Next(2, 4);
 
             for (int i = 0; i < numberOfAttributes; i++)
             {

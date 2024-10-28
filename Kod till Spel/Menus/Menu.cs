@@ -152,7 +152,7 @@ public class Menu
 
                     case 6:
                         Console.Clear();
-                        dungeon.EnterDungeon();
+                        dungeon.EnterDungeon(GameState.CurrentHero);
                         break;
 
                     case 7:

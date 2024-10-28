@@ -14,21 +14,21 @@ namespace Kod_till_Spel;
 public class Dungeons
 {
     Hero hero;
-    Attack attack = new Attack();    
+    Attack attack = new Attack();
     Enemy enemy;
     public Random random = new Random();
     Healing healing = new Healing();
 
-    public int dungeonWeaponCount = 0;
-    public int dungeonHeadCount = 0;
-    public int dungeonChestCount = 0;
-    public int dungeonHandsCount = 0;
-    public int dungeonLegsCount = 0;
-    public int dungeonFeetCount = 0;
+    private int dungeonWeaponCount = 0;
+    private int dungeonHeadCount = 0;
+    private int dungeonChestCount = 0;
+    private int dungeonHandsCount = 0;
+    private int dungeonLegsCount = 0;
+    private int dungeonFeetCount = 0;
 
     public Dungeons(Hero Hero)
     {
-        this.hero = Hero;
+        this.hero = GameState.CurrentHero;
         enemy = new Enemy(hero);
     }
     public enum DungeonRank
@@ -104,22 +104,20 @@ public class Dungeons
             if (roomNumber == 4)
             {
                 hero.Guld += 4;
-                Console.Write(". Och du får 4 extra guld för att klara Bossen");
+                Console.WriteLine(". Och du får 4 extra guld för att klara Bossen\n");
                 EquipableItem loot = currentDungeon.DropLoot();
                 if (loot != null)
-                    Console.WriteLine($"Du hittade: {loot.Name} av rank {loot.ItemRarity} ");
-                else Console.WriteLine("\nTyvärr, ingen loot denna gången");
+                    Console.WriteLine($"\nDu hittade: {loot.Name} av rank {loot.ItemRarity} ");
+                else Console.WriteLine("Tyvärr, ingen loot denna gången");
 
                 Console.ReadKey();
             }
-
         }
     }
 
-    public void EnterDungeon()
+    public void EnterDungeon(Hero hero)
     {
-
-        string[] dungeonOption = {        
+        string[] dungeonOption = {
         "E-Dungeon",
         "D-Dungeon",
         "C-Dungeon",
@@ -158,7 +156,7 @@ public class Dungeons
                 menuPicker--;
             else if (key == ConsoleKey.Enter)
             {
-                
+
                 switch (menuPicker)
                 {
                     case 0:
@@ -210,10 +208,12 @@ public class Dungeons
         if (hero.level > 5 && hero.hp > 0)
         {
             Console.Clear();
-            Console.WriteLine($"=== Du har nu gått in i en {rank}-Rank Dungeon ===");
-            Console.WriteLine("Du har fyra stycken rum att klara!");
             while (dungeonLoop)
             {
+                Console.Clear();
+
+                Console.WriteLine($"=== Du är nu i en {rank}-Rank Dungeon ===");
+                Console.WriteLine($"Du har {4 - roomNumber} rum att klara!");
 
                 Console.WriteLine("\n1. Fortsätt");
                 Console.WriteLine("2. Avbryt");
@@ -224,8 +224,13 @@ public class Dungeons
                     case "1":
                         if (roomNumber < 4)
                         {
+                           // Console.Clear();
                             roomNumber++;
                             EnterRoom();
+
+                            // Så att inte Loopen startar om
+                            if (roomNumber == 4)
+                                dungeonLoop = false;
                         }
                         else
                         {
@@ -242,6 +247,7 @@ public class Dungeons
                         dungeonLoop = false;
                         break;
                 }
+
             }
         }
         else if (hero.hp <= 0)
@@ -281,7 +287,7 @@ public class Dungeons
         if (isWeapon)
         {
             dungeonWeaponCount++;
-            item = new Weapon($"Dungeon Weapon {dungeonWeaponCount++}", rarity.Value);
+            item = new Weapon($"Dungeon Weapon {dungeonWeaponCount}", rarity.Value);
         }
         else
         {
@@ -289,27 +295,27 @@ public class Dungeons
             if (slot == ArmorSlot.Head)
             {
                 dungeonHeadCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonHeadCount++}", rarity.Value, slot);
+                item = new Armor($"Dungeon {slot} Armor {dungeonHeadCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Chest)
             {
                 dungeonChestCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonChestCount++}", rarity.Value, slot);
+                item = new Armor($"Dungeon {slot} Armor {dungeonChestCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Legs)
             {
                 dungeonLegsCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonLegsCount++}", rarity.Value, slot);
+                item = new Armor($"Dungeon {slot} Armor {dungeonLegsCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Feet)
             {
                 dungeonFeetCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonFeetCount++}", rarity.Value, slot);
+                item = new Armor($"Dungeon {slot} Armor {dungeonFeetCount}", rarity.Value, slot);
             }
             else
             {
                 dungeonHandsCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonHandsCount++}", rarity.Value, slot);
+                item = new Armor($"Dungeon {slot} Armor {dungeonHandsCount}", rarity.Value, slot);
             }
         }
 
