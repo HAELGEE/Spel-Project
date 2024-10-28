@@ -130,13 +130,13 @@ public class Menu
                     case 2:
                         Console.Clear();
                         //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
-                        hero.ShowEquippedItems();
+                        GameState.CurrentHero.ShowEquippedItems();
                         Console.ReadKey();
                         break;
 
                     case 3:
                         Console.Clear();
-                        hero.ManageInventory();
+                        GameState.CurrentHero.ManageInventory();
                         break;
 
                     case 4:

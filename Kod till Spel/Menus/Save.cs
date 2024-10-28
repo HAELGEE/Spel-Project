@@ -31,14 +31,10 @@ public class Save
             Console.WriteLine($"En ny hjälte [{newHero.name}] har sparats.");
         }
 
-
         // Spara hela listan tillbaka till filen
         string json = JsonSerializer.Serialize(heroes, new JsonSerializerOptions { WriteIndented = true });
 
         File.WriteAllText(filename, json);
-
-
-        Console.WriteLine("Hjälten är nu sparad.");
     }
     public static List<Hero> LoadHeroes(string filename)
     {
@@ -48,12 +44,5 @@ public class Save
             return JsonSerializer.Deserialize<List<Hero>>(json);
         }
         return new List<Hero>();
-    }
-
-    //public static void SaveHero(Hero hero, string filename)
-    //{
-    //    string json = JsonSerializer.Serialize(hero);
-    //    File.WriteAllText(filename, json);
-    //    Console.WriteLine("Hjälten är nu sparad.");
-    //}
+    }    
 }

@@ -33,7 +33,7 @@ public class Hero
         Console.Write(value);
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 300;
+    public double baseDmg { get; set; } = 3;
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
@@ -172,6 +172,7 @@ public class Hero
             if (itemToEquip != null)
             {
                 Equip(itemToEquip);
+                itemToEquip.Name = $"{itemToEquip.Name} [EQUIPED]";
                 Console.ReadKey();
                 loop = false;
                 return;
