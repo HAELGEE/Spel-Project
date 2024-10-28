@@ -177,7 +177,7 @@ public class Hero
             {
                 Equip(itemToEquip);
                 itemToEquip.Name = $"{itemToEquip.Name} [EQUIPED]";
-                Console.WriteLine($"Du utrustade dig med: {itemToEquip}");
+                Console.WriteLine($"Du utrustade dig med: {itemToEquip.Name}");
                 Console.ReadKey();
                 loop = false;
                 return;
