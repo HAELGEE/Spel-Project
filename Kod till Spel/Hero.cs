@@ -167,7 +167,7 @@ public class Hero
             Console.Clear();
             ShowInventory();
 
-            Console.WriteLine("Vill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:");
+            Console.WriteLine("\nVill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:");
             string choice = Console.ReadLine();
 
 
