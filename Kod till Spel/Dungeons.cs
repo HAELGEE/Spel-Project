@@ -19,13 +19,6 @@ public class Dungeons
     public Random random = new Random();
     Healing healing = new Healing();
 
-    private int dungeonWeaponCount = 0;
-    private int dungeonHeadCount = 0;
-    private int dungeonChestCount = 0;
-    private int dungeonHandsCount = 0;
-    private int dungeonLegsCount = 0;
-    private int dungeonFeetCount = 0;
-
     public Dungeons(Hero Hero)
     {
         this.hero = GameState.CurrentHero;
@@ -270,7 +263,8 @@ public class Dungeons
     public EquipableItem DropLoot()
     {
         Random random = new Random();
-        int dropChance = random.Next(1, 10001); // Slumpa 00.01% till 100%
+        //int dropChance = random.Next(1, 10001); // Slumpa 00.01% till 100%
+        int dropChance = 3080;
 
         Rarity? rarity = DetermineRarity(dropChance);
 
@@ -286,36 +280,36 @@ public class Dungeons
 
         if (isWeapon)
         {
-            dungeonWeaponCount++;
-            item = new Weapon($"Dungeon Weapon {dungeonWeaponCount}", rarity.Value);
+            EquipAbleItem.dungeonWeaponCount++;
+            item = new Weapon($"Dungeon Weapon {EquipAbleItem.dungeonWeaponCount}", rarity.Value);
         }
         else
         {
             ArmorSlot slot = (ArmorSlot)random.Next(0, 5); // Slumpa slot 
             if (slot == ArmorSlot.Head)
             {
-                dungeonHeadCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonHeadCount}", rarity.Value, slot);
+                EquipAbleItem.dungeonHeadCount++;
+                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonHeadCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Chest)
             {
-                dungeonChestCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonChestCount}", rarity.Value, slot);
+                EquipAbleItem.dungeonChestCount++;
+                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonChestCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Legs)
             {
-                dungeonLegsCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonLegsCount}", rarity.Value, slot);
+                EquipAbleItem.dungeonLegsCount++;
+                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonLegsCount}", rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Feet)
             {
-                dungeonFeetCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonFeetCount}", rarity.Value, slot);
+                EquipAbleItem.dungeonFeetCount++;
+                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonFeetCount}", rarity.Value, slot);
             }
             else
             {
-                dungeonHandsCount++;
-                item = new Armor($"Dungeon {slot} Armor {dungeonHandsCount}", rarity.Value, slot);
+                EquipAbleItem.dungeonHandsCount++;
+                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonHandsCount}", rarity.Value, slot);
             }
         }
 

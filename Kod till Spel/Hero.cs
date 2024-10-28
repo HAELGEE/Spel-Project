@@ -14,7 +14,7 @@ using Kod_till_Spel.Enemys;
 
 namespace Kod_till_Spel;
 public class Hero
-{    
+{
     static void Green(string value)
     {
         Console.ForegroundColor = ConsoleColor.Green;       //Färg metod för GRÖN med variabel String
@@ -56,11 +56,11 @@ public class Hero
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
     public int Guld { get; set; } = 0;
-    
+
     public Hero()
     {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
-                
+
         Stats();
         AddExperience(experience);
     }
@@ -152,6 +152,9 @@ public class Hero
                     colour.Red(item.ItemRarity.ToString());
                     break;
             }
+
+            for (int i = 0; i < item.Attributes.Count; i++)
+                Console.WriteLine($", {item.Attributes}");
 
             Console.WriteLine();
         }
@@ -302,7 +305,7 @@ public class Hero
         Console.Write($"Du gick precis upp i level!");
         while (statIncrease != 0)
         {
-            Console.Clear(); 
+            Console.Clear();
 
             Console.WriteLine($" Du har {statIncrease} stat increase kvar: ");
             Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
