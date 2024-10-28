@@ -30,11 +30,15 @@ public class EquipAbleItem
 
         private void GenerateRandomAttributes()
         {
+
+            // Skall läggas till vilken Dungeon som kördes så man inte får en Common när man kör en S-Rank Dungeon
             Random random = new Random();
             string[] possibleAttributes = { "Strength", "Agility", "HPBoost", "Lifesteal", "Intelligence", "Mana" };
             int numberOfAttributes = 0;
+
+            // Exempelvis slumpas 1-3 attributer
             if (ItemRarity.ToString() == "Common")
-                numberOfAttributes = random.Next(1, 2); // Exempelvis slumpas 1-3 attributer
+                numberOfAttributes = random.Next(1, 2); 
             else if (ItemRarity.ToString() == "Uncommon")
                 numberOfAttributes = random.Next(1, 3);
             else if (ItemRarity.ToString() == "Rare")
@@ -47,7 +51,7 @@ public class EquipAbleItem
                 int value = 0;
 
                 // Värdet slumpas, 1-10.
-                if (ItemRarity.ToString() == "Common")
+                if (ItemRarity.ToString() == "Common") 
                     value = random.Next(1, 6); 
                 else if (ItemRarity.ToString() == "Uncommon")
                     value = random.Next(2, 8);

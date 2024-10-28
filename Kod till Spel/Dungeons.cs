@@ -263,8 +263,7 @@ public class Dungeons
     public EquipableItem DropLoot()
     {
         Random random = new Random();
-        //int dropChance = random.Next(1, 10001); // Slumpa 00.01% till 100%
-        int dropChance = 3080;
+        int dropChance = random.Next(1, 10001); // Slumpa 00.01% till 100%        
 
         Rarity? rarity = DetermineRarity(dropChance);
 
@@ -275,7 +274,7 @@ public class Dungeons
         }
 
         // Annars generera ett föremål.
-        bool isWeapon = random.Next(0, 2) == 0;
+        bool isWeapon = random.Next(0, 2) == 0;        
         EquipableItem item;
 
         if (isWeapon)

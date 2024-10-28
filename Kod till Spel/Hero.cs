@@ -153,8 +153,8 @@ public class Hero
                     break;
             }
 
-            for (int i = 0; i < item.Attributes.Count; i++)
-                Console.WriteLine($", {item.Attributes}");
+            foreach (var att in item.Attributes)
+                Console.Write($", {att}");
 
             Console.WriteLine();
         }
@@ -170,12 +170,14 @@ public class Hero
             Console.WriteLine("Vill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:");
             string choice = Console.ReadLine();
 
+
             var itemToEquip = Inventory.FirstOrDefault(i => i.Name.IndexOf(choice, StringComparison.OrdinalIgnoreCase) >= 0);
 
             if (itemToEquip != null)
             {
                 Equip(itemToEquip);
                 itemToEquip.Name = $"{itemToEquip.Name} [EQUIPED]";
+                Console.WriteLine($"Du utrustade dig med: {itemToEquip}");
                 Console.ReadKey();
                 loop = false;
                 return;
