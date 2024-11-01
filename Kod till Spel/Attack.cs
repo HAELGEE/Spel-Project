@@ -22,25 +22,25 @@ namespace Kod_till_Spel
         static void Green(int value)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(CenterText.CenterNumbers(value));
+            Console.Write(value);
             Console.ResetColor();       //Reset av färg till standard
         }
         static void Green(string value)
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.Write(value);
+            Console.Write(CenterText.CenterTextsWhenDead(value));
             Console.ResetColor();       //Reset av färg till standard
         }
         static void Red(int value)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(CenterText.CenterNumbers(value));
+            Console.Write(value);
             Console.ResetColor();       //Reset av färg till standard
         }
         static void Red(string value)
         {
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.Write(CenterText.CenterTexts(value));
+            Console.Write(CenterText.CenterTextsWhenDead(value));
             Console.ResetColor();       //Reset av färg till standard
         }
 
@@ -110,8 +110,9 @@ namespace Kod_till_Spel
 
             double randomSpeedHero = hero.speed; //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedOrc = enemy.speed;
-
-            Console.WriteLine(CenterText.CenterTexts($"\nLevel: {enemy.level.ToString()} {enemy.name} dyker upp!\n"));
+            // Skapar ett "Space" i runtime
+            Console.WriteLine();
+            Console.WriteLine(CenterText.CenterTexts($"Level: {enemy.level.ToString()} {enemy.name} dyker upp!\n"));
 
             if (hero.speed == enemy.speed)
             {
@@ -121,11 +122,11 @@ namespace Kod_till_Spel
                     enemy.speed += 0.1;
             }
 
-            Console.Write($"Hero HP: ");
+            Console.Write(CenterText.CenterTexts3($"Hero HP: "));
             Green(hero.hp);
             Console.Write(", Orc HP: ");
             Red(enemy.hp);
-            Console.WriteLine(CenterText.CenterTexts(""));
+            Console.WriteLine();
             double randomXp = 0;
 
             if (hero.level > enemy.level)
@@ -159,7 +160,7 @@ namespace Kod_till_Spel
                     {
 
                         Red(enemy.name);
-                        Console.WriteLine(CenterText.CenterTexts(" är besegrad!\n"));
+                        Console.WriteLine(" är besegrad!\n");
                         enemy.speed = randomSpeedOrc;           //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
@@ -184,7 +185,7 @@ namespace Kod_till_Spel
                         hero.hp *= 0;
                         Console.Write("\n");
                         Green(hero.name);
-                        Console.WriteLine(CenterText.CenterTexts(" är besegrad!\n"));
+                        Console.WriteLine(" är besegrad!\n");
                         enemy.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
@@ -214,7 +215,7 @@ namespace Kod_till_Spel
                         hero.hp *= 0;
                         Console.Write("\n");
                         Green(hero.name);
-                        Console.Write(CenterText.CenterTexts(" är besegrad!\n"));
+                        Console.Write(" är besegrad!\n");
                         enemy.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
@@ -229,7 +230,7 @@ namespace Kod_till_Spel
                     if (enemy.hp <= 0)
                     {
                         Red(enemy.name);
-                        Console.WriteLine(CenterText.CenterTexts(" är besegrad!\n"));
+                        Console.WriteLine(" är besegrad!\n");
                         enemy.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);
@@ -246,12 +247,12 @@ namespace Kod_till_Spel
             Thread.Sleep(500);
             Console.Write(CenterText.CenterTexts($"{hero.name} HP: "));
             if (hero.hp <= 0)           //lägger till Färg
-            {
+            {                
                 Red(hero.hp);           //Röd om hero = död
                 Console.Write("\n");
             }
             else
-            {
+            {                
                 Green(hero.hp);         //Grön om hero har över 0hp
                 Console.Write("\n");
             }

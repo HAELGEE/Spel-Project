@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kod_till_Spel.Menus;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,12 +41,12 @@ public class Enemy
         this.hero = hero;
     }
     public Enemy()
-    {       
+    {
     }
 
     public void LevelCheck(Hero hero)
     {
-        
+
         int levelOver = GameState.CurrentHero.level + 3;
         int levelUnder = hero.level > 3 ? hero.level - 2 : 1;
 
@@ -87,13 +88,19 @@ public class Enemy
     public void Green(string value)
     {
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.Write(value);
+        Console.Write(CenterText.CenterTextsHeroName(value));
         Console.ResetColor();
     }
     public void Red(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(value);
+        Console.Write(CenterText.CenterTextsHeroName(value));
+        Console.ResetColor();
+    }
+    public void RedSpellCasters(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
         Console.ResetColor();
     }
     public void Cyan(int value)
@@ -102,70 +109,12 @@ public class Enemy
         Console.Write(value);
         Console.ResetColor();
     }
-
-
-    //public void RandomMob()
-    //{
-    //    int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt
-    //    int randomClass = random.Next(0, 3); // Lottning mellan vilken klass som skall mötas
-
-    //    if (randomClass == 0)
-    //    {
-    //        switch (randomName)
-    //        {
-    //            case 0:
-    //               OrcBase orc = new Orc(hero);
-    //                break;
-    //            case 1:
-    //                orc = new Shaman(hero);
-    //                break;
-    //            case 2:
-    //                orc = new Grunt(hero);
-    //                break;
-    //            default:
-    //                orc = new Orc(hero);
-    //                break;
-    //        }
-    //    }
-    //    else if (randomClass == 1)
-    //    {
-    //        switch (randomName)
-    //        {
-    //            case 0:
-    //                elf = new Sylvastra(hero);
-    //                break;
-    //            case 1:
-    //                elf = new Elowen(hero);
-    //                break;
-    //            case 2:
-    //                elf = new Tharion(hero);
-    //                break;
-    //            default:
-    //                elf = new Sylvastra(hero);
-    //                break;
-    //        }
-    //    }
-    //    else if (randomClass == 2)
-    //    {
-    //        switch (randomName)
-    //        {
-    //            case 0:
-    //                ghost = new Wraithon(hero);
-    //                break;
-    //            case 1:
-    //                ghost = new Hauntress(hero);
-    //                break;
-    //            case 2:
-    //                ghost = new Gravemourn(hero);
-    //                break;
-    //            default:
-    //                ghost = new Wraithon(hero);
-    //                break;
-    //        }
-    //    }
-    //}
-
-
+    public void CyanNotCentered(int value)
+    {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.Write(value);
+        Console.ResetColor();
+    }
 
     public virtual int Attack(Hero hero)
     {
@@ -194,6 +143,7 @@ public class Enemy
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.Write(" slash dmg.");
+
         return value;
     }
 
@@ -226,7 +176,7 @@ public class Enemy
         {
             value = 0;
         }
-        Red(name);                  //lägger in färgen RÖD på orc
+        RedSpellCasters(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG
         Console.Write(" fire dmg.");

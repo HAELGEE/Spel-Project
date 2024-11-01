@@ -11,6 +11,7 @@ using static Kod_till_Spel.Armor;
 using static Kod_till_Spel.EquipAbleItem;
 using System.Xml.Linq;
 using Kod_till_Spel.Enemys;
+using Kod_till_Spel.Menus;
 
 namespace Kod_till_Spel;
 public class Hero
@@ -18,7 +19,7 @@ public class Hero
     static void Green(string value)
     {
         Console.ForegroundColor = ConsoleColor.Green;       //Färg metod för GRÖN med variabel String
-        Console.Write(value);
+        Console.Write(CenterText.CenterTextsHeroName(value));
         Console.ResetColor();
     }
     static void Cyan(int value)
@@ -30,7 +31,7 @@ public class Hero
     static void Red(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;         //Färg metod för RÖD med variabel String
-        Console.Write(value);
+        Console.Write(CenterText.CenterTextsHeroName(value));
         Console.ResetColor();
     }
     public double baseDmg { get; set; } = 3;
@@ -58,12 +59,14 @@ public class Hero
     public int Guld { get; set; } = 0;
 
     public Hero()
-    {
+    {        
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
 
         Stats();
         AddExperience(experience);
     }
+
+   
 
     public Weapon EquippedWeapon { get; set; }  // Lägger till för att hantera nuvarande utrustat vapen
     public List<EquipableItem> Inventory { get; set; } = new List<EquipableItem>(); //Skapar en lista för items som är hittade

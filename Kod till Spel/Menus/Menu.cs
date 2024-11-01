@@ -143,13 +143,14 @@ public class Menu
         }
         else if (game)
         {
+            Console.Write("Ange ett namn till din Hjälte: ");
+            GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+
             Attack attack = new Attack();
             Healing healing = new Healing();
             Save save = new Save();
             Dungeons dungeon = new Dungeons(hero);
 
-            Console.Write("Ange ett namn till din Hjälte: ");
-            GameState.CurrentHero = new Hero { name = Console.ReadLine() };
 
 
             string menu1 = CenterText.CenterTexts("Kolla Status på din hjälte");
