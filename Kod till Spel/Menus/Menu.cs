@@ -18,7 +18,7 @@ public class Menu
         Hero hero = new Hero();
         Status status = new Status();
 
-        string m1 = CenterText.CenterTexts2("\u001b[3mSpela\u001b[0m");
+        string m1 = CenterText.CenterMenu("\u001b[3mSpela\u001b[0m");
         string m2 = CenterText.CenterTexts2("\x1b[3mLadda Hjälte\x1b[0m");
         string m3 = CenterText.CenterTexts2("\x1b[3mAvsluta\x1b[0m");
 
@@ -64,9 +64,7 @@ public class Menu
             Console.WriteLine(CenterText.CenterTexts(@"         \/____/                  \/____/                  \|___|                                   "));
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
-
-            
+            Console.WriteLine();            
 
             for (int i = 0; i < menuChoice1.Length; i++)
             {
