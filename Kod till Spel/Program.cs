@@ -14,11 +14,6 @@ namespace SPEL
             Menu menu = new Menu();
 
             menu.StartMenu();
-
-            /*
-             *  Problem med att ladda och spara hjälte. FIXA
-             *  Kan heller inte ladda en sparad hjälte som har fått items Måste spara med Items till Hjälte Fixa
-             */
         }
     }
 }
