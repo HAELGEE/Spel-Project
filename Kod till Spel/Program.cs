@@ -16,6 +16,7 @@ namespace SPEL
             menu.StartMenu();
 
             /*
+             *  Problem med attackera mobs då Hero klassen är Null
              *  Problem med att ladda och spara hjälte. FIXA
              *  Kan heller inte ladda en sparad hjälte som har fått items Måste spara med Items till Hjälte Fixa
              */

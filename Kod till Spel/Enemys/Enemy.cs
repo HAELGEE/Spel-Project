@@ -45,7 +45,7 @@ public class Enemy
 
     public void LevelCheck(Hero hero)
     {
-
+        
         int levelOver = hero.level + 3;
         int levelUnder = hero.level > 3 ? hero.level - 2 : 1;
 
