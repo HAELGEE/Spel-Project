@@ -16,8 +16,6 @@ namespace SPEL
             menu.StartMenu();
 
             /*
-             *  Problem med attackera mobs då Hero klassen är Null
-             *  Kan skapa en hero som sparas i GameState, men får inte den till att gå vidare och lägga sig som Hero (Hero klassen är tom)
              *  Problem med att ladda och spara hjälte. FIXA
              *  Kan heller inte ladda en sparad hjälte som har fått items Måste spara med Items till Hjälte Fixa
              */
