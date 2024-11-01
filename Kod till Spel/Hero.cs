@@ -122,13 +122,17 @@ public class Hero
     public void UnequipItem(EquipableItem item)
     {
         // Logik för att ta av item, t.ex. återställa stats
-        Console.WriteLine($"Du har tagit av {item.Name}.");
+        Console.WriteLine(CenterText.CenterTexts($"Du har tagit av {item.Name}."));
     }
 
     // Metod för att visa inventory
     public void ShowInventory()
     {
-        Console.WriteLine("Dina items:");
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine(CenterText.CenterTexts("Dina items:"));
         foreach (var item in Inventory)
         {
             Console.Write($"Namn: {item.Name}, Rarity: ");
@@ -170,7 +174,8 @@ public class Hero
             Console.Clear();
             ShowInventory();
 
-            Console.WriteLine("\nVill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:");
+            Console.WriteLine();
+            Console.WriteLine(CenterText.CenterTexts("Vill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:"));
             string choice = Console.ReadLine();
 
 
@@ -180,7 +185,7 @@ public class Hero
             {
                 Equip(itemToEquip);
                 itemToEquip.Name = $"{itemToEquip.Name} [EQUIPED]";
-                Console.WriteLine($"Du utrustade dig med: {itemToEquip.Name}");
+                Console.WriteLine(CenterText.CenterTexts($"Du utrustade dig med: {itemToEquip.Name}"));
                 Console.ReadKey();
                 loop = false;
                 return;
@@ -192,7 +197,7 @@ public class Hero
             }
             else
             {
-                Console.WriteLine("Itemet finns inte i inventariet.");
+                Console.WriteLine(CenterText.CenterTexts("Itemet finns inte i inventariet."));
             }
             Console.ReadKey();
         }
@@ -200,19 +205,23 @@ public class Hero
 
     public void ShowEquippedItems()
     {
-        Console.WriteLine("Equipped Items:");
-        if (Head != null) Console.WriteLine($"Huvudet: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}");
-        else Console.WriteLine("Du har inget på Huvudet");
-        if (Chest != null) Console.WriteLine($"Bröst: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}");
-        else Console.WriteLine("Du har inget på Bröstet");
-        if (Hands != null) Console.WriteLine($"Händer: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}");
-        else Console.WriteLine("Du har inget på Händerna");
-        if (Legs != null) Console.WriteLine($"Byxor: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}");
-        else Console.WriteLine("Du har inga Byxor");
-        if (Feet != null) Console.WriteLine($"Fötter: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}");
-        else Console.WriteLine("Du har inget på Fötterna");
-        if (Weapon != null) Console.WriteLine($"Vapen: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}");
-        else Console.WriteLine("Du har inget vapen");
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine(CenterText.CenterTexts("Equipped Items:"));
+        if (Head != null) Console.WriteLine(CenterText.CenterTexts($"Huvudet: {Head.Name}, Attributes: {string.Join(", ", Head.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inget på Huvudet"));
+        if (Chest != null) Console.WriteLine(CenterText.CenterTexts($"Bröst: {Chest.Name}, Attributes: {string.Join(", ", Chest.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inget på Bröstet"));
+        if (Hands != null) Console.WriteLine(CenterText.CenterTexts($"Händer: {Hands.Name}, Attributes: {string.Join(", ", Hands.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inget på Händerna"));
+        if (Legs != null) Console.WriteLine(CenterText.CenterTexts($"Byxor: {Legs.Name}, Attributes: {string.Join(", ", Legs.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inga Byxor"));
+        if (Feet != null) Console.WriteLine(CenterText.CenterTexts($"Fötter: {Feet.Name}, Attributes: {string.Join(", ", Feet.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inget på Fötterna"));
+        if (Weapon != null) Console.WriteLine(CenterText.CenterTexts($"Vapen: {Weapon.Name}, Attributes: {string.Join(", ", Weapon.Attributes)}"));
+        else Console.WriteLine(CenterText.CenterTexts("Du har inget vapen"));
 
         // Kontrollera attributen och uppdaterar attributen
         UpdateAttributes(Head);

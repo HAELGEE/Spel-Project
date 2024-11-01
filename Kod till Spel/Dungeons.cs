@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using Kod_till_Spel.Enemys;
+using Kod_till_Spel.Menus;
 using static Kod_till_Spel.Armor;
 using static Kod_till_Spel.EquipAbleItem;
 
@@ -55,7 +56,7 @@ public class Dungeons
 
 
         Console.Clear();
-        Console.WriteLine($"Du är nu i rum {roomNumber}");
+        Console.WriteLine(CenterText.CenterTexts($"Du är nu i rum {roomNumber}"));
         attack.DungeonAttack(hero);
         if (hero.hp <= 0)
         {
@@ -63,14 +64,14 @@ public class Dungeons
             do
             {
                 Console.Clear();
-                Console.WriteLine("Din hjälte är död, du kan inte fortsätta");
-                Console.WriteLine("Meditera för att försöka igen? J/N");
+                Console.WriteLine(CenterText.CenterTexts("Din hjälte är död, du kan inte fortsätta"));
+                Console.WriteLine(CenterText.CenterTexts("Meditera för att försöka igen? J/N"));
                 string choice = Console.ReadLine().ToUpper();
 
                 if (choice == "J")      //Lägger till ett val för användaren för att se om dom vill försöka på detta rummet igen
                 {
                     healing._Healing();     //Om ja
-                    roomNumber--;
+                    roomNumber = 0;
                     loop = false;
                     break;
                 }
@@ -85,39 +86,52 @@ public class Dungeons
         else
         {
             Console.Clear();
-            Console.WriteLine($"Grattis, du klarade rum {roomNumber}");
-            Console.Write($"\nDu fick {rng} guld för att klara rum {roomNumber}");
+            Console.WriteLine(CenterText.CenterTexts($"Grattis, du klarade rum {roomNumber}"));
+            Console.WriteLine(CenterText.CenterTexts($"Du fick {rng} guld för att klara rum {roomNumber}"));
             hero.Guld += rng;
             if (roomNumber == 2)
             {
                 hero.Guld += 2;
-                Console.Write(". Och du får 2 extra guld för att klara Bossen");
+                Console.WriteLine(CenterText.CenterTexts("Du får även 2 extra guld för att klara Bossen"));
             }
 
             if (roomNumber == 4)
             {
                 hero.Guld += 4;
-                Console.WriteLine(". Och du får 4 extra guld för att klara Bossen\n");
+                Console.WriteLine(CenterText.CenterTexts("Du får även 4 extra guld för att klara sista Bossen\n"));
                 EquipableItem loot = currentDungeon.DropLoot();
                 if (loot != null)
-                    Console.WriteLine($"\nDu hittade: {loot.Name} av rank {loot.ItemRarity} ");
-                else Console.WriteLine("Tyvärr, ingen loot denna gången");
+                {
+                    Console.WriteLine();
+                    Console.WriteLine(CenterText.CenterTexts($"Du hittade: {loot.Name} av rank {loot.ItemRarity}"));
+                }
+                else Console.WriteLine(CenterText.CenterTexts("Tyvärr, ingen loot denna gången"));
 
                 Console.ReadKey();
             }
         }
     }
+    
+
 
     public void EnterDungeon(Hero hero)
     {
+        string dung = CenterText.CenterTexts("E-Dungeon");
+        string dung2 = CenterText.CenterTexts("D-Dungeon");
+        string dung3 = CenterText.CenterTexts("C-Dungeon");
+        string dung4 = CenterText.CenterTexts("B-Dungeon");
+        string dung5 = CenterText.CenterTexts("A-Dungeon");
+        string dung6 = CenterText.CenterTexts("S-Dungeon");
+        string dung7 = CenterText.CenterTexts("Tillabaka");
+
         string[] dungeonOption = {
-        "E-Dungeon",
-        "D-Dungeon",
-        "C-Dungeon",
-        "B-Dungeon",
-        "A-Dungeon",
-        "S-Dungeon",
-        "Tillabaka",
+        dung,
+        dung2,
+        dung3,
+        dung4,
+        dung5,
+        dung6,
+        dung7
     };
         int menuPicker = 0;
 
@@ -125,13 +139,17 @@ public class Dungeons
         while (loop)
         {
             Console.Clear();
-            Console.WriteLine("Vilken dungeon vill du gå in i?");
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine(CenterText.CenterTexts("Vilken dungeon vill du gå in i?"));
             for (int i = 0; i < dungeonOption.Length; i++)
             {
                 if (i == menuPicker)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"---> \t {(dungeonOption[i])}");
+                    Console.WriteLine($"{(dungeonOption[i])}\t <---");
                     Console.ResetColor();
                     Console.CursorVisible = false;
                 }
@@ -184,7 +202,7 @@ public class Dungeons
                         break;
 
                     case 6:
-                        Console.WriteLine("Du går nu tillbaka");
+                        Console.WriteLine(CenterText.CenterTexts("Du går nu tillbaka"));
                         Console.ReadKey();
                         loop = false;
                         break;
@@ -205,12 +223,12 @@ public class Dungeons
             {
                 Console.Clear();
 
-                Console.WriteLine($"=== Du är nu i en {rank}-Rank Dungeon ===");
-                Console.WriteLine($"Du har {4 - roomNumber} rum att klara!");
-
-                Console.WriteLine("\n1. Fortsätt");
-                Console.WriteLine("2. Avbryt");
-                Console.WriteLine("Vill du fortsätta eller avbryta?");
+                Console.WriteLine(CenterText.CenterTexts($"=== Du är nu i en {rank}-Rank Dungeon ==="));
+                Console.WriteLine(CenterText.CenterTexts($"Du har {4 - roomNumber} rum att klara!\n"));
+                
+                Console.WriteLine(CenterText.CenterTexts("1. Fortsätt"));
+                Console.WriteLine(CenterText.CenterTexts("2. Avbryt"));
+                Console.WriteLine(CenterText.CenterTexts("Vill du fortsätta eller avbryta?"));
                 string val = Console.ReadLine();
                 switch (val)
                 {
@@ -227,7 +245,7 @@ public class Dungeons
                         }
                         else
                         {
-                            Console.WriteLine("Du har klarat denna Dungeon redan\n");
+                            Console.WriteLine(CenterText.CenterTexts("Du har klarat denna Dungeon redan\n"));
                             Console.ReadKey();
                             roomNumber = 0;
                             dungeonLoop = false;
@@ -235,7 +253,7 @@ public class Dungeons
                         break;
 
                     case "2":
-                        Console.WriteLine("Du går nu ut ur denna Dungeon!\n");
+                        Console.WriteLine(CenterText.CenterTexts("Du går nu ut ur denna Dungeon!\n"));
                         Console.ReadKey();
                         dungeonLoop = false;
                         break;
@@ -245,12 +263,12 @@ public class Dungeons
         }
         else if (hero.hp <= 0)
         {
-            Console.WriteLine($"Din hjälte har {hero.hp}:hp, du kan ej fortsätta utan att meditera");
+            Console.WriteLine(CenterText.CenterTexts($"Din hjälte har {hero.hp}:hp, du kan ej fortsätta utan att meditera"));
             Console.ReadKey();
         }
         else
         {
-            Console.WriteLine("Tyvärr är du för låg level för att köra denna Dungeon");
+            Console.WriteLine(CenterText.CenterTexts("Tyvärr är du för låg level för att köra denna Dungeon"));
             Console.ReadKey();
         }
     }
@@ -280,7 +298,7 @@ public class Dungeons
         if (isWeapon)
         {
             EquipAbleItem.dungeonWeaponCount++;
-            item = new Weapon($"Dungeon Weapon {EquipAbleItem.dungeonWeaponCount}", rarity.Value);
+            item = new Weapon(CenterText.CenterTexts($"Dungeon Weapon {EquipAbleItem.dungeonWeaponCount}"), rarity.Value);
         }
         else
         {
@@ -288,27 +306,27 @@ public class Dungeons
             if (slot == ArmorSlot.Head)
             {
                 EquipAbleItem.dungeonHeadCount++;
-                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonHeadCount}", rarity.Value, slot);
+                item = new Armor(CenterText.CenterTexts($"Dungeon {slot} Armor {EquipAbleItem.dungeonHeadCount}"), rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Chest)
             {
                 EquipAbleItem.dungeonChestCount++;
-                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonChestCount}", rarity.Value, slot);
+                item = new Armor(CenterText.CenterTexts($"Dungeon {slot} Armor {EquipAbleItem.dungeonChestCount}"), rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Legs)
             {
                 EquipAbleItem.dungeonLegsCount++;
-                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonLegsCount}", rarity.Value, slot);
+                item = new Armor(CenterText.CenterTexts($"Dungeon {slot} Armor {EquipAbleItem.dungeonLegsCount}"), rarity.Value, slot);
             }
             else if (slot == ArmorSlot.Feet)
             {
                 EquipAbleItem.dungeonFeetCount++;
-                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonFeetCount}", rarity.Value, slot);
+                item = new Armor(CenterText.CenterTexts($"Dungeon {slot} Armor {EquipAbleItem.dungeonFeetCount}"), rarity.Value, slot);
             }
             else
             {
                 EquipAbleItem.dungeonHandsCount++;
-                item = new Armor($"Dungeon {slot} Armor {EquipAbleItem.dungeonHandsCount}", rarity.Value, slot);
+                item = new Armor(CenterText.CenterTexts($"Dungeon {slot} Armor {EquipAbleItem.dungeonHandsCount}"), rarity.Value, slot);
             }
         }
 
