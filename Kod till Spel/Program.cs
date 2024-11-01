@@ -12,10 +12,13 @@ namespace SPEL
         static void Main(string[] args)
         {
             Menu menu = new Menu();
+
             menu.StartMenu();
 
-            // MÅSTE FIXA SÅ ATT INTE " ORC " GÅR IN I ATTACK OCH SÅNT. HAR LAGT TILL GHOST OCH ELF KLASSEN!
-            // SKAPA EN CLASS FÖR EGEN ATTACK/STATS FÖR MOBS KANSKE?
+            /*
+             *  Problem med att ladda och spara hjälte. FIXA
+             *  Kan heller inte ladda en sparad hjälte som har fått items Måste spara med Items till Hjälte Fixa
+             */
         }
     }
 }
