@@ -238,6 +238,10 @@ public class Menu
 
                         case 4:
                             Console.Clear();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
                             Console.WriteLine(CenterText.CenterTexts("Det finns inget här för tillfället. Mer kommer inom kort!"));
                             Console.ReadKey();
                             break;
