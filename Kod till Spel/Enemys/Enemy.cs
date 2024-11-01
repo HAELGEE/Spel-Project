@@ -40,13 +40,13 @@ public class Enemy
         this.hero = hero;
     }
     public Enemy()
-    {
+    {       
     }
 
     public void LevelCheck(Hero hero)
     {
         
-        int levelOver = hero.level + 3;
+        int levelOver = GameState.CurrentHero.level + 3;
         int levelUnder = hero.level > 3 ? hero.level - 2 : 1;
 
         level = random.Next(levelUnder, levelOver);

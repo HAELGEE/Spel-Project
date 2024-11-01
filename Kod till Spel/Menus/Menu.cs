@@ -136,14 +136,7 @@ public class Menu
                     }
                 }
                 else
-                {
                     Console.WriteLine(CenterText.CenterTexts("Inga hjältar att ladda."));
-                    do
-                    {
-                        Console.Write("\nAnge ett namn till din Hjälte: ");
-                        GameState.CurrentHero = new Hero { name = Console.ReadLine() };
-                    } while (GameState.CurrentHero.name == null);
-                }
                 Console.ReadKey();
                 break;
             }
@@ -155,9 +148,9 @@ public class Menu
             Save save = new Save();
             Dungeons dungeon = new Dungeons(hero);
 
-
             Console.Write("Ange ett namn till din Hjälte: ");
             GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+
 
             string menu1 = CenterText.CenterTexts("Kolla Status på din hjälte");
             string menu2 = CenterText.CenterTexts("Roama runt och Attackera mobs");
