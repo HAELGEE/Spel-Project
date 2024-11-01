@@ -18,9 +18,9 @@ public class Menu
         Hero hero = new Hero();
         Status status = new Status();
 
-        string m1 = CenterText.CenterMenu("\u001b[3mSpela\u001b[0m");
-        string m2 = CenterText.CenterTexts2("\x1b[3mLadda Hjälte\x1b[0m");
-        string m3 = CenterText.CenterTexts2("\x1b[3mAvsluta\x1b[0m");
+        string m1 = "\u001b[3mSpela\u001b[0m";
+        string m2 = "\x1b[3mLadda Hjälte\x1b[0m";
+        string m3 = "\x1b[3mAvsluta\x1b[0m";
 
         bool game = false;
         bool Load = false;
@@ -31,12 +31,12 @@ public class Menu
             m2,
             m3
         };
-        int menuSelecter1 = 0;
 
+        int menuSelecter1 = 0;
         bool menu = true;
         while (menu)
         {
-            Console.Clear();
+           Console.Clear();
 
             Console.WriteLine();
             Console.WriteLine();
@@ -64,19 +64,19 @@ public class Menu
             Console.WriteLine(CenterText.CenterTexts(@"         \/____/                  \/____/                  \|___|                                   "));
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();            
+            Console.WriteLine();
 
             for (int i = 0; i < menuChoice1.Length; i++)
             {
                 if (i == menuSelecter1)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"{menuChoice1[i]}  <---");
+                    Console.WriteLine(CenterText.CenterMenu($"{menuChoice1[i]}  <---"));
                     Console.ResetColor();
                     Console.CursorVisible = false;
                 }
                 else
-                    Console.WriteLine(menuChoice1[i]);
+                    Console.WriteLine(CenterText.CenterMenu2(menuChoice1[i]));
             }
 
             var key = Console.ReadKey(true).Key;
@@ -103,11 +103,11 @@ public class Menu
                         menu = false;
                         break;
                     case 2:
-                        Console.WriteLine("Bye bye");
+                        Console.WriteLine(CenterText.CenterTexts("Bye bye"));
                         menu = false;
                         break;
                 }
-            }            
+            }
         }
 
         if (Load)
@@ -145,7 +145,10 @@ public class Menu
         {
             Console.Write("Ange ett namn till din Hjälte: ");
             GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+        }
 
+        if (game || Load)
+        {
             Attack attack = new Attack();
             Healing healing = new Healing();
             Save save = new Save();
@@ -275,8 +278,6 @@ public class Menu
                 }
             }
         }
-        else
-            Console.WriteLine();
     }
 }
 
