@@ -109,8 +109,7 @@ public class Menu
                         menu = false;
                         break;
                 }
-            }
-            
+            }            
         }
 
         if (Load)
@@ -153,8 +152,6 @@ public class Menu
             Healing healing = new Healing();
             Save save = new Save();
             Dungeons dungeon = new Dungeons(hero);
-
-
 
             string menu1 = CenterText.CenterTexts("Kolla Status på din hjälte");
             string menu2 = CenterText.CenterTexts("Roama runt och Attackera mobs");
