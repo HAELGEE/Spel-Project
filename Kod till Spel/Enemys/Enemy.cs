@@ -289,7 +289,6 @@ public class Enemy
             speed = baseSpeed + agility * 1.10;
             armor = baseArmor + agility * 0.31;
             resistance = baseResistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)
@@ -393,12 +392,10 @@ public class Enemy
 
             name = "DungeonGrunt-" + random.Next(1, 3340);
 
-
             damage = damage + styrka * 1;
             speed = speed + agility * 1.10;
             armor = armor + agility * 0.28;
             resistance = resistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)
@@ -483,7 +480,6 @@ public class Enemy
             speed = baseSpeed + agility * 1.10;
             armor = baseArmor + agility * 0.31;
             resistance = baseResistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)
@@ -592,7 +588,6 @@ public class Enemy
             speed = speed + agility * 1.10;
             armor = armor + agility * 0.28;
             resistance = resistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)
@@ -677,7 +672,6 @@ public class Enemy
             speed = baseSpeed + agility * 1.10;
             armor = baseArmor + agility * 0.31;
             resistance = baseResistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)
@@ -781,12 +775,10 @@ public class Enemy
 
             name = "DungeonGravemourn-" + random.Next(1, 3340);
 
-
             damage = damage + styrka * 1;
             speed = speed + agility * 1.10;
             armor = armor + agility * 0.28;
             resistance = resistance + intelligence * 0.25;
-
         }
 
         public override int Attack(Hero hero)

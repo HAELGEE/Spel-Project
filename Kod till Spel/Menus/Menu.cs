@@ -36,7 +36,7 @@ public class Menu
         bool menu = true;
         while (menu)
         {
-           Console.Clear();
+            Console.Clear();
 
             Console.WriteLine();
             Console.WriteLine();
@@ -154,7 +154,7 @@ public class Menu
             Save save = new Save();
             Dungeons dungeon = new Dungeons(hero);
 
-            string menu1 = CenterText.CenterTexts("Kolla Status på din hjälte");
+            string menu1 = "Kolla Status på din hjälte";
             string menu2 = CenterText.CenterTexts("Roama runt och Attackera mobs");
             string menu3 = CenterText.CenterTexts("Utrustade föremål");
             string menu4 = CenterText.CenterTexts("Kolla hittade föremål");
@@ -167,18 +167,17 @@ public class Menu
 
 
             string[] menuChoice = {
-            menu1,
-            menu2,
-            menu3,
-            menu4,
-            menu5,
-            menu6,
-            menu7,
-            menu8,
-            menu9,
-            menu10
-
-            };
+            "Kolla Status på din hjälte",
+            "Roama runt och Attackera mobs",
+            "Utrustade föremål",
+            "Kolla hittade föremål",
+            "Öppna Shopen",
+            "Meditera (Heala din hjälte)",
+            "Dungeons",
+            "Spara din hjälte",
+            "Ladda en hjälte",
+            "Stänga Programmet"
+        };
             int menuSelecter = 0;
 
             bool spel = true;
@@ -186,7 +185,7 @@ public class Menu
             {
                 Console.Clear();
                 Console.WriteLine();
-                Console.WriteLine(CenterText.CenterTexts($"A game created by #Christofer Hägg"));
+                Console.WriteLine(CenterText.CenterTexts($"         A game created by #Christofer Hägg"));
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -195,12 +194,12 @@ public class Menu
                     if (i == menuSelecter)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine($"{menuChoice[i]}\t <---");
+                        Console.WriteLine(CenterText.CenterMenu($"{menuChoice[i]}\t <---"));
                         Console.ResetColor();
                         Console.CursorVisible = false;
                     }
                     else
-                        Console.WriteLine(menuChoice[i]);
+                        Console.WriteLine(CenterText.CenterMenu2(menuChoice[i]));
                 }
 
                 var key = Console.ReadKey(true).Key;
@@ -266,8 +265,44 @@ public class Menu
 
                         case 8:
                             Console.Clear();
-                            Console.WriteLine(CenterText.CenterTexts("Kommmer ngt inom kort"));
-                            break;
+                            Console.WriteLine(CenterText.CenterTexts("Har du sparat din hjälte innan?"));
+                            string svar = Console.ReadLine().ToLower();
+                            if (svar == "ja" || svar == "yes" || svar == "j" || svar == "y" || svar == "ye")
+                            {
+                                bool load = true;
+                                while (load)
+                                {
+                                    List<Hero> loadedHeroes = Save.LoadHeroes("Hero_save.json");
+                                    if (loadedHeroes != null && loadedHeroes.Count > 0)
+                                    {
+                                        Console.WriteLine(CenterText.CenterTexts("Välj vilken hjälte du vill ladda:"));
+                                        for (int i = 0; i < loadedHeroes.Count; i++)
+                                        {
+                                            Console.WriteLine(CenterText.CenterTexts($"{i + 1}. {loadedHeroes[i].name}"));
+                                        }
+
+                                        bool validInput = int.TryParse(Console.ReadLine(), out int selectedHeroIndex);
+                                        if (validInput && selectedHeroIndex > 0 && selectedHeroIndex <= loadedHeroes.Count)
+                                        {
+                                            GameState.CurrentHero = loadedHeroes[selectedHeroIndex - 1];
+                                            Console.WriteLine(CenterText.CenterTexts($"Hjälten {hero.name} har laddats."));
+                                            
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine(CenterText.CenterTexts("Ogiltigt val."));
+                                        }
+                                    }
+                                    else
+                                        Console.WriteLine(CenterText.CenterTexts("Inga hjältar att ladda."));
+
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                break;
+                            }
+                            else
+                                break;
 
                         case 9:
                             Console.Clear();
