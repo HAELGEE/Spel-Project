@@ -47,7 +47,7 @@ public class Enemy
     public void LevelCheck(Hero hero)
     {
 
-        int levelOver = GameState.CurrentHero.level + 3;
+        int levelOver = hero.level + 3;
         int levelUnder = hero.level > 3 ? hero.level - 2 : 1;
 
         level = random.Next(levelUnder, levelOver);
@@ -100,10 +100,7 @@ public class Enemy
     public void RedSpellCasters(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        if (speed > hero.speed)
-            Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
-        else
-            Console.Write(CenterText.CenterTexts(value));
+        Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
         Console.ResetColor();
     }
     public void Cyan(int value)
@@ -175,6 +172,7 @@ public class Enemy
             value = random.Next(minDamage, maxDamage);
         }
 
+        // så att man inte gör minus skada, utan 0 istället
         if (value < 0)
         {
             value = 0;
