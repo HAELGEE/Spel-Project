@@ -377,7 +377,8 @@ namespace Kod_till_Spel
             double randomSpeedHero = hero.speed;        // Sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
             double randomSpeedEnemy = enemy.speed;
 
-            Console.WriteLine(CenterText.CenterTexts($"\nLevel: {enemy.level} {enemy.name} dyker upp!\n"));
+            Console.WriteLine();
+            Console.WriteLine(CenterText.CenterTexts($"Level: {enemy.level} {enemy.name} dyker upp!\n"));
 
             if (hero.speed == enemy.speed)
             {
@@ -391,7 +392,7 @@ namespace Kod_till_Spel
                 }
             }
 
-            Console.Write($"Hero HP: ");
+            Console.Write(CenterText.CenterHeroTextInDungeon($"Hero HP: "));
             Green(hero.hp);
             Console.Write(", Enemy HP: ");
             Red(enemy.hp);
@@ -429,7 +430,7 @@ namespace Kod_till_Spel
                     {
 
                         Red(enemy.name);
-                        Console.WriteLine(CenterText.CenterTexts(" är besegrad!\n"));
+                        Console.WriteLine(" är besegrad!\n");
                         enemy.speed = randomSpeedEnemy;           //Stänger av tillfälliga speed ökningen
                         hero.speed = randomSpeedHero;
                         Thread.Sleep(400);

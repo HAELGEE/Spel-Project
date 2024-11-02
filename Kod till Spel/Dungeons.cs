@@ -214,7 +214,7 @@ public class Dungeons
     private Dungeons currentDungeon;
     public void Edungeon(DungeonRank rank)
     {
-        roomNumber = 3;
+        roomNumber = 0;
 
         if (hero.level > 5 && hero.hp > 0)
         {
@@ -267,7 +267,7 @@ public class Dungeons
         }
         else
         {
-            Console.WriteLine(CenterText.CenterTexts("Tyvärr är du för låg level för att köra denna Dungeon, behöver vara level 5"));
+            Console.WriteLine(CenterText.CenterTexts("Tyvärr är du för låg level för att köra denna Dungeon, behöver vara level 6"));
             Console.ReadKey();
         }
     }
