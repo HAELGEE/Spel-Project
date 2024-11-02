@@ -268,7 +268,7 @@ public class Dungeons
         }
         else
         {
-            Console.WriteLine(CenterText.CenterTexts("Tyvärr är du för låg level för att köra denna Dungeon"));
+            Console.WriteLine(CenterText.CenterTexts("Tyvärr är du för låg level för att köra denna Dungeon, behöver vara level 5"));
             Console.ReadKey();
         }
     }

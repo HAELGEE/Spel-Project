@@ -17,6 +17,7 @@ public class Menu
         Colour colour = new Colour();
         Hero hero = new Hero();
         Status status = new Status();
+        List<Hero> loadedHeroes = Save.LoadHeroes("Hero_save.json");
 
         string m1 = "\u001b[3mSpela\u001b[0m";
         string m2 = "\x1b[3mLadda Hjälte\x1b[0m";
@@ -99,8 +100,16 @@ public class Menu
                         break;
 
                     case 1:
-                        Load = true;
-                        menu = false;
+                        if (loadedHeroes != null && loadedHeroes.Count > 0)
+                        {
+                            Load = true;
+                            menu = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine(CenterText.CenterTexts("Inga hjältar att ladda."));
+                            Console.ReadKey();
+                        }
                         break;
                     case 2:
                         Console.WriteLine(CenterText.CenterTexts("Bye bye"));
@@ -115,7 +124,6 @@ public class Menu
             bool load = true;
             while (load)
             {
-                List<Hero> loadedHeroes = Save.LoadHeroes("Hero_save.json");
                 if (loadedHeroes != null && loadedHeroes.Count > 0)
                 {
                     Console.WriteLine(CenterText.CenterTexts("Välj vilken hjälte du vill ladda:"));
@@ -272,7 +280,6 @@ public class Menu
                                 bool load = true;
                                 while (load)
                                 {
-                                    List<Hero> loadedHeroes = Save.LoadHeroes("Hero_save.json");
                                     if (loadedHeroes != null && loadedHeroes.Count > 0)
                                     {
                                         Console.WriteLine(CenterText.CenterTexts("Välj vilken hjälte du vill ladda:"));
@@ -286,7 +293,7 @@ public class Menu
                                         {
                                             GameState.CurrentHero = loadedHeroes[selectedHeroIndex - 1];
                                             Console.WriteLine(CenterText.CenterTexts($"Hjälten {hero.name} har laddats."));
-                                            
+
                                         }
                                         else
                                         {

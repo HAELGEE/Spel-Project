@@ -124,7 +124,7 @@ namespace Kod_till_Spel
 
             Console.Write(CenterText.CenterTexts3($"Hero HP: "));
             Green(hero.hp);
-            Console.Write(", Orc HP: ");
+            Console.Write(", Enemy HP: ");
             Red(enemy.hp);
             Console.WriteLine();
             double randomXp = 0;
@@ -197,7 +197,7 @@ namespace Kod_till_Spel
                 {
                     int damage;
                     // Orc attackerar först
-                    if (enemy.name.Contains("Shaman"))
+                    if (enemy.name.Contains("Shaman") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Elowen"))
                     {
                         damage = enemy.AttackSpellCasters(hero);  //orc attackerar
                     }
