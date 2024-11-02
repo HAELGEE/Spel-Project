@@ -316,13 +316,17 @@ public class Hero
         hp = maxHp;
         int statIncrease = 2;
 
-        Console.Write($"Du gick precis upp i level!");
+        Console.Write(CenterText.CenterTexts($"Du gick precis upp i level!"));
         while (statIncrease != 0)
         {
             Console.Clear();
 
-            Console.WriteLine($" Du har {statIncrease} stat increase kvar: ");
-            Console.WriteLine($"1. Styrka \n2. Agility \n3. Stamina \n4. Charm \n5. Intelligence \n");
+            Console.WriteLine(CenterText.CenterTexts($" Du har {statIncrease} stat increase kvar: "));
+            Console.WriteLine(CenterText.CenterTexts($"1. Styrka"));
+            Console.WriteLine(CenterText.CenterTexts("2.Agility"));
+            Console.WriteLine(CenterText.CenterTexts("3.Stamina"));
+            Console.WriteLine(CenterText.CenterTexts("4. Charm"));
+            Console.WriteLine(CenterText.CenterTexts("5. Intelligence"));
             string str = Console.ReadLine()!;
 
             if (str == "1")
@@ -352,7 +356,7 @@ public class Hero
             }
             else
             {
-                Console.WriteLine("Ogiltigt val, försök igen!");
+                Console.WriteLine(CenterText.CenterTexts("Ogiltigt val, försök igen!"));
                 str = Console.ReadLine()!;
             }
 

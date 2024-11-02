@@ -258,7 +258,6 @@ public class Dungeons
                         dungeonLoop = false;
                         break;
                 }
-
             }
         }
         else if (hero.hp <= 0)
@@ -286,10 +285,9 @@ public class Dungeons
         Rarity? rarity = DetermineRarity(dropChance);
 
         // Om rarity är null, returnerar vi ingen loot.
-        if (rarity == null)
-        {
+        if (rarity == null)        
             return null;
-        }
+        
 
         // Annars generera ett föremål.
         bool isWeapon = random.Next(0, 2) == 0;        
@@ -332,7 +330,6 @@ public class Dungeons
 
         hero.AddToInventory(item);
         return item;
-
     }
 
     private Rarity? DetermineRarity(int dropChance)
