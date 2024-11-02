@@ -100,7 +100,10 @@ public class Enemy
     public void RedSpellCasters(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
+        if (speed > hero.speed)
+            Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
+        else
+            Console.Write(CenterText.CenterTexts(value));
         Console.ResetColor();
     }
     public void Cyan(int value)

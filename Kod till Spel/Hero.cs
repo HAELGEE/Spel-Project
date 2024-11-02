@@ -323,8 +323,8 @@ public class Hero
 
             Console.WriteLine(CenterText.CenterTexts($" Du har {statIncrease} stat increase kvar: "));
             Console.WriteLine(CenterText.CenterTexts($"1. Styrka"));
-            Console.WriteLine(CenterText.CenterTexts("2.Agility"));
-            Console.WriteLine(CenterText.CenterTexts("3.Stamina"));
+            Console.WriteLine(CenterText.CenterTexts("2. Agility"));
+            Console.WriteLine(CenterText.CenterTexts("3. Stamina"));
             Console.WriteLine(CenterText.CenterTexts("4. Charm"));
             Console.WriteLine(CenterText.CenterTexts("5. Intelligence"));
             string str = Console.ReadLine()!;
