@@ -72,12 +72,12 @@ public class Menu
                 if (i == menuSelecter1)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(CenterText.CenterMenu($"{menuChoice1[i]}  <---"));
+                    Console.WriteLine(CenterText.CenterMenu2($"{menuChoice1[i]}\t <---"));
                     Console.ResetColor();
                     Console.CursorVisible = false;
                 }
                 else
-                    Console.WriteLine(CenterText.CenterMenu2(menuChoice1[i]));
+                    Console.WriteLine(CenterText.CenterTextss(menuChoice1[i]));
             }
 
             var key = Console.ReadKey(true).Key;
@@ -193,7 +193,7 @@ public class Menu
             {
                 Console.Clear();
                 Console.WriteLine();
-                Console.WriteLine(CenterText.CenterTexts($"         A game created by #Christofer Hägg"));
+                Console.WriteLine(CenterText.CenterTexts($"A game created by #Christofer Hägg"));
                 Console.WriteLine();
                 Console.WriteLine();
 
@@ -207,7 +207,7 @@ public class Menu
                         Console.CursorVisible = false;
                     }
                     else
-                        Console.WriteLine(CenterText.CenterMenu2(menuChoice[i]));
+                        Console.WriteLine(CenterText.CenterTexts(menuChoice[i]));
                 }
 
                 var key = Console.ReadKey(true).Key;

@@ -34,14 +34,14 @@ public class Hero
         Console.Write(CenterText.CenterTextsHeroName(value));
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 3;
+    public double baseDmg { get; set; } = 30;
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 1;
+    public int level { get; set; } = 10;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
-    public int hp { get; set; } = 15;
+    public int hp { get; set; } = 150;
     public int maxHp { get; set; } = 15;
     public int styrka { get; set; } = 2;               //ÖKAR SKADA
     public int agility { get; set; } = 2;              //ÖKAR SPEED

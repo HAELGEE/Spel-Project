@@ -18,7 +18,8 @@ namespace SPEL
             /*
              * Ett problem där om jag skapar en ny hjälte och sedan laddar jag en annan hjälte och sedan
              * går in i attack så är det den gamla hjälten som går in i attack och inte nya
-             * Problem där om jag möter en healer, tex shaman, och shaman har högre speed än hero så hamnar texten väldigt till vänster.
+             * Problem där om jag möter en healer, tex shaman, och shaman har högre speed än 
+             * hero så hamnar texten väldigt till vänster. pga att Healing inte kommer med
              */
         }
     }

@@ -94,13 +94,21 @@ public class Enemy
     public void Red(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.Write(CenterText.CenterTextsHeroName(value));
+        Console.Write(CenterText.CenterTextsEnemyName(value));
         Console.ResetColor();
     }
     public void RedSpellCasters(string value)
     {
         Console.ForegroundColor = ConsoleColor.Red;
+        //Console.Write(value);
         Console.Write(CenterText.CenterTextsEnemySpellCasters(value));
+        Console.ResetColor();
+    }
+    public void RedSpellCastersNoHealing(string value)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        //Console.Write(CenterText.CenterTextsss(value));
+        Console.Write(CenterText.CenterTextsEnemySpellCastersWhenNoHealing(value));
         Console.ResetColor();
     }
     public void Cyan(int value)
@@ -177,13 +185,16 @@ public class Enemy
         {
             value = 0;
         }
-        RedSpellCasters(name);                  //lägger in färgen RÖD på orc
-        Console.Write(" gjorde ");
-        Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.Write(" fire dmg.");
 
         if (hp < maxHp)
         {
+            if (hp > maxHp) 
+                hp = maxHp;
+
+            RedSpellCasters(name);                  //lägger in färgen RÖD på orc
+            Console.Write(" gjorde ");
+            Cyan(value);                //Lägger till färgen CYAN på DMG
+            Console.Write(" fire dmg.");
             int randomHealing = random.Next(minHealing, maxHealing);
             hp += Convert.ToInt32(healing);
             Console.Write($" Och healar sig själv med ");
@@ -191,6 +202,13 @@ public class Enemy
             Console.Write(healing);
             Console.ResetColor();
             Console.Write("hp");
+        }
+        else
+        {
+        RedSpellCastersNoHealing(name);      //lägger in färgen RÖD på orc
+        Console.Write(" gjorde ");
+        Cyan(value);                //Lägger till färgen CYAN på DMG
+        Console.Write(" fire dmg.");
         }
 
         return value;
