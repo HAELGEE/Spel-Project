@@ -147,7 +147,6 @@ public class Enemy
         if (value < 0)
             value = 0;
 
-        Console.Write("\n");
         Red(name);                  //lägger in färgen RÖD på orc
         Console.Write(" gjorde ");
         Cyan(value);                //Lägger till färgen CYAN på DMG

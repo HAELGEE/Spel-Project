@@ -21,6 +21,9 @@ namespace SPEL
              * Problem där om jag möter en healer, tex shaman, och shaman har högre speed än 
              * hero så hamnar texten väldigt till vänster. pga att Healing inte kommer med
              * 
+             * Fixa så att man får en viss chans till Poitions vid att roama runt och attackera mobs
+             * som man sedan använder i dungeons för att inte dö, dör man börjar man från början i dungeon
+             * 
              * Fixa olika hero klasser, Mage, archer, warrior, hunter, rouge
              */
         }
