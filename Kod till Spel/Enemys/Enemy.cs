@@ -187,10 +187,9 @@ public class Enemy
             value = 0;
         }
 
-        Console.Write("\n");
         if (hp < maxHp)
         {
-            if (hp > maxHp) 
+            if (hp > maxHp)
                 hp = maxHp;
 
             RedSpellCasters(name);                  //lägger in färgen RÖD på orc
@@ -207,10 +206,10 @@ public class Enemy
         }
         else
         {
-        RedSpellCastersNoHealing(name);      //lägger in färgen RÖD på orc
-        Console.Write(" gjorde ");
-        Cyan(value);                //Lägger till färgen CYAN på DMG
-        Console.Write(" fire dmg.");
+            RedSpellCastersNoHealing(name);      //lägger in färgen RÖD på orc
+            Console.Write(" gjorde ");
+            Cyan(value);                //Lägger till färgen CYAN på DMG
+            Console.Write(" fire dmg.");
         }
 
         return value;
