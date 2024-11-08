@@ -9,9 +9,9 @@ public class Elf
 {
     //public Hero hero { get; set; }
     //public string name { get; set; }
-    public Enemy stats { get; set; }
+    public Enemy stats { get; set; }  
 
-    public Elf(Hero hero)
+    public Elf(Hero hero, string clas)
     {
         //this.hero = hero;
         this.stats = stats;

@@ -151,8 +151,12 @@ public class Menu
         }
         else if (game)
         {
-            Console.Write("Ange ett namn till din Hjälte: ");
-            GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+            do
+            {
+                Console.Write("Ange ett namn till din Hjälte: ");
+                GameState.CurrentHero = new Hero { name = Console.ReadLine() };
+
+            } while (GameState.CurrentHero.name == "");
         }
 
         if (game || Load)
@@ -177,6 +181,7 @@ public class Menu
             string[] menuChoice = {
             "Kolla Status på din hjälte",
             "Roama runt och Attackera mobs",
+            "Titlar",
             "Utrustade föremål",
             "Kolla hittade föremål",
             "Öppna Shopen",
@@ -234,17 +239,21 @@ public class Menu
                             break;
                         case 2:
                             Console.Clear();
+                            hero.TitleManagement();
+                            break;
+                        case 3:
+                            Console.Clear();
                             //Console.WriteLine("Finns inget här just nu, men kommer inom snart!");
                             GameState.CurrentHero.ShowEquippedItems();
                             Console.ReadKey();
                             break;
 
-                        case 3:
+                        case 4:
                             Console.Clear();
                             GameState.CurrentHero.ManageInventory();
                             break;
 
-                        case 4:
+                        case 5:
                             Console.Clear();
                             Console.WriteLine();
                             Console.WriteLine();
@@ -254,24 +263,24 @@ public class Menu
                             Console.ReadKey();
                             break;
 
-                        case 5:
+                        case 6:
                             Console.Clear();
                             healing._Healing();
                             break;
 
-                        case 6:
+                        case 7:
                             Console.Clear();
                             dungeon.EnterDungeon(GameState.CurrentHero);
                             break;
 
-                        case 7:
+                        case 8:
                             Console.Clear();
                             Save.SaveHeroes(GameState.CurrentHero, "Hero_save.json");
                             hero.Stats();
                             Console.ReadKey();
                             break;
 
-                        case 8:
+                        case 9:
                             Console.Clear();
                             Console.WriteLine(CenterText.CenterTexts("Har du sparat din hjälte innan?"));
                             string svar = Console.ReadLine().ToLower();
@@ -311,7 +320,7 @@ public class Menu
                             else
                                 break;
 
-                        case 9:
+                        case 10:
                             Console.Clear();
                             Console.WriteLine(CenterText.CenterTexts("Tack för att du använder detta programmet, nu avslutas programmet"));
                             spel = false;

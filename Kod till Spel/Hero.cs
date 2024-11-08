@@ -12,6 +12,7 @@ using static Kod_till_Spel.EquipAbleItem;
 using System.Xml.Linq;
 using Kod_till_Spel.Enemys;
 using Kod_till_Spel.Menus;
+using System.Threading.Channels;
 
 namespace Kod_till_Spel;
 public class Hero
@@ -34,20 +35,26 @@ public class Hero
         Console.Write(CenterText.CenterTextsHeroName(value));
         Console.ResetColor();
     }
-    public double baseDmg { get; set; } = 30;
+
+    public string HeroClass { get; set; }
+    public string Title { get; set; }
+    public static int OrcKiller = 0;
+    public static int ElfKiller = 0;
+    public static int GhostKiller = 0;
+    public double baseDmg { get; set; } = 3;
     public double baseArmor { get; set; } = 1.5;
     public double baseSpeed { get; set; } = 2;
     public string name { get; set; }
-    public int level { get; set; } = 10;
+    public int level { get; set; } = 1;
     public static int savedLevel { get; set; } = 1;
     public double experience { get; set; } = 0;
-    public int hp { get; set; } = 150;
+    public int hp { get; set; } = 15;
     public int maxHp { get; set; } = 15;
     public int styrka { get; set; } = 2;               //ÖKAR SKADA
     public int agility { get; set; } = 2;              //ÖKAR SPEED
     public int stamina { get; set; } = 2;
-    public int charm { get; set; } = 1;
-    public int intelligence { get; set; } = 1;
+    public int charm { get; set; } = 2;
+    public int intelligence { get; set; } = 2;
     public int mana { get; set; } = 15;
     public double dmg { get; set; } = 2;                //SKADA
     public double speed { get; set; } = 1;              //SPEED
@@ -59,14 +66,15 @@ public class Hero
     public int Guld { get; set; } = 0;
 
     public Hero()
-    {        
+    {
         maxHp = hp;    //Denna raden är bara till för att veta vad MAX HP till Hero är!
 
         Stats();
         AddExperience(experience);
+        Titles();
     }
 
-   
+
 
     public Weapon EquippedWeapon { get; set; }  // Lägger till för att hantera nuvarande utrustat vapen
     public List<EquipableItem> Inventory { get; set; } = new List<EquipableItem>(); //Skapar en lista för items som är hittade
@@ -270,6 +278,38 @@ public class Hero
         }
     }
 
+    public List<string> titles = new List<string>();
+    public void Titles()
+    {       
+        if (OrcKiller >= 100)
+            titles.Add("Orc Slayer");
+
+        if (ElfKiller >= 100)
+            titles.Add("Elf Slayer");
+
+        if (GhostKiller >= 100)
+           titles.Add("Ghost Slayer");
+
+    }
+    public void TitleManagement()
+    {
+        Console.WriteLine();
+        Console.WriteLine();
+        Console.WriteLine();
+
+        if (titles.Count > 0)
+        {
+            foreach (var Titel in titles)
+            {
+                Console.WriteLine(CenterText.CenterTexts($"{Titel}"));
+            }
+        }
+        else
+            Console.WriteLine(CenterText.CenterTexts("Du har för närvande inga Titlar."));
+
+        Console.ReadKey();
+    }
+
     public void AddExperience(double amount)
     {
         experience += amount;
@@ -319,6 +359,19 @@ public class Hero
         Console.Write(CenterText.CenterTexts($"Du gick precis upp i level!"));
         while (statIncrease != 0)
         {
+            //if (level > 4)
+            //{
+            //    string[] String =
+            //    {
+            //    "Warrior",
+            //    "Rouge",
+            //    "Mage",
+            //    "Archer"
+            //    };
+
+            //    MenuChoice.MenuChoices(String, 4, "Grattis till nivå 5, du kan nu välja en klass");
+
+            //}
             Console.Clear();
 
             Console.WriteLine(CenterText.CenterTexts($" Du har {statIncrease} stat increase kvar: "));

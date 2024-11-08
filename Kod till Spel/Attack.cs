@@ -503,6 +503,14 @@ namespace Kod_till_Spel
 
                     if (enemy.hp <= 0)
                     {
+                        // För att räkna upp till Titeln av Slayer
+                        if (enemy.name.Contains("Shaman") || enemy.name.Contains("Orc") || enemy.name.Contains("Grunt"))
+                            Hero.OrcKiller++;
+                        else if (enemy.name.Contains("Sylvastra") || enemy.name.Contains("Elowen") || enemy.name.Contains("Tharion"))
+                            Hero.ElfKiller++;
+                        else if (enemy.name.Contains("Wraithon") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Gravemourn"))
+                            Hero.GhostKiller++;
+
                         Red(enemy.name);
                         Console.WriteLine(CenterText.CenterTexts(" är besegrad!\n"));
                         enemy.speed = randomSpeedEnemy;       //Stänger av tillfälliga speed ökningen

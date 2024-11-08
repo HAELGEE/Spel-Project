@@ -10,15 +10,17 @@ namespace Kod_till_Spel;
 internal class Status
 {
     public Colour colour = new Colour();    
-
+    
     public void StatusMenu()
     {
         Hero hero = GameState.CurrentHero;
 
         Console.Clear();
+              
 
         Console.WriteLine(CenterText.CenterTexts("==========================================================="));
         Console.WriteLine(CenterText.CenterTexts($"Ditt namn på din Hero: {hero.name}\n"));
+        Console.WriteLine(CenterText.CenterTexts($"Titel: {hero.Title}\n"));
         Console.WriteLine(CenterText.CenterTexts("Din hjälte är på Level: " + hero.level));
         Console.WriteLine(CenterText.CenterTexts($"Din hjälte har: {hero.experience}xp"));
         Console.WriteLine(CenterText.CenterTexts($"Din hjälte har: {hero.maxXp - hero.experience}xp kvar till nästa level\n"));
