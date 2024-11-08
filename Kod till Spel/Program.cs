@@ -27,6 +27,7 @@ namespace SPEL
              * Fixa olika hero klasser, Mage, archer, warrior, hunter, rouge
              * 
              * Fixa Så man kan välja bland Titlarna
+             * Samt att den valda Titen gör så att man ökar Damage emot den typen av enemy.
              */
         }
     }
