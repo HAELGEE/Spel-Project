@@ -146,6 +146,7 @@ namespace Kod_till_Spel
 
             }
 
+            int chanceOfPotionDropp = random.Next(1, 101);
             while (hero.hp > 0 && enemy.hp > 0)
             {
                 if (hero.speed > enemy.speed)     //Hero speed över orc speed
@@ -158,6 +159,13 @@ namespace Kod_till_Spel
 
                     if (enemy.hp <= 0)
                     {
+                        if (enemy.name.Contains("Shaman") || enemy.name.Contains("Orc") || enemy.name.Contains("Grunt"))
+                            Hero.OrcKiller++;
+                        else if (enemy.name.Contains("Sylvastra") || enemy.name.Contains("Elowen") || enemy.name.Contains("Tharion"))
+                            Hero.ElfKiller++;
+                        else if (enemy.name.Contains("Wraithon") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Gravemourn"))
+                            Hero.GhostKiller++;
+
 
                         Red(enemy.name);
                         Console.WriteLine(" är besegrad!\n");
@@ -169,10 +177,16 @@ namespace Kod_till_Spel
                         Thread.Sleep(400);
                         Console.WriteLine(CenterText.CenterTexts($"Din hjälte är på level: {hero.level}"));
                         Thread.Sleep(400);
+                        if (chanceOfPotionDropp >= 1 && chanceOfPotionDropp <= 10)
+                        {
+                            hero.Potions++;
+                            Console.WriteLine(CenterText.CenterTexts("Du hittade en Healing Potion"));
+                        }
+                        Thread.Sleep(400);
                         break;
                     }
-                    if (enemy.name.Contains("Shaman") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Elowen"))                                            
-                            damage = enemy.AttackSpellCasters(hero);  //enemy attackerar  
+                    if (enemy.name.Contains("Shaman") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Elowen"))
+                        damage = enemy.AttackSpellCasters(hero);  //enemy attackerar  
                     else
                     {
                         damage = enemy.Attack(hero);
@@ -229,6 +243,13 @@ namespace Kod_till_Spel
 
                     if (enemy.hp <= 0)
                     {
+                        if (enemy.name.Contains("Shaman") || enemy.name.Contains("Orc") || enemy.name.Contains("Grunt"))
+                            Hero.OrcKiller++;
+                        else if (enemy.name.Contains("Sylvastra") || enemy.name.Contains("Elowen") || enemy.name.Contains("Tharion"))
+                            Hero.ElfKiller++;
+                        else if (enemy.name.Contains("Wraithon") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Gravemourn"))
+                            Hero.GhostKiller++;
+
                         Red(enemy.name);
                         Console.WriteLine(" är besegrad!\n");
                         enemy.speed = randomSpeedOrc;       //Stänger av tillfälliga speed ökningen
@@ -239,6 +260,12 @@ namespace Kod_till_Spel
                         Thread.Sleep(400);
                         Console.WriteLine(CenterText.CenterTexts($"{hero.name} är på level: {hero.level}"));
                         Thread.Sleep(400);
+                        if (chanceOfPotionDropp >= 1 && chanceOfPotionDropp <= 10)
+                        {
+                            hero.Potions++;
+                            Console.WriteLine(CenterText.CenterTexts("Du hittade en Healing Potion"));
+                        }
+                        Thread.Sleep(400);
                         break;
                     }
                 }
@@ -247,12 +274,12 @@ namespace Kod_till_Spel
             Thread.Sleep(500);
             Console.Write(CenterText.CenterTexts($"{hero.name} HP: "));
             if (hero.hp <= 0)           //lägger till Färg
-            {                
+            {
                 Red(hero.hp);           //Röd om hero = död
                 Console.Write("\n");
             }
             else
-            {                
+            {
                 Green(hero.hp);         //Grön om hero har över 0hp
                 Console.Write("\n");
             }

@@ -64,6 +64,7 @@ public class Hero
     public int maxXp { get; set; } = 50;
     public int lifeSteal { get; set; } = 0;
     public int Guld { get; set; } = 0;
+    public int Potions { get; set; } = 0;
 
     public Hero()
     {
@@ -141,6 +142,8 @@ public class Hero
         Console.WriteLine();
         Console.WriteLine();
         Console.WriteLine(CenterText.CenterTexts("Dina items:"));
+        Console.WriteLine();
+        Console.WriteLine(CenterText.CenterTexts($"Healing Potions: {Potions}st"));
         foreach (var item in Inventory)
         {
             Console.Write($"Namn: {item.Name}, Rarity: ");
@@ -183,9 +186,17 @@ public class Hero
             ShowInventory();
 
             Console.WriteLine();
+            Console.WriteLine(CenterText.CenterTexts("Vill du använda en Healing Potion, skriv Potion"));
             Console.WriteLine(CenterText.CenterTexts("Vill du utrusta ett item? Skriv namnet på itemet eller 'back' för att gå tillbaka:"));
             string choice = Console.ReadLine();
 
+            if (choice.ToLower() == "Potion")
+            {
+                if (hp > maxHp)
+                    hp = maxHp;
+
+                hp = hp + 10;
+            }
 
             var itemToEquip = Inventory.FirstOrDefault(i => i.Name.IndexOf(choice, StringComparison.OrdinalIgnoreCase) >= 0);
 
@@ -280,7 +291,7 @@ public class Hero
 
     public List<string> titles = new List<string>();
     public void Titles()
-    {       
+    {
         if (OrcKiller >= 100)
             titles.Add("Orc Slayer");
 
@@ -288,7 +299,7 @@ public class Hero
             titles.Add("Elf Slayer");
 
         if (GhostKiller >= 100)
-           titles.Add("Ghost Slayer");
+            titles.Add("Ghost Slayer");
 
     }
     public void TitleManagement()
