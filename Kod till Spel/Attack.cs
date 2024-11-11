@@ -70,6 +70,7 @@ namespace Kod_till_Spel
                         enemy = new Enemy.Orc(hero);
                         break;
                 }
+                enemy.Class = "Orc";
             }
             else if (randomClass == 1)
             {
@@ -88,6 +89,7 @@ namespace Kod_till_Spel
                         enemy = new Enemy.Sylvastra(hero);
                         break;
                 }
+                enemy.Class = "Elf";
             }
             else if (randomClass == 2)
             {
@@ -106,6 +108,7 @@ namespace Kod_till_Spel
                         enemy = new Enemy.Wraithon(hero);
                         break;
                 }
+                enemy.Class = "Ghost";
             }
 
             double randomSpeedHero = hero.speed; //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
@@ -159,13 +162,19 @@ namespace Kod_till_Spel
 
                     if (enemy.hp <= 0)
                     {
-                        if (enemy.name.Contains("Shaman") || enemy.name.Contains("Orc") || enemy.name.Contains("Grunt"))
-                            Hero.OrcKiller++;
-                        else if (enemy.name.Contains("Sylvastra") || enemy.name.Contains("Elowen") || enemy.name.Contains("Tharion"))
-                            Hero.ElfKiller++;
-                        else if (enemy.name.Contains("Wraithon") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Gravemourn"))
-                            Hero.GhostKiller++;
+                        //if (enemy.name.Contains("Shaman") || enemy.name.Contains("Orc") || enemy.name.Contains("Grunt"))
+                        //    Hero.OrcKiller++;
+                        //else if (enemy.name.Contains("Sylvastra") || enemy.name.Contains("Elowen") || enemy.name.Contains("Tharion"))
+                        //    Hero.ElfKiller++;
+                        //else if (enemy.name.Contains("Wraithon") || enemy.name.Contains("Hauntress") || enemy.name.Contains("Gravemourn"))
+                        //    Hero.GhostKiller++;
 
+                        if (enemy.Class.Contains("Orc"))
+                            Hero.OrcKiller++;
+                        else if (enemy.Class.Contains("Elf"))
+                            Hero.ElfKiller++;
+                        else if (enemy.Class.Contains("Ghost"))
+                            Hero.GhostKiller++;
 
                         Red(enemy.name);
                         Console.WriteLine(" är besegrad!\n");

@@ -13,6 +13,7 @@ public class Enemy
 {
     public Hero hero { get; set; }
     public string name { get; set; }
+    public string Class { get; set; }  // Sätter vilken klass det blir på moben för att få Titeln
     public int level { get; set; } = 1;
     public int hp { get; set; } = 10;
     public int maxHp { get; set; } = 10;
@@ -46,7 +47,6 @@ public class Enemy
 
     public void LevelCheck(Hero hero)
     {
-
         int levelOver = hero.level + 3;
         int levelUnder = hero.level > 3 ? hero.level - 2 : 1;
 

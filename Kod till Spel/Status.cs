@@ -15,9 +15,6 @@ internal class Status
     {
         Hero hero = GameState.CurrentHero;
 
-        Console.Clear();
-              
-
         Console.WriteLine(CenterText.CenterTexts("==========================================================="));
         Console.WriteLine(CenterText.CenterTexts($"Ditt namn på din Hero: {hero.name}\n"));
         Console.WriteLine(CenterText.CenterTexts($"Titel: {hero.Title}\n"));
