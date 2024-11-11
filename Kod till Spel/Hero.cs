@@ -310,10 +310,43 @@ public class Hero
 
         if (titles.Count > 0)
         {
+            int i = 0;
+            
             foreach (var Titel in titles)
             {
-                Console.WriteLine(CenterText.CenterTexts($"{Titel}"));
+                Console.WriteLine(CenterText.CenterTexts($"{i++}. {Titel}"));
             }
+            Console.WriteLine(CenterText.CenterTexts("Vilken titel vill du välja?"));
+           string choice = Console.ReadLine();
+            if (choice == "1")
+            {
+                if (Title.Contains("Orc"))
+                    Title = "Orc slayer";
+                else if (Title.Contains("Elf"))
+                    Title = "Elf slayer";
+                else
+                    Title = "Ghost slayer";
+            }
+            else if (choice == "2")
+            {
+                if (Title.Contains("Orc"))
+                    Title = "Orc slayer";
+                else if (Title.Contains("Elf"))
+                    Title = "Elf slayer";
+                else
+                    Title = "Ghost slayer";
+            }
+            else if (choice == "3")
+            {
+                if (Title.Contains("Orc"))
+                    Title = "Orc slayer";
+                else if (Title.Contains("Elf"))
+                    Title = "Elf slayer";
+                else
+                    Title = "Ghost slayer";
+            }
+
+
         }
         else
             Console.WriteLine(CenterText.CenterTexts("Du har för närvande inga Titlar."));
@@ -442,18 +475,27 @@ public class Hero
         int maxDamage = 7;
         minDamage += (int)dmg - (int)enemy.armor;
         maxDamage += (int)dmg - (int)enemy.armor;
-        int value = random.Next(minDamage, maxDamage);
+        double value = random.Next(minDamage, maxDamage);
         if (value < 0)
         {
             value = 0;
         }
+        if (Title == "Orc slayer")
+            value = (value * 1.1);
+        else if (Title == "Elf slayer")
+            value = (value * 1.1);
+        else if (Title == "Ghost slayer")
+            value = (value * 1.1);
+
+        Math.Round(value);
+        
         Console.Write("\n");
         Green(name);                //Lägger till Färgen GRÖN på Hero
         Console.Write(" gjorde ");
-        Cyan(value);                //Lägger till färgen CYAN på DMG
+        Cyan(Convert.ToInt32(value));                //Lägger till färgen CYAN på DMG
         Console.Write(" slash dmg.");
         LifeStealing();
-        return value;
+        return Convert.ToInt32(value);
     }
 
 }
