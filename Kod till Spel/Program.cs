@@ -9,11 +9,13 @@ namespace SPEL
 {
     public class Program
     {
+        public static bool Running = true;
         static void Main(string[] args)
         {
             Menu menu = new Menu();
 
             menu.StartMenu();
+
 
             /* 
              * Ett problem där om jag skapar en ny hjälte och sedan laddar jag en annan hjälte och sedan
@@ -30,6 +32,7 @@ namespace SPEL
              * Fixa Så man kan välja bland Titlarna
              * Samt att den valda Titen gör så att man ökar Damage emot den typen av enemy.
              */
+
         }
     }
 }
