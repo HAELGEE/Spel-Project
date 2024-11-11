@@ -25,14 +25,10 @@ internal class Status
         Console.WriteLine(CenterText.CenterTexts($"Din hjälte har: {hero.maxXp - hero.experience}xp kvar till nästa level\n"));
         Console.WriteLine(CenterText.CenterTexts($"Du har för närvarande {hero.Guld} guld\n"));
         Console.Write(CenterText.CenterHpText($"HP:"));
-        if (hero.hp < hero.maxHp)
-        {
-            colour.Red(hero.hp);
-        }
-        else
-        {
-            colour.Green(hero.hp);
-        }        
+        if (hero.hp < hero.maxHp)        
+            colour.Red(hero.hp);        
+        else        
+            colour.Green(hero.hp);            
         Console.ResetColor();
         Console.Write(" av ");
         Console.ForegroundColor = ConsoleColor.Green;
