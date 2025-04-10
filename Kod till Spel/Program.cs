@@ -25,7 +25,7 @@ namespace SPEL
              * hero så hamnar texten väldigt till vänster. pga att Healing inte kommer med
              * 
              * //FIXAD// Fixa så att man får en viss chans till Poitions vid att roama runt och attackera mobs
-             * //FIXAD// som man sedan använder i dungeons för att inte dö, dör man börjar man från början i dungeon
+             *  som man sedan använder i dungeons för att inte dö, dör man börjar man från början i dungeon
              * 
              * Fixa olika hero klasser, Mage, archer, warrior, hunter, rouge
              * 

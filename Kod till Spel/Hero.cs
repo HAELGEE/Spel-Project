@@ -321,7 +321,7 @@ public class Hero
             if (choice == "1")
             {
                 if (Title.Contains("Orc"))
-                    Title = "Orc slayer";
+                    Title = "Orc slayer";                    
                 else if (Title.Contains("Elf"))
                     Title = "Elf slayer";
                 else

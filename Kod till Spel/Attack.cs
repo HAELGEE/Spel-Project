@@ -453,7 +453,7 @@ namespace Kod_till_Spel
             }
 
             while (hero.hp > 0 && enemy.hp > 0)
-            {
+            { 
                 if (hero.speed > enemy.speed)     //Hero speed över fiende speed
                 {
                     // Hero attackerar först
