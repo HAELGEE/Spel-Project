@@ -53,62 +53,64 @@ namespace Kod_till_Spel
             int randomName = random.Next(0, 3); //Lottning mellan om man skall möta en orc, shaman eller grunt      
             int randomClass = random.Next(0, 3); // Lottning mellan vilken klass som skall mötas
 
-            if (randomClass == 0)
+            switch (randomClass)
             {
-                switch (randomName)
-                {
-                    case 0:
-                        enemy = new Enemy.Orc(hero);
-                        break;
-                    case 1:
-                        enemy = new Enemy.Shaman(hero);
-                        break;
-                    case 2:
-                        enemy = new Enemy.Grunt(hero);
-                        break;
-                    default:
-                        enemy = new Enemy.Orc(hero);
-                        break;
-                }
-                enemy.Class = "Orc";
-            }
-            else if (randomClass == 1)
-            {
-                switch (randomName)
-                {
-                    case 0:
-                        enemy = new Enemy.Sylvastra(hero);
-                        break;
-                    case 1:
-                        enemy = new Enemy.Elowen(hero);
-                        break;
-                    case 2:
-                        enemy = new Enemy.Tharion(hero);
-                        break;
-                    default:
-                        enemy = new Enemy.Sylvastra(hero);
-                        break;
-                }
-                enemy.Class = "Elf";
-            }
-            else if (randomClass == 2)
-            {
-                switch (randomName)
-                {
-                    case 0:
-                        enemy = new Enemy.Wraithon(hero);
-                        break;
-                    case 1:
-                        enemy = new Enemy.Hauntress(hero);
-                        break;
-                    case 2:
-                        enemy = new Enemy.Gravemourn(hero);
-                        break;
-                    default:
-                        enemy = new Enemy.Wraithon(hero);
-                        break;
-                }
-                enemy.Class = "Ghost";
+                case 0:
+                    switch (randomName)
+                    {
+                        case 0:
+                            enemy = new Enemy.Orc(hero);
+                            break;
+                        case 1:
+                            enemy = new Enemy.Shaman(hero);
+                            break;
+                        case 2:
+                            enemy = new Enemy.Grunt(hero);
+                            break;
+                        default:
+                            enemy = new Enemy.Orc(hero);
+                            break;
+                    }
+                    enemy.Class = "Orc";
+                    break;
+
+                case 1:
+                    switch (randomName)
+                    {
+                        case 0:
+                            enemy = new Enemy.Sylvastra(hero);
+                            break;
+                        case 1:
+                            enemy = new Enemy.Elowen(hero);
+                            break;
+                        case 2:
+                            enemy = new Enemy.Tharion(hero);
+                            break;
+                        default:
+                            enemy = new Enemy.Sylvastra(hero);
+                            break;
+                    }
+                    enemy.Class = "Elf";
+                    break;
+
+                case 2:
+                    switch (randomName)
+                    {
+                        case 0:
+                            enemy = new Enemy.Wraithon(hero);
+                            break;
+                        case 1:
+                            enemy = new Enemy.Hauntress(hero);
+                            break;
+                        case 2:
+                            enemy = new Enemy.Gravemourn(hero);
+                            break;
+                        default:
+                            enemy = new Enemy.Wraithon(hero);
+                            break;
+                    }
+                    enemy.Class = "Ghost";
+                    break;
             }
 
             double randomSpeedHero = hero.speed; //sätter en tillfällig variabel för att sedan lotta vem som skall börja med speed (om speed = speed)
@@ -453,7 +455,7 @@ namespace Kod_till_Spel
             }
 
             while (hero.hp > 0 && enemy.hp > 0)
-            { 
+            {
                 if (hero.speed > enemy.speed)     //Hero speed över fiende speed
                 {
                     // Hero attackerar först
