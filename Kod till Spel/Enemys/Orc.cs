@@ -15,13 +15,13 @@ public class OrcBase
 {
     //public Hero hero { get; set; }
     //public string name { get; set; }
-    public Enemy stats { get; set; }
+    public Enemy Stats { get; set; }
 
 
     public OrcBase(Hero hero)
     {
-        this.stats = stats;
-        stats.name = "Orc";
+        Stats = Stats;
+        Stats.name = "Orc";
     }
 
 

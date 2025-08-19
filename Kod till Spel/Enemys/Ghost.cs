@@ -9,13 +9,13 @@ public class Ghost
 {
     //public Hero hero { get; set; }
     //public string name { get; set; }
-    public Enemy stats { get; set; }
+    public Enemy Stats { get; set; }
 
     public Ghost(Hero hero)
     {
         //this.hero = hero;
-        this.stats = stats;
-        stats.name = "Ghost";
+        Stats = Stats;
+        Stats.name = "Ghost";
     }
 
 

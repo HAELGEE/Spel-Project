@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Kod_till_Spel.Enemys;
 public class Elf
-{
-    //public Hero hero { get; set; }
-    //public string name { get; set; }
-    public Enemy stats { get; set; }  
+{    
+    public Enemy Stats { get; set; }  
 
     public Elf(Hero hero, string clas)
     {
         //this.hero = hero;
-        this.stats = stats;
-        stats.name = "Elf";
+        Stats = Stats;
+        Stats.name = "Elf";
     }
 
 //    public void LevelCheck(Hero hero)
